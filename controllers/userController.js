@@ -2,6 +2,7 @@ const userModel = require('../models/userModel')
 const md5 = require('md5');
 const JWT = require("jsonwebtoken");
 const nodemailer = require('nodemailer');
+const MailFunction = require('./mailFunction')
 
 const user = {
 
@@ -10,13 +11,13 @@ const user = {
         switch (methods) {
             case "POST":
                 try {
-
                     const email = req.body.email;
                     const MobNumber = req.body.MobNumber;
                     const username = req.body.username;
                     const password = md5(req.body.password);
                     const role = req.body.role;
                     const status = req.body.status;
+                    const ProfileStatus = "0"
                     
                     if (!email) {
                         return res.status(422).send({ error: 'You must enter an email address.' });
@@ -46,9 +47,17 @@ const user = {
                             username,
                             role,
                             status,
+                            ProfileStatus
                         });
-                        user.save().then((user, err) => {
+                        user.save().then(async (user, err) => {
+                            console.log("user", user)
                             if (err) { return console.log(err); }
+                            let HtmlMsg = `<div><p><b>Service partner account is created successfully.</b> <br /> Check the below credentials: <br /> <b>Username:</b> ${req.body.username} <br/> <b>Email:</b> ${req.body.email} <br /> <b>Password:</b>  ${req.body.password} </p></div>`;
+                            let subject="Service Partner account created successfully";
+                            let toMail = req.body.email;
+                            let SendToMail = "sricharitha1998@gmail.com";
+                            await MailFunction(HtmlMsg, subject, SendToMail)
+                            await MailFunction(HtmlMsg, subject, toMail)
                             return res.json({ status: true, user });
                         });
                     })

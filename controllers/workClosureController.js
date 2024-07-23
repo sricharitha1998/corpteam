@@ -24,10 +24,12 @@ const workClosure = {
                 console.error("Error parsing 'others' field:", error);
             }
         }
+        console.log("req.body.workOrder_id", req.body.workOrder_id)
                     const closureForm = new workClosureModel({
                         ...fileData,
                         others,
-                        vendor_id: req.body.vendor_id
+                        vendor_id: req.body.vendor_id,
+                        workOrder_id: req.body.workOrder_id
                     });
             
                     closureForm.save().then((details, err) => {
@@ -253,6 +255,9 @@ const workClosure = {
                         acc[file.fieldname] = file.originalname;
                         return acc;
                     }, {});
+                    fileData.level1 = "";
+                    fileData.level2 = "";
+                    fileData.level3 = "";
                     const document = await workClosureModel.findByIdAndUpdate(req.params.id, fileData);
                     if (!document) {
                         return res.status(404).json({ msg: 'Document not found' });

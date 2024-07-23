@@ -27,5 +27,7 @@ const uploadFields = (req, res, next) => {
 router.post('/register', uploadFields, Vendor.register);
 router.get('/getVendorDetails/:id', Vendor.VendorDetails);
 router.get('/getDetails/:vendorID', Vendor.GetDetails);
+router.get('/updateProfile/:id', uploadFields, Vendor.UpdateProfile);
+router.post('/updateApproval', uploadFields, Vendor.UpdateApproval);
 
 module.exports = router;

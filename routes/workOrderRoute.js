@@ -8,5 +8,6 @@ router.get('/getAll', WorkOrder.getAllRecords);
 router.get('/getOneRecord/:id', WorkOrder.getOneRecord);
 router.post('/updateStatus', WorkOrder.UpdateStatus);
 router.post('/updateVendor', WorkOrder.UpdateVendor);
+router.post('/getOrderRecord', WorkOrder.getOrderRecord);
 
 module.exports = router;

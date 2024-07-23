@@ -21,7 +21,8 @@ const WorkClosureSchema = new Schema({
     po: String,
     approvals: Array,
     civilSignOff: String,
-    sdOrBg: String
+    sdOrBg: String,
+    workOrder_id: String
 });
  
 module.exports = mongoose.model('WorkClosure', WorkClosureSchema);

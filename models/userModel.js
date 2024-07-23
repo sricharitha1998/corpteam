@@ -19,7 +19,8 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    status:Number
+    status:Number,
+    ProfileStatus: String
 });
 
 module.exports = mongoose.model('User', UserSchema);

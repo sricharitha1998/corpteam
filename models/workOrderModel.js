@@ -3,10 +3,13 @@ const Schema = mongoose.Schema;
 
 const WorkOrderSchema = new Schema({
     workOrderNumber: String,
-    buildingName: String,
+    buildingArea: String,
     vendor_id: String,
     services: Array,
-    status: String
+    status: String,
+    date: String,
+    homePass: String,
+    routeLength: String,
 });
  
 module.exports = mongoose.model('WorkOrder', WorkOrderSchema);

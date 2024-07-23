@@ -26,16 +26,21 @@ export default () => {
     navigate('/');
 };
   return (
-    <Navbar variant="dark" expanded className="ps-0 pe-2 pb-0">
+    <Navbar variant="dark" expanded className="ps-0 pe-2 pb-0" style={{backgroundColor: "white", marginBottom: "10px"}}>
       <Container fluid className="px-0">
         <div className="d-flex justify-content-between w-100">
           <div className="d-flex align-items-center">
-            
+          {userDetails?.role === "admin" ?
+            <h5 className="px-4">Admin Portal</h5>
+            :
+            <h5 className="px-4">Service Partner Portal</h5>
+          }
           </div>
           <Nav className="align-items-center">
             <Dropdown as={Nav.Item} onMouseEnter={() => setShowDropdown(true)} show={showDropdown}>
               <Dropdown.Toggle as={Nav.Link} className="pt-1 px-0">
                 <div className="media d-flex align-items-center">
+                
                   {/* <Image src={Profile3} className="user-avatar md-avatar rounded-circle" /> */}
                   <div className="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                     <FontAwesomeIcon icon={faUserCircle} className="me-2" style={{ fontSize: '25px' }}/>

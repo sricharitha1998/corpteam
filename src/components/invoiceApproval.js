@@ -123,7 +123,7 @@ export default () => {
                                     <input type="radio" name="wcf" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="wcf" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="wcf" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="wcf" onChange={handleCommentChange} /></td>
                             </tr>
@@ -142,7 +142,7 @@ export default () => {
                                     <input type="radio" name="invoiceCopy" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="invoiceCopy" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="invoiceCopy" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="invoiceCopy" onChange={handleCommentChange} /></td>
                             </tr>
@@ -161,7 +161,7 @@ export default () => {
                                     <input type="radio" name="supportingDoc" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="supportingDoc" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="supportingDoc" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="supportingDoc" onChange={handleCommentChange} /></td>
                             </tr>

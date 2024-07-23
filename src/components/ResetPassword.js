@@ -1,9 +1,11 @@
 
 import React, {useState} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
+import { faUnlockAlt, faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Form, Button, Container, InputGroup } from '@themesberg/react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
+import corpteamLogo from "../assets/img/corpteam-trnspt.png"; 
+import '../assets/css/dashboard.css'
 
 export default () => {
 
@@ -42,7 +44,9 @@ export default () => {
           <Row className="justify-content-center">
             <Col xs={12} className="d-flex align-items-center justify-content-center">
               <div className="bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-                <h3 className="mb-4">Reset password</h3>
+              <img src={corpteamLogo} className="logoCss" alt="logo" />
+              <p className="my-2"><FontAwesomeIcon icon={faArrowAltCircleLeft} onClick={() => navigate('/forgotPassword')} /><span className="mx-2">Back</span></p>
+                <h3 className="mb-4">Reset Password</h3>
                 <Form>
                   <Form.Group id="password" className="mb-4">
                     <Form.Label>New Password</Form.Label>
@@ -63,7 +67,7 @@ export default () => {
                     </InputGroup>
                   </Form.Group>
                   <Button variant="primary" type="submit" onClick={ChangePassword} className="w-100">
-                    Reset password
+                    Reset Password
                   </Button>
                 </Form>
               </div>

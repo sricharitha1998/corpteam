@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleUp, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Card, Table, Form, Pagination } from '@themesberg/react-bootstrap';
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
@@ -9,27 +9,45 @@ import Modal from 'react-modal';
 import '../assets/css/dashboard.css';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { PDFfile } from './functions/pdfFile';
+import { Capitalized } from './functions/CaptaliseFunction';
 
 export const WorkOrder = () => {
   const TableRow = (props) => {
-    const { workOrderNumber, buildingName, _id, status, username } = props;
+    const { workOrderNumber, buildingArea, _id, status, username, homePass, date, routeLength } = props;
     const navigate = useNavigate();
+    const today = new Date();
+    const workOrderDate = new Date(date);
+    const differenceInTime = workOrderDate.getTime() -today.getTime();
+    const differenceInDays = Math.abs(Math.ceil(differenceInTime / (1000 * 3600 * 24)));
 
     return (
       <tr>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{workOrderNumber}</Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{Capitalized(workOrderNumber)}</Card.Link>
         </td>
         {username &&
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{username}{status !== "accept" && <span className="badge bg-secondary" onClick={() => { setVendorModal(true); setIdDetails(_id) }}>Change</span>}</Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{Capitalized(username)}{status !== "accept" && <span className="badge bg-secondary" onClick={() => { setVendorModal(true); setIdDetails(_id) }}>Change</span>}</Card.Link>
         </td>
         }
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{buildingName}</Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{homePass ? Capitalized(homePass) : "-"}</Card.Link>
         </td>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">
+          <Card.Link href="#" className="text-dark fw-bold">{routeLength ? Capitalized(routeLength) : "-"}</Card.Link>
+        </td>
+        <td>
+          <Card.Link href="#" className="text-dark fw-bold">{Capitalized(buildingArea)}</Card.Link>
+        </td>
+        <td>
+          <Card.Link href="#" className="text-dark fw-bold">{workOrderDate.toLocaleDateString()}</Card.Link>
+        </td>
+        <td>
+          <Card.Link href="#" className="text-dark fw-bold">{differenceInDays >=0 ? differenceInDays : "-"}</Card.Link>
+        </td>
+        <td>
+          <Card.Link href="#" className="text-dark fw-bold">
 
             {
               status === "accept" ? (
@@ -37,7 +55,7 @@ export const WorkOrder = () => {
               ) : status === "reject" ? (
                 <span className="badge bg-danger p-2">Rejected</span>
               ) : getUserDetails?.role === "admin" ? (
-                <span className="badge bg-warning p-2">Pending</span>
+                <span className="badge bg-warning p-2">Vendor Acceptance Pending</span>
               ) :
                 (
                   <>
@@ -47,13 +65,23 @@ export const WorkOrder = () => {
                 )}
           </Card.Link>
         </td>
-        <td><FontAwesomeIcon icon={faDownload} onClick={(event) => DownloadPDF(_id, event)} /></td>
+        <td><FontAwesomeIcon icon={faDownload} onClick={(event) => DownloadPDF(_id, event, username ? username : getUserDetails?.username)} /></td>
+        { getUserDetails?.role === "vendor" && 
+        <td>
+        { status === "accept" ? 
+          <button className="btn btn-sm btn-primary" disabled={ClosureBtn} onClick={() => navigate("/wcform", { state: { id: _id } })}>Closure </button>
+          :
+          
+            "Not Accepted"
+          
+         }
+         </td>
+        }
       </tr>
     );
   };
 
   const location = useLocation();
-  const navigate = useNavigate();
   const [workOrders, setWorkOrders] = useState([]);
   const [sorted, setSorted] = useState([]);
   const [sortOrder, setSortOrder] = useState('dsc');
@@ -61,6 +89,7 @@ export const WorkOrder = () => {
   const [getID, setID] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [getUserDetails, setUserDetails] = useState();
+  const [ClosureBtn, setClosureBtn] = useState(false);
   const itemsPerPage = 10;
 
   useEffect(() => {
@@ -71,7 +100,6 @@ export const WorkOrder = () => {
       const userInfo = await fetch(`http://localhost:4000/users/getUsers/vendor`);
       const getAllVendors = await userInfo.json();
       setVendors(getAllVendors?.users)
-
       setUserDetails(userDetails)
       let res;
       if (userDetails?.role === "admin") {
@@ -150,34 +178,42 @@ export const WorkOrder = () => {
     setCurrentPage(1);
   };
 
-  const DownloadPDF = async (id, event) => {
+  const DownloadPDF = async (id, event, username) => {
+
     event.preventDefault();
     const userInfo = await fetch(`http://localhost:4000/workOrder/getOneRecord/${id}`);
     const res = await userInfo.json();
+    const getAllData = {...res, ...{vendorName: username}}
+
+    PDFfile(getAllData)
 
     // Create a PDF from the response
-    const doc = new jsPDF();
-    // doc.text("Code\tUOM\tDescription\tQuantity", 10, 10);
-    doc.text('Purchase Order', 20, 20);
-    doc.text(`Work Order No: ${res.workOrderNumber}`, 20, 30);
-    doc.text(`Building Name: ${res.buildingName || ''}`, 20, 40);
+    // const doc = new jsPDF();
+    // // doc.text("Code\tUOM\tDescription\tQuantity", 10, 10);
 
-    const tableColumn = ["S.No", "Service Description", "Service Code", "UOM", "Quantity"];
-    const tableRows = [];
+    // doc.text('Purchase Order', 20, 20);
+    // doc.text(`Work Order No: ${res.workOrderNumber}`, 20, 30);
+    // doc.text(`Home Pass No: ${res.homePass || ''}`, 110, 30);
+    // doc.text(`Route Length: ${res.routeLength || ''}`, 110, 40);
+    // doc.text(`Building Area: ${res.buildingArea || ''}`, 20, 40);
+    // doc.text(`Vendor Name: ${username || ''}`, 20, 50);
 
-    res && res.services.forEach((service, index) => {
-      const serviceData = [
-        index + 1,
-        service.description,
-        service.code,
-        service.uom,
-        service.quantity,
-      ];
-      tableRows.push(serviceData);
-    });
+    // const tableColumn = ["S.No", "Service Description", "Service Code", "UOM", "Quantity"];
+    // const tableRows = [];
 
-    doc.autoTable(tableColumn, tableRows, { startY: 50 });
-    doc.save('purchase_order.pdf');
+    // res && res.services.forEach((service, index) => {
+    //   const serviceData = [
+    //     index + 1,
+    //     service.description,
+    //     service.code,
+    //     service.uom,
+    //     service.quantity,
+    //   ];
+    //   tableRows.push(serviceData);
+    // });
+
+    // doc.autoTable(tableColumn, tableRows, { startY: 60 });
+    // doc.save('purchase_order.pdf');
   }
 
   const UpdateStatus = async (status, event) => {
@@ -192,11 +228,12 @@ export const WorkOrder = () => {
     });
     const data = await response.json();
     if (data) {
-      if (status === "accept") {
-        navigate("/wcform", { state: { id: getID } });
-      } else if (status === "reject") {
+      // if (status === "accept") {
+        // navigate("/wcform", { state: { id: getID } });
         window.location.reload();
-      }
+      // } else if (status === "reject") {
+      //   window.location.reload();
+      // }
     }
   };
 
@@ -248,7 +285,7 @@ export const WorkOrder = () => {
                     <Col>
                       <Form.Control
                         type="text"
-                        placeholder="Search by Work Order Number"
+                        placeholder="Search By Work Order Number"
                         value={searchTerm}
                         onChange={handleSearch}
                       />
@@ -256,26 +293,32 @@ export const WorkOrder = () => {
                   </Row>
                 </div>
               </div>
-
-              <Table responsive className="table-centered table-nowrap rounded mb-0">
+              <div>
+              <Table responsive className="table-centered table-nowrap rounded mb-0" >
                 <thead className="thead-light">
                   <tr>
                     <th className="border-0" onClick={handleSort} style={{ cursor: 'pointer' }}>
-                      Work Order Number <FontAwesomeIcon icon={sortOrder === 'asc' ? faAngleUp : faAngleDown} />
+                      Work Order Number <FontAwesomeIcon icon={sortOrder === 'asc' ? faAngleUp : faAngleDown}/>
                     </th>
                     {
                       getUserDetails?.role === "admin" &&
                       <th className="border-0">Vendor Name</th>
                     }
-                    <th className="border-0">Building Name</th>
-                    <th className="border-0">Status</th>
+                    <th className="border-0">Home Pass Number</th>
+                    <th className="border-0">Route Length</th>
+                    <th className="border-0">Building Area</th>
+                    <th className="border-0">Issued Date</th>
+                    <th className="border-0">Aging Days</th>
+                    <th className="border-0">Allocation Status</th>
                     <th className="border-0">Download</th>
+                    { getUserDetails?.role === "vendor" && <th className="border-0">Invoice</th> }
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="" style={{overflow: "scroll"}}>
                   {currentItems?.map(pt => <TableRow key={`page-traffic-${pt._id}`} {...pt} />)}
                 </tbody>
               </Table>
+              </div>
               <Pagination className="mt-3">
                 {Array.from({ length: Math.ceil(sorted.length / itemsPerPage) }, (_, index) => (
                   <Pagination.Item
@@ -301,17 +344,25 @@ export const WorkOrder = () => {
             margin: 'auto',
             height: 'fit-content',
             padding: '20px',
+            boxShadow: '30px 30px 30px 30px rgba(0, 0, 0, 0.1)'
           }
         }}
       >
-        <h5>Are you sure you want to accept the order?</h5>
+      <div className='row'>
+        <div className='col-md-11'></div>
+        <div className='col-md-1'>
+        <FontAwesomeIcon icon={faTimes} onClick={() => setModal(false)} />
+        </div>
+      </div>
+        <h5 className='text-center'>Are you sure you want to accept the order?</h5>
         <br />
         <form>
           <div className="row col-md-12">
-            <div className="col-md-6 text-center">
+            <div className="col-md-4"></div>
+            <div className="col-md-2 text-center">
               <button className="btn btn-success" onClick={(event) => UpdateStatus("accept", event)}>Yes</button>
             </div>
-            <div className="col-md-6 text-center">
+            <div className="col-md-2 text-center">
               <button className="btn btn-danger" onClick={() => setModal(false)}>No</button>
             </div>
           </div>
@@ -327,10 +378,21 @@ export const WorkOrder = () => {
             margin: 'auto',
             height: 'fit-content',
             padding: '20px',
+            boxShadow: '30px 30px 30px 30px rgba(0, 0, 0, 0.1)'
           }
         }}
       >
-        <h5>Change Vendor</h5>
+      <div className='row'>
+        <div className='col-md-1'></div>
+        <div className='col-md-10'>
+        <h5 className='text-center'>Change Vendor</h5>
+        </div>
+        <div className='col-md-1'>
+        <FontAwesomeIcon icon={faTimes} onClick={() => setVendorModal(false)} />
+        </div>
+      </div>
+        
+        
         <br />
         <form>
           <div className="row col-md-12">
@@ -342,7 +404,7 @@ export const WorkOrder = () => {
             </select>
             <div className='row'>
               <div className='col-md-4'>
-                <button type="button" onClick={UpdateVendor} className="btn btn-primary m-2">Submit</button>
+                <button type="button" onClick={UpdateVendor} className="btn btn-primary my-2">Submit</button>
               </div>
             </div>
 
@@ -359,17 +421,25 @@ export const WorkOrder = () => {
             margin: 'auto',
             height: 'fit-content',
             padding: '20px',
+            boxShadow: '30px 30px 30px 30px rgba(0, 0, 0, 0.1)'
           }
         }}
       >
-        <h5>Are you sure you want to reject the order?</h5>
+      <div className='row'>
+        <div className='col-md-11'></div>
+        <div className='col-md-1'>
+        <FontAwesomeIcon icon={faTimes} onClick={() => setRejectModal(false)} />
+        </div>
+      </div>
+      <h5 className='text-center'>Are you sure you want to reject the order?</h5>
         <br />
         <form>
           <div className="row col-md-12">
-            <div className="col-md-6 text-center">
+          <div className="col-md-4"></div>
+            <div className="col-md-2 text-center">
               <button className="btn btn-success" onClick={(event) => UpdateStatus("reject", event)}>Yes</button>
             </div>
-            <div className="col-md-6 text-center">
+            <div className="col-md-2 text-center">
               <button className="btn btn-danger" onClick={() => setRejectModal(false)}>No</button>
             </div>
           </div>

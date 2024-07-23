@@ -3,6 +3,36 @@
     padding: 25px 10px
 }
 
+/* .signupBg {
+  box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-image: url("../../assets/img/bg-image.jpg"); 
+  background-color: #aa9898; 
+  height: 100%; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+
+.existFile{
+  font-size: smaller;
+  color: whitesmoke;
+  background-color: rgb(43, 37, 37);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.getColorBtn{
+  background-color: rgb(56, 56, 105);
+  color: white
+}
+
+.logoCss{
+  width: 180px;
+  height: 80px;
+  margin-left: 23%;
+  cursor: pointer;
+}
+
 .no-print {
   display: none;
 }

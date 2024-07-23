@@ -14,20 +14,20 @@ export const InvoiceList = () => {
     return (
       <tr>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{wcf}</Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{wcf}</Card.Link>
         </td>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{level1 === "approved" ? "Approved" : level1 === "rejected" ? "Rejected" : "Pending"}</Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{level1 === "approved" ? "Approved" : level1 === "rejected" ? "Rejected" : "Pending"}</Card.Link>
         </td>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{level2 === "approved" ? "Approved" : level2 === "rejected" ? "Rejected" : "Pending"}</Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{level2 === "approved" ? "Approved" : level2 === "rejected" ? "Rejected" : "Pending"}</Card.Link>
         </td>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{level3 === "approved" ? "Approved" : level3 === "rejected" ? "Rejected" : "Pending"}</Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{level3 === "approved" ? "Approved" : level3 === "rejected" ? "Rejected" : "Pending"}</Card.Link>
         </td>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">
-          {(level1 !=="approved" || level2 !=="approved" || level3 !=="approved") &&
+          <Card.Link href="#" className="text-dark fw-bold">
+          {((level1 ==="approved" && level2 ==="approved" && level3 ==="approved") || (level1 ==="" && level2 ==="" && level3 ==="")) ? "-" :
             <button className="btn btn-sm btn-primary" onClick={() => navigate(`/viewInvoice`, { state: { approvals, id: _id } })}>
               Verify
             </button>
@@ -104,7 +104,7 @@ export const InvoiceList = () => {
                 <Col>
                   <Form.Control
                     type="text"
-                    placeholder="Search by WCF Document"
+                    placeholder="Search By WCF Document"
                     value={searchTerm}
                     onChange={handleSearch}
                   />

@@ -5,6 +5,7 @@ import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { Col, Row, Card, Table, ProgressBar, Form, Pagination } from '@themesberg/react-bootstrap';
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
+import { Capitalized } from './functions/CaptaliseFunction';
 
 export const VendorsList = () => {
   const TableRow = (props) => {
@@ -14,16 +15,16 @@ export const VendorsList = () => {
     return (
       <tr>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{username}</Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{Capitalized(username)}</Card.Link>
         </td>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{email}</Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{Capitalized(email)}</Card.Link>
         </td>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{MobNumber}</Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{MobNumber}</Card.Link>
         </td>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">
+          <Card.Link href="#" className="text-dark fw-bold">
             <button className="btn btn-sm btn-primary" onClick={() => navigate('/updateVendor', {state: {id:_id}})}>
               Edit
             </button>
@@ -97,7 +98,7 @@ export const VendorsList = () => {
                 <Col>
                   <Form.Control
                     type="text"
-                    placeholder="Search by Username"
+                    placeholder="Search By Username"
                     value={searchTerm}
                     onChange={handleSearch}
                   />

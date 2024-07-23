@@ -15,22 +15,22 @@ export const WCFTable = () => {
     return (
       <tr>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{po}</Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{po}</Card.Link>
         </td>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{level1 === "approved" ? "Approved" : level1 === "rejected" ? "Rejected" : "Pending"}</Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{level1 === "approved" ? "Approved" : level1 === "rejected" ? "Rejected" : "Pending"}</Card.Link>
         </td>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{level2 === "approved" ? "Approved" : level2 === "rejected" ? "Rejected" : "Pending"}</Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{level2 === "approved" ? "Approved" : level2 === "rejected" ? "Rejected" : "Pending"}</Card.Link>
         </td>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">{level3 === "approved" ? "Approved" : level3 === "rejected" ? "Rejected" : "Pending"} </Card.Link>
+          <Card.Link href="#" className="text-dark fw-bold">{level3 === "approved" ? "Approved" : level3 === "rejected" ? "Rejected" : "Pending"} </Card.Link>
         </td>
         <td>
-          <Card.Link href="#" className="text-primary fw-bold">
-          {(level1 !=="approved" || level2 !=="approved" || level3 !=="approved") &&
+          <Card.Link href="#" className="text-dark fw-bold">
+          {((level1 ==="approved" && level2 ==="approved" && level3 ==="approved") || (level1 ==="" && level2 ==="" && level3 ==="")) ? "-" :
             <button className="btn btn-sm btn-primary" onClick={() => navigate(`/viewWCF`, { state: { approvals, id: _id } })}>
-            Verify
+            Check
             </button>
           }
           </Card.Link>
@@ -97,14 +97,14 @@ export const WCFTable = () => {
             <Card.Body className="pb-0">
             <div className='row col-md-12 sticky-header'>
               <div className='col-md-8'>
-              <h5>Work Closure Forms</h5>
+              <h5>Invoice Approval Stage</h5>
               </div>
               <div className='col-md-4'>
               <Row className="mb-3">
                 <Col>
                   <Form.Control
                     type="text"
-                    placeholder="Search by PO Document"
+                    placeholder="Search By PO Document"
                     value={searchTerm}
                     onChange={handleSearch}
                   />
@@ -122,7 +122,7 @@ export const WCFTable = () => {
                     <th className="border-0">Level1</th>
                     <th className="border-0">Level2</th>
                     <th className="border-0">Level3</th>
-                    <th className="border-0">Verify</th>
+                    <th className="border-0">Status</th>
                   </tr>
                 </thead>
                 <tbody>

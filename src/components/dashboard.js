@@ -5,7 +5,8 @@ import { CounterWidget } from "./Widgets";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
-import '../assets/css/dashboard.css'
+import '../assets/css/dashboard.css';
+import { Capitalized } from "./functions/CaptaliseFunction";
 
 export default () => {
   const [details, setDetails] = useState()
@@ -17,16 +18,16 @@ export default () => {
     }
     fetchData()
   }, [])
-
+  
   return (
     <>
       <Sidebar />
       <main className="content">
         <Navbar />
         <article>
-          <p><b>Username:</b> {details?.username}</p>
-          <p><b>Role:</b> {details?.role}</p>
-          <p><b>Email:</b> {details?.email}</p>
+          <p className="text-dark"><b>Username:</b> {Capitalized(details?.username)}</p>
+          <p className="text-dark"><b>Role:</b> {Capitalized(details?.role)}</p>
+          <p className="text-dark"><b>Email:</b> {Capitalized(details?.email)}</p>
           <Row className="justify-content-md-center">
             <Col xs={12} sm={6} xl={4} className="mb-4">
               <CounterWidget

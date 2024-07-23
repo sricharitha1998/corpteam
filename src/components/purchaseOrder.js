@@ -8,6 +8,7 @@ import 'jspdf-autotable';
 import '../assets/css/dashboard.css';
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
+import { PDFfile } from './functions/pdfFile';
 
 export const PurchaseOrder = () => {
       
@@ -88,7 +89,6 @@ export const PurchaseOrder = () => {
             });
             const userInfo = await fetch(`http://localhost:4000/vendor/getDetails/${SplitValue[0]}`);
             const res = await userInfo.json();
-            console.log("res",res)
             setAddress(res?.details?.address)  
             setVendorName(SplitValue[1])          
         }else{
@@ -104,7 +104,20 @@ export const PurchaseOrder = () => {
 
         e.preventDefault();
         try {
-            const payload = { ...data, services };
+            for (const service of services) {
+                if (!service.code || !service.uom || !service.description || !service.quantity) {
+                    alert('All service fields are required.');
+                    return;
+                }
+            }
+
+            if(!data?.routeLength || !data?.vendorID || !data?.buildingArea){
+                alert('All fields are required.');
+                    return;
+            }
+
+            // const formattedDate = new Date().toLocaleDateString();
+            const payload = { ...data, services, date: new Date()  };
             const response = await fetch('http://localhost:4000/workOrder/insert', {
                 method: 'POST',
                 headers: {
@@ -127,30 +140,34 @@ export const PurchaseOrder = () => {
         } catch (error) {
             console.error('Error uploading files:', error);
         }
+        const getAllData = {...data, ...services}
+        PDFfile(getAllData)
 
-        const doc = new jsPDF();
+        // const doc = new jsPDF();
 
-        doc.text('Purchase Order', 20, 20);
-        doc.text(`Work Order No: ${data.workOrderNumber}`, 20, 30);
-        doc.text(`Building Name: ${data.buildingName || ''}`, 20, 40);
+        // doc.text('Purchase Order', 20, 20);
+        // doc.text(`Work Order No: ${data.workOrderNumber}`, 20, 30);
+        // doc.text(`Home Pass No: ${data.homePass || ''}`, 110, 30);
+        // doc.text(`Route Length: ${data.routeLength || ''}`, 110, 40);
+        // doc.text(`Building Area: ${data.buildingArea || ''}`, 20, 40);
+        // doc.text(`Vendor Name: ${data.vendorName || ''}`, 20, 50);
 
-        const tableColumn = ["S.No", "Service Description", "Service Code", "UOM", "Quantity"];
-        const tableRows = [];
+        // const tableColumn = ["S.No", "Service Description", "Service Code", "UOM", "Quantity"];
+        // const tableRows = [];
 
-        services.forEach((service, index) => {
-            const serviceData = [
-                index + 1,
-                service.description,
-                service.code,
-                service.uom,
-                service.quantity,
-            ];
-            tableRows.push(serviceData);
-        });
+        // services.forEach((service, index) => {
+        //     const serviceData = [
+        //         index + 1,
+        //         service.description,
+        //         service.code,
+        //         service.uom,
+        //         service.quantity,
+        //     ];
+        //     tableRows.push(serviceData);
+        // });
 
-        doc.autoTable(tableColumn, tableRows, { startY: 50 });
-
-        doc.save('purchase_order.pdf');
+        // doc.autoTable(tableColumn, tableRows, { startY: 60 });
+        // doc.save('purchase_order.pdf');
     };
 
     return (
@@ -167,7 +184,7 @@ export const PurchaseOrder = () => {
                             <div className='row'>
                                 <div className='col-md-4'>
                                     
-                                    <h7>Work Order No:</h7>
+                                    <h7>Work Order No*:</h7>
                                 </div>
                                 <div className='col-md-8'>
                                     <input className='form-control mx-2' value={data?.workOrderNumber} name="workOrderNumber" type='text' onChange={onChangeDetails} disabled={true} />
@@ -177,18 +194,37 @@ export const PurchaseOrder = () => {
                         <div className='col-md-6'>
                             <div className='row'>
                                 <div className='col-md-4'>
-                                    <h7>Building Name: </h7>
+                                    <h7>Building Area*: </h7>
                                 </div>
                                 <div className='col-md-8'>
-                                    <input className='form-control mx-2' name="buildingName" type='text' onChange={onChangeDetails} defaultValue={data?.buildingName}/>
+                                    <input className='form-control mx-2' name="buildingArea" type='text' onChange={onChangeDetails} placeholder="Enter Building Area" defaultValue={data?.buildingArea}/>
                                 </div>
                             </div>
                         </div>
                         <div className='col-md-6'>
-                        <br />
-                            <div className='row'>
+                            <div className='row mt-1'>
                                 <div className='col-md-4'>
-                                    <h7>Select Vendor: </h7>
+                                    <h7>Home Pass No: </h7>
+                                </div>
+                                <div className='col-md-8'>
+                                    <input className='form-control mx-2' name="homePass" type='text' onChange={onChangeDetails} placeholder='Enter Home Pass Number' defaultValue={data?.homePass}/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-md-6'>
+                            <div className='row mt-1'>
+                                <div className='col-md-4'>
+                                    <h7>Route Length*: </h7>
+                                </div>
+                                <div className='col-md-8'>
+                                    <input className='form-control mx-2' placeholder='Enter Route Length' name="routeLength" type='text' onChange={onChangeDetails} defaultValue={data?.routeLength}/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-md-6'>
+                            <div className='row mt-1'>
+                                <div className='col-md-4'>
+                                    <h7>Select Vendor*: </h7>
                                 </div>
                                 <div className='col-md-8'>
                                 <select className='form-control mx-2' name="vendorID" onChange={onChangeDetails}>
@@ -202,8 +238,7 @@ export const PurchaseOrder = () => {
                         </div>
                         {Address &&
                         <div className='col-md-6'>
-                        <br />
-                        <div className='row'>
+                        <div className='row mt-1'>
                         <div className='col-md-4'>
                                     <h7>Vendor Address: </h7>
                                 </div>

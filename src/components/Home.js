@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import '../assets/css/dashboard.css';
-import logo from '../assets/img/corpteam.jpg';
+import logo from "../assets/img/corpteam-trnspt.png"; 
 
 function Dashboard() {
 
@@ -15,8 +15,8 @@ function Dashboard() {
             </div>
             <p className='text-center'>Welcome to CorpTeam Solutions Partner Management System. </p>
             <div className="pointerCss col-md-4 text-center" onClick={() => navigate("/login", { state: { role: "employee" } })}>
-                <h6 className='dashboard'>Employee</h6></div>
-            <div className="pointerCss col-md-4 text-center" onClick={() => navigate("/login", { state: { role: "vendor" } })}><h6 className='dashboard'>Service Partner</h6></div>
+                <h5 className='dashboard'><b>Employee</b></h5></div>
+            <div className="pointerCss col-md-4 text-center" onClick={() => navigate("/login", { state: { role: "vendor" } })}><h5 className='dashboard'><b>Service Partner</b></h5></div>
         </div>
         </div>
     );

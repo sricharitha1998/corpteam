@@ -40,16 +40,16 @@ export const PrintPurchaseOrder = () => {
         return (
           <tr>
             <td>
-              <Card.Link href="#" className="text-primary fw-bold">{description}</Card.Link>
+              <Card.Link href="#" className="text-dark fw-bold">{description}</Card.Link>
             </td>
             <td>
-              <Card.Link href="#" className="text-primary fw-bold">{code}</Card.Link>
+              <Card.Link href="#" className="text-dark fw-bold">{code}</Card.Link>
             </td>
             <td>
-              <Card.Link href="#" className="text-primary fw-bold">{uom}</Card.Link>
+              <Card.Link href="#" className="text-dark fw-bold">{uom}</Card.Link>
             </td>
             <td>
-              <Card.Link href="#" className="text-primary fw-bold">{quantity}</Card.Link>
+              <Card.Link href="#" className="text-dark fw-bold">{quantity}</Card.Link>
             </td>
           </tr>
         );
@@ -61,9 +61,12 @@ export const PrintPurchaseOrder = () => {
             <Card.Body className="pb-0">
               <div className='row col-md-12'>
               <h4 className='text-center'>Purchase Order</h4>
-              <h6>Work Order Number: {Details?.workOrderNumber}</h6>
-              <h6>Building Name: {Details?.buildingName}</h6>
-              <h6>Vendor Name: {location?.state?.VendorName}</h6>
+              <div className='col-md-4'><h6>Work Order Number: {Details?.workOrderNumber}</h6></div>
+              <div className='col-md-4'><h6>Home Pass Number: {Details?.homePass}</h6></div>
+              <div className='col-md-4'><h6>Route Length: {Details?.routeLength}</h6></div>
+              <div className='col-md-4'><h6>Vendor Name: {location?.state?.VendorName}</h6></div>
+              <div className='col-md-4'><h6>Building Area: {Details?.buildingArea}</h6></div>
+            
               </div>
               
               <Table responsive className="table-centered table-nowrap rounded mb-0">

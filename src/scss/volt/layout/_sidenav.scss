@@ -27,16 +27,18 @@
 		&.active {
 			& > .nav-link {
 				color: $light;
-				background-color: #2e3650;
+				// background-color: #E19004; //#2e3650
+				background-color: #e48e01; //#2e3650
 				border: $border-width solid lighten( $dark, 20% );
 			}
 		}
 		.nav-link {
 			color: $light;
-			border: $border-width solid $dark;
+			border: $border-width solid #004475;
 			&:hover {
 				color: $light;
-				background-color: #2e3650;
+				background-color: #e48e01; //#2e3650
+				// background-color: #E19004; //#2e3650
 			}
 			&.active {
 				color: $white;
@@ -180,7 +182,7 @@
 			width:.5rem;
 		}
 		&:not(.collapsed) {
-			background-color:#2e3650;
+			background-color:#d19c46;
 			&::after{
 				transform: rotate(90deg);
     			transition: all .2s ease;

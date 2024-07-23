@@ -120,7 +120,7 @@ console.log("details", details)
                                     <input type="radio" name="po" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="po" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="po" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="po" onChange={handleCommentChange} /></td>
                             </tr>
@@ -139,7 +139,7 @@ console.log("details", details)
                                     <input type="radio" name="nesa" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="nesa" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="nesa" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="nesa" onChange={handleCommentChange} /></td>
                             </tr>
@@ -158,7 +158,7 @@ console.log("details", details)
                                     <input type="radio" name="inventory" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="inventory" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="inventory" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="inventory" onChange={handleCommentChange} /></td>
                             </tr>
@@ -177,7 +177,7 @@ console.log("details", details)
                                     <input type="radio" name="signupABD" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="signupABD" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="signupABD" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="signupABD" onChange={handleCommentChange} /></td>
                             </tr>
@@ -196,7 +196,7 @@ console.log("details", details)
                                     <input type="radio" name="civilSignOff" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="civilSignOff" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="civilSignOff" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="civilSignOff" onChange={handleCommentChange} /></td>
                             </tr>
@@ -215,7 +215,7 @@ console.log("details", details)
                                     <input type="radio" name="mrc" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="mrc" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="mrc" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="mrc" onChange={handleCommentChange} /></td>
                             </tr>
@@ -234,7 +234,7 @@ console.log("details", details)
                                     <input type="radio" name="officalApp" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="officalApp" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="officalApp" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="officalApp" onChange={handleCommentChange} /></td>
                             </tr>
@@ -253,7 +253,7 @@ console.log("details", details)
                                     <input type="radio" name="officalDemandNote" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="officalDemandNote" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="officalDemandNote" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="officalDemandNote" onChange={handleCommentChange} /></td>
                             </tr>
@@ -272,7 +272,7 @@ console.log("details", details)
                                     <input type="radio" name="dd" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="dd" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="dd" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="dd" onChange={handleCommentChange} /></td>
                             </tr>
@@ -291,7 +291,7 @@ console.log("details", details)
                                     <input type="radio" name="finalOrder" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="finalOrder" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="finalOrder" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="finalOrder" onChange={handleCommentChange} /></td>
                             </tr>
@@ -310,7 +310,7 @@ console.log("details", details)
                                     <input type="radio" name="signup" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="signup" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="signup" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="signup" onChange={handleCommentChange} /></td>
                             </tr>
@@ -330,7 +330,7 @@ console.log("details", details)
                                     <input type="radio" name="sdOrBg" value="Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td>
-                                    <input type="radio" name="sdOrBg" value="Not Approve" onChange={handleCheckboxChange} />
+                                    <input type="radio" name="sdOrBg" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td><input type="text" className='form-control' name="sdOrBg" onChange={handleCommentChange} /></td>
                             </tr>
@@ -351,7 +351,7 @@ console.log("details", details)
                                         <input type="radio" name={`${item.key}`} value="Approved" onChange={handleCheckboxChange} />
                                     </td>
                                     <td>
-                                        <input type="radio" name={`${item.key}`} value="Not Approve" onChange={handleCheckboxChange} />
+                                        <input type="radio" name={`${item.key}`} value="Not Approved" onChange={handleCheckboxChange} />
                                     </td>
                                     <td><input type="text" className='form-control' name={item.key} onChange={handleCommentChange} /></td>
                                 </tr>

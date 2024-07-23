@@ -63,7 +63,6 @@ export default () => {
             });
 
             const data = await response.json();
-
             console.log("data", data)
 
             if (data) {
@@ -122,7 +121,7 @@ export default () => {
 
     return (
 
-        <div className='row col-md-12'>
+        <div className='row col-md-12 signupBg'>
             <div className='col-md-2'></div>
             <div className='col-md-8'>
                 <div class="card p-5 my-5">
@@ -131,7 +130,11 @@ export default () => {
                     </div>
                     <form encType='multipart/form-data'>
                         <div className='form-group'>
+                        <div className='row mt-2'>
+                            <div className='col-md-4'>
                             <label className='mt-3'>Vendor Code</label>
+                            </div>
+                            <div className='col-md-8'>
                             <input
                                 type='text'
                                 name='vendorCode'
@@ -139,7 +142,14 @@ export default () => {
                                 disabled={true}
                                 value={inputDetails.code || ''}
                             />
+                            </div>
+                        </div>
+                            
+                        <div className='row'>
+                            <div className='col-md-4'>
                             <label className='mt-3'>Financial Document</label>
+                            </div>
+                            <div className='col-md-8'>
                             <input
                                 type='file'
                                 name='financialDetails'
@@ -147,11 +157,14 @@ export default () => {
                                 required
                                 onChange={onChangeFunction}
                             />
-                            {/* {
-                                userType === "new" ?
-                                    <> */}
-                                        <label className='mt-3'>Email</label>
-                                        <input
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-4'>
+                            <label className='mt-3'>Email</label>
+                            </div>
+                            <div className='col-md-8'>
+                            <input
                                             type='email'
                                             name='email'
                                             className='form-control mt-1'
@@ -159,9 +172,14 @@ export default () => {
                                             required
                                             onChange={OnChangeDetails}
                                         />
-
-                                        <label className='mt-3'>Password</label>
-                                        <input
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-4'>
+                            <label className='mt-3'>Password</label>
+                            </div>
+                            <div className='col-md-8'>
+                            <input
                                             type='password'
                                             name='password'
                                             className='form-control mt-1'
@@ -169,8 +187,14 @@ export default () => {
                                             required
                                             onChange={OnChangeDetails}
                                         />
-                                        <label className='mt-3'>Mobile Number</label>
-                                        <input
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-4'>
+                            <label className='mt-3'>Mobile Number</label>
+                            </div>
+                            <div className='col-md-8'>
+                            <input
                                             type='number'
                                             name='MobNumber'
                                             className='form-control mt-1'
@@ -178,8 +202,14 @@ export default () => {
                                             required
                                             onChange={OnChangeDetails}
                                         />
-                                        <label className='mt-3'>Username</label>
-                                        <input
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-4'>
+                            <label className='mt-3'>Username</label>
+                            </div>
+                            <div className='col-md-8'>
+                            <input
                                             type='text'
                                             name='username'
                                             className='form-control mt-1'
@@ -187,19 +217,13 @@ export default () => {
                                             required
                                             onChange={OnChangeDetails}
                                         />
-                                    {/* </> */}
-                                    
-                                    {/* <>
-                                        <label className='mt-3'>Select User</label>
-                                        <select className='form-control' name="vendor_id" onChange={(e) => setVendorId(e.target.value)}>
-                                            <option value="">Select User</option>
-                                            {vendors && vendors.map((vendor) => (
-                                                <option key={vendor._id} value={vendor._id}>{vendor.username}</option>
-                                            ))}
-                                        </select>
-                                    </>
-                            } */}
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-4'>
                             <label className='mt-3'>GST No</label>
+                            </div>
+                            <div className='col-md-8'>
                             <input
                                 type='text'
                                 name='gst'
@@ -208,8 +232,14 @@ export default () => {
                                 placeholder='Enter GST Number'
                                 onChange={onChangeFunction}
                             />
+                            </div>
+                        </div>
 
+                        <div className='row'>
+                            <div className='col-md-4'>
                             <label className='mt-3'>ROC</label>
+                            </div>
+                            <div className='col-md-8'>
                             <input
                                 type='file'
                                 name='roc'
@@ -217,8 +247,14 @@ export default () => {
                                 required
                                 onChange={onChangeFunction}
                             />
+                            </div>
+                        </div>
 
+                        <div className='row'>
+                            <div className='col-md-4'>
                             <label className='mt-3'>Photo</label>
+                            </div>
+                            <div className='col-md-8'>
                             <input
                                 type='file'
                                 name='photo'
@@ -226,27 +262,13 @@ export default () => {
                                 required
                                 onChange={onChangeFunction}
                             />
-
-                            {/* <label className='mt-3'>AOE</label>
-                            <input
-                                type='text'
-                                name='aoe'
-                                className='form-control mt-1'
-                                placeholder='Enter AOE'
-                                required
-                                onChange={onChangeFunction}
-                            /> */}
-
-                            {/* <label className='mt-3'>Registration Document</label>
-                            <input
-                                type='file'
-                                name='registrationDoc'
-                                className='form-control mt-1'
-                                required
-                                onChange={onChangeFunction}
-                            /> */}
-
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-4'>
                             <label className='mt-3'>Partnership Lead / AOE / MOA</label>
+                            </div>
+                            <div className='col-md-8'>
                             <input
                                 type='file'
                                 name='partnerShip'
@@ -254,8 +276,13 @@ export default () => {
                                 required
                                 onChange={onChangeFunction}
                             />
-
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-4'>
                             <label className='mt-3'>Company Pancard</label>
+                            </div>
+                            <div className='col-md-8'>
                             <input
                                 type='file'
                                 name='pancard'
@@ -263,27 +290,13 @@ export default () => {
                                 required
                                 onChange={onChangeFunction}
                             />
-
-                            {/* <label className='mt-3'>Aadhaar Card</label>
-                            <input
-                                type='file'
-                                name='aadhaar'
-                                className='form-control mt-1'
-                                required
-                                onChange={onChangeFunction}
-                            /> */}
-
-                            {/* <label className='mt-3'>Phone Number</label>
-                            <input
-                                type='number'
-                                name='phone'
-                                className='form-control mt-1'
-                                placeholder='Enter Phone Number'
-                                required
-                                onChange={onChangeFunction}
-                            /> */}
-
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-4'>
                             <label className='mt-3'>Company Team</label>
+                            </div>
+                            <div className='col-md-8'>
                             <textarea
                                 name='companyTeam'
                                 className='form-control mt-1'
@@ -291,7 +304,13 @@ export default () => {
                                 required
                                 onChange={onChangeFunction}
                             ></textarea>
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-md-4'>
                             <label className='mt-3'>Company Address</label>
+                            </div>
+                            <div className='col-md-8'>
                             <textarea
                                 name='address'
                                 className='form-control mt-1'
@@ -299,7 +318,14 @@ export default () => {
                                 required
                                 onChange={onChangeFunction}
                             ></textarea>
+                            </div>
+                        </div>
+                           
+                        <div className='row'>
+                            <div className='col-md-4'>
                             <label className='mt-3'>Others</label>
+                            </div>
+                            <div className='col-md-8'>
                             <textarea
                                 name='companyDetails'
                                 className='form-control mt-1'
@@ -307,10 +333,18 @@ export default () => {
                                 required
                                 onChange={onChangeFunction}
                             ></textarea>
-
-                            <br />
-                            <button type="button" onClick={handleSubmit} className="btn btn-primary">Submit</button>
+                            </div>
                         </div>
+
+                        <div className='row mt-2'>
+                            <div className='col-md-4'></div>
+                            <div className='col-md-8'>
+                            <button type="button" onClick={handleSubmit} className="btn btn-primary">Submit</button>
+                        
+                            </div>
+                        </div>
+
+                            </div>
                     </form>
                 </div>
             </div>

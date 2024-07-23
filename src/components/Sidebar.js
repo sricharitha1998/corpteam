@@ -3,10 +3,11 @@ import SimpleBar from 'simplebar-react';
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { CSSTransition } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faChartPie, faFileAlt, faSignOutAlt, faTimes, faUser, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faChartPie, faFileAlt, faSignOutAlt, faTimes, faUser, faPlus, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { Nav, Badge, Image, Button, Accordion, Navbar } from '@themesberg/react-bootstrap';
 import { Routes } from "../routes";
 import corpteamIcon from "../assets/img/corpteamIcon.png";
+import corpteamLogo from "../assets/img/corpteam.png"; 
 import ProfilePicture from "../assets/img/team/profile-picture-3.jpg";
 
 export default () => {
@@ -90,7 +91,9 @@ export default () => {
         </Navbar.Toggle>
       </Navbar>
       <CSSTransition timeout={300} in={show} classNames="sidebar-transition">
-        <SimpleBar className={`collapse ${showClass} sidebar d-md-block bg-primary text-white`}>
+        <SimpleBar className={`collapse ${showClass} sidebar d-md-block bg-primary text-white`} 
+        // style={{backgroundColor: "#e58e00"}}
+        >
           <div className="sidebar-inner px-4 pt-3">
             <div className="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
               <div className="d-flex align-items-center">
@@ -111,20 +114,20 @@ export default () => {
 
             { userDetails?.role === "admin" ? 
             <Nav className="flex-column pt-3 pt-md-0">
-              <NavItem title="CorpTeam " link={Routes.Home.path} />
-              <NavItem title="Dashboard" link={Routes.AdminDashboard.path} icon={faChartPie} /> 
+            <img src={corpteamLogo} className="my-2" alt="logo"/>
+              <NavItem title="Admin Dashboard" link={Routes.AdminDashboard.path} icon={faChartPie} /> 
               <CollapsableNavItem eventKey="work-closure-form/" title="Vendors" icon={faUser}>
                 <NavItem title="Add" link={Routes.AddVendor.path} />
                 <NavItem title="List" link={Routes.ListVendor.path} />
               </CollapsableNavItem>
-              {/* <NavItem title="Purchase Order" link={Routes.Purchase.path} icon={faFileAlt} /> */}
-              <NavItem title="Work Order" link={Routes.WorkOrder.path} icon={faPlus} />
-              <NavItem title="Purchase Order" link={Routes.Purchase.path} icon={faPlus} />
+              <NavItem title="Purchase Order" link={Routes.Purchase.path} icon={faCartPlus} />
+              <NavItem title="Partner Allocation Work" link={Routes.WorkOrder.path} icon={faPlus} />
             </Nav>
             :
             <Nav className="flex-column pt-3 pt-md-0">
-              <NavItem title="CorpTeam " link={Routes.Home.path} />
-              <NavItem title="Dashboard" link={Routes.DashboardOverview.path} icon={faChartPie} />              
+            <img src={corpteamLogo} className="my-2" alt="logo" />
+              {/* <NavItem link={Routes.Home.path} icon={corpteamLogo} /> */}
+              <NavItem title="Service Partner" link={Routes.DashboardOverview.path} icon={faChartPie} />              
               <NavItem title="Work Order" link={Routes.WorkOrder.path} icon={faPlus} />              
               <CollapsableNavItem eventKey="work-closure-form/" title="Work Closure Form" icon={faFileAlt}>
                 <NavItem title="Add" link={Routes.WCForm.path} />

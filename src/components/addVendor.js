@@ -51,6 +51,7 @@ export default () => {
             if(InputDetails?.username && InputDetails?.password){
             if (validateEmail(InputDetails.email)){
                 if(!ErrMob){
+                    console.log("Input", InputDetails)
             const response = await fetch('http://localhost:4000/users/registration' , {
                 method: 'POST',
                 headers: {
@@ -66,10 +67,14 @@ export default () => {
 
             const result = await response.json();
             console.log("result", result)
-            if (result) {
-                localStorage.setItem('Details', JSON.stringify(result));
-                alert("Profile Updated Successfully");
+            if (result.status === true) {
+                // localStorage.setItem('Details', JSON.stringify(result));
+                alert("Profile Registered Successfully");
                 navigate('/vendorsList')
+            }else if(result.status === false){
+                alert("Profile Already Exists")
+            }else{
+                alert("Profile Update Again")
             }
         }else{
             alert("Please enter valid mobile number")
@@ -96,7 +101,6 @@ export default () => {
                 <Navbar />
                 { userDetails?.role === "admin" ? 
                 <article>
-
                     <div className="card p-5">
                         <div className="card-header">
                             Add Vendor
@@ -131,12 +135,10 @@ export default () => {
                                     </div>
                                 </div>
                             </div>
-
                             <div className="row mt-3">
                                 <div className="col-md-4">
                                     <button type="submit" onClick={ClickSubmit} className="btn btn-primary">Submit</button>
                                 </div>
-
                             </div>
                         </form>
                     </div>

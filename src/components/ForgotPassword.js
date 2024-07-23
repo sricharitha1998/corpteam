@@ -3,6 +3,11 @@ import React, {useState} from "react";
 import { Col, Row, Form, Button, Container, InputGroup } from '@themesberg/react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowAltCircleLeft } from "@fortawesome/free-regular-svg-icons";
+import corpteamLogo from "../assets/img/corpteam-trnspt.png"; 
+import '../assets/css/dashboard.css'
+
 export default () => {
 
   const navigate = useNavigate()
@@ -59,7 +64,9 @@ export default () => {
           <Row className="justify-content-center">
             <Col xs={12} className="d-flex align-items-center justify-content-center">
               <div className="signin-inner my-3 my-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-                <h3>Forgot your password?</h3>
+              <img src={corpteamLogo} className="logoCss" alt="logo" />
+              <p className="my-2"><FontAwesomeIcon icon={faArrowAltCircleLeft} onClick={() => navigate('/login')} /><span className="mx-2">Back</span></p>
+              <h3>Forgot Your Password?</h3>
                 <p className="mb-4">Enter your email and we'll send you a OTP to reset your password</p>
                 <Form>
                   <div className="mb-4">
@@ -69,9 +76,10 @@ export default () => {
                     </InputGroup>
                   </div>
                   <Button variant="primary" type="submit" className="w-100" onClick={SendOTP}>
-                    Recover password
+                    Recover Password
                   </Button>
                 </Form>
+                
               </div>
             </Col>
           </Row>

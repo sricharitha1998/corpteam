@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 
@@ -72,7 +71,7 @@ export default () => {
                         <div className="form-group mt-4">
                         <div className='row col-md-12'>
                             <div className='col-md-4'>
-                            <label>Work closure Form* :</label>
+                            <label>Work Closure Form* :</label>
                             </div>
                             <div className='col-md-8'>
                             <input type="file" className="inputFiled form-control" name="wcf" onChange={OnChangeFunction} required />

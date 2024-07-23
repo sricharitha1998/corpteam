@@ -13,7 +13,7 @@ import ResetPassword from './components/ResetPassword';
 import InvoiceForm from './components/invoiceForm';
 import Profile from './components/Profile';
 import Dashboard from './components/dashboard';
-import InvoiceApproval from './components/invoiceApproval'
+import InvoiceApproval from './components/invoiceApproval';
 import { InvoiceList } from './components/invoiceList';
 import { ViewInvoice } from './components/viewInvoice';
 import AdminLogin from './components/adminLogin';
@@ -25,7 +25,9 @@ import { VendorsList } from './components/listVendors';
 import UpdateVendor from './components/updateVendor';
 import SignupBackup from './components/signup-backup';
 import { PrintPurchaseOrder } from './components/printPurchaseOrder';
-import SigninNew from './components/signin-new';
+import ProfileNew from './components/profile-new';
+import ProfileUpdateDashboard from './components/ProfileUpdateDashboard';
+import VendorApproval from './components/VendorApproval';
 
 function App() {
     return ( 
@@ -42,6 +44,7 @@ function App() {
                 <Route path="/resetPassword" element={<ResetPassword />} />
                 <Route path="/approvalForm/:id/:level" element={<ApprovalTable />} />
                 <Route path="/invoiceApproval/:id/:level" element={<InvoiceApproval />} />
+                <Route path="/VendorApproval/:id" element={<VendorApproval />} />
                 <Route path="/invoice" element={<InvoiceForm />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/dashboard" element={<Dashboard />} />
@@ -56,7 +59,8 @@ function App() {
                 <Route path="/updateVendor" element={<UpdateVendor />} /> 
                 <Route path="/signupBackup" element={<SignupBackup />} /> 
                 <Route path="/printPurchase" element={<PrintPurchaseOrder />} /> 
-                <Route path="/signinNew" element={<SigninNew />} /> 
+                <Route path="/profileNew" element={<ProfileNew />} /> 
+                <Route path="/ProfileUpdateDashboard" element={<ProfileUpdateDashboard />} /> 
             </Routes>
         </Router>
     );

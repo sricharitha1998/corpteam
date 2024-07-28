@@ -4,7 +4,7 @@ import '../../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './../navbar';
-import Footer from '../footer';
+import Footer from '../Footer';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 

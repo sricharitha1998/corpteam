@@ -1,13 +1,12 @@
+import React, { useEffect, useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-select/dist/css/bootstrap-select.min.css';
+import '../assets/css/style.css';
+import Logo from '../assets/img/logo/dashboard-logo.png';
+import { useLocation, useNavigate } from "react-router-dom";
+const AdminLogin = () => {
 
-import React, { useState} from 'react';
-import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
-import { Col, Row, Form, Card, Button, Container, InputGroup } from '@themesberg/react-bootstrap';
-import { Routes } from "../routes";
-
-export default () => {
-
+   
   const [InputDetails, setInputDetails] = useState({
     email: "",
     password: "", role: "admin"
@@ -31,7 +30,7 @@ function LoginInput(event) {
 const Login = async (event) => {
   event.preventDefault();
   if (validateEmail(InputDetails.email) && InputDetails?.password){
-  const response = await fetch('http://localhost:4000/users/login', {
+  const response = await fetch(' http://93.127.185.34:4000/users/login', {
       method: 'POST',
       headers: {
           "Content-Type": "application/json",
@@ -52,70 +51,48 @@ const Login = async (event) => {
 }
  }
 
+    
   return (
-    <main>
-      <section className="d-flex align-items-center my-4">
-        <Container>
-          <Row className="justify-content-center form-bg-image"
-          //  style={{ backgroundImage: `url(${BgImage})` }}
-           >
-            <Col xs={12} className="d-flex align-items-center justify-content-center">
-              <div className="bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-                <div className="text-center text-md-center mb-4 mt-md-0">
-                  <h3 className="mb-0">Sign in</h3>
-                  <p>Please Enter Your User Credentials</p>
-                </div>
-                <Form className="mt-4">
-                  <Form.Group id="email" className="mb-4">
-                    <Form.Label>Email</Form.Label>
-                    <InputGroup>
-                      <InputGroup.Text>
-                        <FontAwesomeIcon icon={faEnvelope} />
-                      </InputGroup.Text>
-                      <Form.Control autoFocus required name="email" onChange={LoginInput} type="email" placeholder="example@company.com" />
-                    </InputGroup>
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Group id="password" className="mb-4">
-                      <Form.Label>Password</Form.Label>
-                      <InputGroup>
-                        <InputGroup.Text>
-                          <FontAwesomeIcon icon={faUnlockAlt} />
-                        </InputGroup.Text>
-                        <Form.Control required name="password" type="password" onChange={LoginInput} placeholder="Password" />
-                      </InputGroup>
-                    </Form.Group>
-                    <div className='row col-md-12'>
-                      <div className='col-md-7'></div>
-                      <div className='col-md-5'>
-                      <div className="d-flex justify-content-between align-items-center mb-4" style={{float:"right"}}>
-                      <Card.Link className="small text-end" onClick={() => navigate("/forgotPassword")} >Forgot password?</Card.Link>
-                    </div>
+    <div className="vh-100">
+      <div className="authincation h-100">
+        <div className="container h-100">
+          <div className="row justify-content-center h-100 align-items-center">
+            <div className="col-md-6">
+              <div className="authincation-content">
+                <div className="row no-gutters">
+                  <div className="col-xl-12">
+                    <div className="auth-form">
+                      <div className="text-center mb-3">
+                        <a href="index.html" className="brand-logo">
+                          <img src={Logo} width="150px" alt="Logo" /> 
+                        </a>
                       </div>
+                      <h4 className="mb-0 text-center">Sign in</h4>
+                  <p className='text-center'>Please Enter Your User Credentials</p>
+                      <form action="index.html">
+                        <div className="form-group">
+                          <label className="mb-1"><strong>Email</strong></label>
+                          <input type="email" autoFocus required name="email" onChange={LoginInput} placeholder="example@company.com"  className="form-control" />
+                        </div>
+                        <div className="form-group">
+                          <label className="mb-1"><strong>Password</strong></label>
+                          <input type="password" className="form-control" required name="password" onChange={LoginInput} placeholder="Password" />
+                        </div>
+                        
+                        <div className="text-center">
+                          <button type="submit" onClick={Login} className="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                      </form>
                     </div>
-                    
-                  </Form.Group>
-                  <Button variant="primary" type="submit" onClick={Login} className="w-100">
-                    Sign in
-                  </Button>
-                </Form>
-
-                <div className="mt-3 mb-4 text-center">
-                  <span className="fw-normal">or</span>
-                </div>
-                <div className="d-flex justify-content-center align-items-center mt-4">
-                  <span className="fw-normal">
-                    Not registered?
-                    <Card.Link to={Routes.Signup.path} onClick={() => navigate('/register')} className="fw-bold">
-                      {` Create account `}
-                    </Card.Link> 
-                  </span>
+                  </div>
                 </div>
               </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-    </main>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
+
+export default AdminLogin;

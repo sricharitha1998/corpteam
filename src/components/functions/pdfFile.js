@@ -1,6 +1,6 @@
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import { Capitalized } from './CaptaliseFunction';
+import { Capitalized } from './capitalized';
 
 export const PDFfile = (data) => {
     const doc = new jsPDF();

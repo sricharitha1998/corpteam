@@ -1,15 +1,10 @@
-
 import React, {useState} from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUnlockAlt, faArrowAltCircleLeft } from "@fortawesome/free-solid-svg-icons";
-import { Col, Row, Form, Button, Container, InputGroup } from '@themesberg/react-bootstrap';
 import { useLocation, useNavigate } from 'react-router-dom';
-import corpteamLogo from "../assets/img/corpteam-trnspt.png"; 
-import '../assets/css/dashboard.css'
+import '../assets/css/style.css'; // Assuming you have a main CSS file similar to style.css
+import Logo from '../assets/img/logo/dashboard-logo.png';
 
-export default () => {
-
-  const [Password, setPassword] = useState();
+const ResetPassword = () => {
+    const [Password, setPassword] = useState();
     const [ConfirmPassword, setConfirmPassword] = useState();
 
     const location = useLocation();
@@ -18,7 +13,7 @@ export default () => {
     const ChangePassword = async (event) => {
       event.preventDefault();
       if(ConfirmPassword == Password){
-          const response = await fetch('http://localhost:4000/users/changePassword', {
+          const response = await fetch(' http://93.127.185.34:4000/users/changePassword', {
               method: 'POST',
               headers: {
                   "Content-Type": "application/json",
@@ -38,43 +33,57 @@ export default () => {
   }
 
   return (
-    <main>
-      <section className="bg-soft d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
-        <Container>
-          <Row className="justify-content-center">
-            <Col xs={12} className="d-flex align-items-center justify-content-center">
-              <div className="bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-              <img src={corpteamLogo} className="logoCss" alt="logo" />
-              <p className="my-2"><FontAwesomeIcon icon={faArrowAltCircleLeft} onClick={() => navigate('/forgotPassword')} /><span className="mx-2">Back</span></p>
-                <h3 className="mb-4">Reset Password</h3>
-                <Form>
-                  <Form.Group id="password" className="mb-4">
-                    <Form.Label>New Password</Form.Label>
-                    <InputGroup>
-                      <InputGroup.Text>
-                        <FontAwesomeIcon icon={faUnlockAlt} />
-                      </InputGroup.Text>
-                      <Form.Control required type="password" name="password" onChange={e => setPassword(e.target.value)} placeholder="Password" />
-                    </InputGroup>
-                  </Form.Group>
-                  <Form.Group id="confirmPassword" className="mb-4">
-                    <Form.Label>Confirm Password</Form.Label>
-                    <InputGroup>
-                      <InputGroup.Text>
-                        <FontAwesomeIcon icon={faUnlockAlt} />
-                      </InputGroup.Text>
-                      <Form.Control required type="password" name="confirmPassword" onChange={e => setConfirmPassword(e.target.value)} placeholder="Confirm Password" />
-                    </InputGroup>
-                  </Form.Group>
-                  <Button variant="primary" type="submit" onClick={ChangePassword} className="w-100">
-                    Reset Password
-                  </Button>
-                </Form>
+    <div className="vh-100">
+      <div className="authincation h-100">
+        <div className="container h-100">
+          <div className="row justify-content-center h-100 align-items-center">
+            <div className="col-md-6">
+              <div className="authincation-content">
+                <div className="row no-gutters">
+                  <div className="col-xl-12">
+                    <div className="auth-form">
+                      <div className="text-center mb-3">
+                        <img
+                          src={Logo}
+                          width="150px"
+                          alt="Logo"
+                        />
+                      </div>
+                      <h4 className="text-center mb-4">Reset Password</h4>
+                      <form action="index.html">
+                        <div className="form-group">
+                          <label>
+                            <strong>New Password</strong>
+                          </label>
+                          <input
+                            required className="form-control" type="password" name="password" onChange={e => setPassword(e.target.value)} placeholder="Password"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label>
+                            <strong>Confirm Password</strong>
+                          </label>
+                          <input
+                            required type="password" className="form-control"name="confirmPassword" onChange={e => setConfirmPassword(e.target.value)} placeholder="Confirm Password"
+                          />
+                        </div>
+                        <div className="text-center">
+                          <button type="submit" onClick={ChangePassword} className="btn btn-block text-white btnColor">
+                            Reset Password
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-    </main>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
   );
-};
+}
+
+export default ResetPassword;

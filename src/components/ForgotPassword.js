@@ -1,11 +1,11 @@
-
 import React, {useState} from "react";
-import { Col, Row, Form, Button, Container, InputGroup } from '@themesberg/react-bootstrap';
+import '../assets/css/style.css'; // Assuming you have a main CSS file similar to style.css
+import Logo from '../assets/img/logo/dashboard-logo.png';
 import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
-export default () => {
 
-  const navigate = useNavigate()
+const ForgotPassword = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState('');
     const [getModal, setModal] = useState(false);
     const [originalOTP, setOriginalOTP] = useState();
@@ -16,10 +16,13 @@ export default () => {
         return regex.test(email);
     };
 
+    const apiUrl = process.env.REACT_APP_API_URL;
+    console.log("apiUrl", process.env.REACT_APP_API_URL)
+
     const SendOTP = async (event) => {
         event.preventDefault();
         if (validateEmail(email)) {
-            const response = await fetch('http://localhost:4000/users/sendOTP', {
+            const response = await fetch(' http://93.127.185.34:4000/users/sendOTP', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -53,30 +56,50 @@ export default () => {
   }
 
   return (
-    <main>
-      <section className="vh-lg-100 mt-4 mt-lg-0 bg-soft d-flex align-items-center">
-        <Container>
-          <Row className="justify-content-center">
-            <Col xs={12} className="d-flex align-items-center justify-content-center">
-              <div className="signin-inner my-3 my-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
-                <h3>Forgot your password?</h3>
-                <p className="mb-4">Enter your email and we'll send you a OTP to reset your password</p>
-                <Form>
-                  <div className="mb-4">
-                    <Form.Label htmlFor="email">Email</Form.Label>
-                    <InputGroup id="email">
-                      <Form.Control required autoFocus onChange={e => setEmail(e.target.value)} name="email" type="email" placeholder="john@company.com" />
-                    </InputGroup>
+    <div className="vh-100">
+      <div className="authincation h-100">
+        <div className="container h-100">
+          <div className="row justify-content-center h-100 align-items-center">
+            <div className="col-md-6">
+              <div className="authincation-content">
+                <div className="row no-gutters">
+                  <div className="col-xl-12">
+                    <div className="auth-form">
+                      <div className="text-center mb-3">
+                        <img
+                          src={Logo}
+                          width="150px"
+                          alt="Logo"
+                        />
+                      </div>
+                      <h4 className="text-center mb-4">Forgot Password</h4>
+                      <form action="index.html">
+                        <div className="form-group">
+                          <label>
+                            <strong>Email</strong>
+                          </label>
+                          <input
+                            type="email"
+                            className="form-control"
+                            required autoFocus onChange={e => setEmail(e.target.value)} name="email"
+                            placeholder="hello@example.com"
+                          />
+                        </div>
+                        <div className="text-center">
+                          <button type="submit" onClick={SendOTP} className="btn btn-block text-white btnColor">
+                            SUBMIT
+                          </button>
+                        </div>
+                      </form>
+                    </div>
                   </div>
-                  <Button variant="primary" type="submit" className="w-100" onClick={SendOTP}>
-                    Recover password
-                  </Button>
-                </Form>
+                </div>
               </div>
-            </Col>
-          </Row>
-        </Container>
-        <Modal
+            </div>
+          </div>
+        </div>
+      </div>
+      <Modal
                 isOpen={getModal}
                 onRequestClose={() => setModal(false)}
                 style={{
@@ -104,11 +127,12 @@ export default () => {
                             </div>
                         </div>
                     </div>
-                    <button type="button" onClick={handleSubmit} className="btn btn-primary m-2">Submit</button>
+                    <button type="button" onClick={handleSubmit} className="btn btnColor text-white m-2">Submit</button>
                     <button type="button" onClick={() => setModal(false)} className="btn btn-secondary">Close</button>
                 </form>
             </Modal>
-      </section>
-    </main>
+    </div>
   );
-};
+}
+
+export default ForgotPassword;

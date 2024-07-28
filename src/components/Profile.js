@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import Sidebar from "./Sidebar";
-import Navbar from "./Navbar";
-import '../assets/css/dashboard.css'
+import React, { useEffect, useState } from 'react';
+import '../assets/css/style.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './navbar';
 
-export default () => {
-
+function Profile() {
     const [InputDetails, setInputDetails] = useState({})
  
     useEffect(()=>{
@@ -30,7 +30,7 @@ export default () => {
         e.preventDefault();
        
         try {
-            const response = await fetch('http://localhost:4000/users/changeProfile/'+InputDetails?._id, {
+            const response = await fetch(' http://93.127.185.34:4000/users/changeProfile/'+InputDetails?._id, {
                 method: 'POST',
                 headers: {
             "Content-Type": "application/json",
@@ -56,55 +56,64 @@ export default () => {
         }
 
     }
-
     return (
-        <>
-        
-            <Sidebar />
+        <div fontSetting>
 
-            <main className="content">
-                <Navbar />
-                <article>
+            <Navbar />
 
-                    <div class="card p-5">
-                    <div class="card-header sticky-header">
-                            <h5>Change Profile</h5>
-                        </div>
-                        <form>
-                    <div className="form-group mt-4">
-                    <div className='row col-md-12'>
-                        <div className='col-md-4 mt-3'>
-                        <label>Username* :</label>
-                        </div>
-                        <div className='col-md-8 mt-3'>
-                        <input type="text" className="inputFiled form-control" name="username" onChange={OnChangeFunction} defaultValue={InputDetails?.username} required />
-                        </div>
-                        {/* <div className='col-md-4 mt-3'>
-                        <label>Email* :</label>
-                        </div>
-                        <div className='col-md-8 mt-3'>
-                        <input type="text" className="inputFiled form-control" name="email" onChange={OnChangeFunction} defaultValue={InputDetails?.email} required />
-                        </div>
-                        <div className='col-md-4 mt-3'>
-                        <label>Mobile Number* :</label>
-                        </div> 
-                        <div className='col-md-8 mt-3'>
-                        <input type="number" className="inputFiled form-control" name="MobNumber" onChange={OnChangeFunction} defaultValue={InputDetails?.MobNumber} required />
-                        </div>*/}
+            <div className="content-body">
+                <div className="container-fluid">
+                     
+                    <div className="row page-titles">
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item active">Admin Portal</li>
+                        </ol>
                     </div>
-                    </div>
+                    <div className="row page-titles">
+                        <div className="col-lg-12">
 
-                    <div className="row mt-3">
-                        <div className="col-md-4">
-                            <button type="submit" onClick={ClickSubmit} className="btn btn-primary">Submit</button>
+                            <div className="card-body">
+                           
+                                <div className="form-validation">
+                                    <form className="needs-validation" novalidate="">
+                                        <div className="row">
+                                            <div className="col-xl-12">
+                                                <div className="mb-3 row">
+                                                    <label className="col-lg-4 col-form-label">Username    <span className="text-danger">*</span>
+                                                        
+                                                    </label>
+                                                    <div className="col-lg-6">
+                                                    <input type="text" className="form-control" name="username" placeholder='Enter Username' onChange={OnChangeFunction} defaultValue={InputDetails?.username} required />
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                            
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <div className="row mt-4 align-items-center">
+
+                                    <div className="col-sm-6 text-sm-right text-start">
+                                       
+                                        <button type="submit" onClick={ClickSubmit} className="btn  btnColor text-white mb-2">Submit</button>
+                                    </div>
+                                </div>
+                               
+                            </div>
                         </div>
 
                     </div>
-                </form>
-                    </div>
-                </article>
-
-            </main>
-        </>
+                </div>
+            </div>
+            <div className="footer">
+                <div className="copyright">
+                    <p>Copyright © Designed & Developed by <a href="" target="_blank">CorpTeam Solutions</a> <span className="current-year">2024</span></p>
+                </div>
+            </div>
+        </div>
     );
-};
+}
+
+export default Profile;

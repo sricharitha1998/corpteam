@@ -1,62 +1,56 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
-import Login from './components/Signin';
-import Register from './components/Signup';
-import WCForm from './components/wcform';
-import Forms from './pages/components/Forms';
-import { WCFTable } from './components/wcfTable';
-import { ViewWCF } from './components/viewDetails';
-import { ApprovalTable } from './components/approvalForm';
-import ForgotPassword from './components/ForgotPassword';
-import ResetPassword from './components/ResetPassword';
-import InvoiceForm from './components/invoiceForm';
-import Profile from './components/Profile';
+import LoginComponent from './components/Login';
+import ForgotPassword from './components/forgotPassword';
 import Dashboard from './components/dashboard';
-import InvoiceApproval from './components/invoiceApproval'
-import { InvoiceList } from './components/invoiceList';
-import { ViewInvoice } from './components/viewInvoice';
+import PurchaseOrder from './components/purchaseOrder';
+import InvoiceForm from './components/invoice/invoiceForm';
+import InvoiceList from './components/invoice/invoiceList';
+import WCForm from './components/WCForm/add';
+import WCFList from './components/WCForm/list';
+import WorkOrder from './components/workOrder';
+import AddVendor from './components/vendor/add';
+import VendorList from './components/vendor/list';
+import UpdateVendor from './components/vendor/update';
+import WCFViewDetails from './components/WCForm/viewDetails';
+import Profile from './components/profile';
+import ProfileDocs from './components/ProfileDoc';
+import InvoiceApproval from './components/invoice/invoiceApproval';
+import WCFApproval from './components/WCForm/wcfApproval';
+import VendorApproval from './components/vendor/vendorApproval';
+import PrintPurchase from './components/printPurchase';
+import ResetPassword from './components/resetPassword';
 import AdminLogin from './components/adminLogin';
-import AddVendor from './components/addVendor';
 import AdminDashboard from './components/adminDashboard';
-import { WorkOrder } from './components/workOrder';
-import { PurchaseOrder } from './components/purchaseOrder';
-import { VendorsList } from './components/listVendors';
-import UpdateVendor from './components/updateVendor';
-import SignupBackup from './components/signup-backup';
-import { PrintPurchaseOrder } from './components/printPurchaseOrder';
-import SigninNew from './components/signin-new';
 
 function App() {
     return ( 
         <Router>
           <Routes>
                 <Route path="/" element={<Home />} />  
-                <Route path="/login" element={<Login />} />
-                <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/wcform" element={<WCForm />} />
-                <Route path="/Forms" element={<Forms />} />
-                <Route path="/wcfTables" element={<WCFTable />} />
-                <Route path="/forgotPassword" element={<ForgotPassword />} />
-                <Route path="/resetPassword" element={<ResetPassword />} />
-                <Route path="/approvalForm/:id/:level" element={<ApprovalTable />} />
-                <Route path="/invoiceApproval/:id/:level" element={<InvoiceApproval />} />
-                <Route path="/invoice" element={<InvoiceForm />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/viewWCF" element={<ViewWCF />} />  
-                <Route path="/viewInvoice" element={<ViewInvoice />} /> 
-                <Route path="/invoiceList" element={<InvoiceList />} /> 
-                <Route path="/addVendor" element={<AddVendor />} /> 
-                <Route path="/adminDashboard" element={<AdminDashboard />} /> 
+                <Route path="/login" element={<LoginComponent />} />  
+                <Route path="/forgotPassword" element={<ForgotPassword />} />  
+                <Route path="/dashboard" element={<Dashboard />} />  
+                <Route path="/purchaseOrder" element={<PurchaseOrder />} />  
+                <Route path="/invoiceForm" element={<InvoiceForm />} />  
+                <Route path="/invoiceList" element={<InvoiceList />} />  
+                <Route path="/wcform" element={<WCForm />} />  
+                <Route path="/wcfList" element={<WCFList />} /> 
                 <Route path="/workOrder" element={<WorkOrder />} /> 
-                <Route path="/purchaseOrder" element={<PurchaseOrder />} /> 
-                <Route path="/vendorsList" element={<VendorsList />} /> 
-                <Route path="/updateVendor" element={<UpdateVendor />} /> 
-                <Route path="/signupBackup" element={<SignupBackup />} /> 
-                <Route path="/printPurchase" element={<PrintPurchaseOrder />} /> 
-                <Route path="/signinNew" element={<SigninNew />} /> 
+                <Route path="/addVendor" element={<AddVendor />} />  
+                <Route path="/vendorList" element={<VendorList />} />  
+                <Route path="/updateVendor" element={<UpdateVendor />} />  
+                <Route path="/wcfViewDetails" element={<WCFViewDetails />} />  
+                <Route path="/profile" element={<Profile />} /> 
+                <Route path="/profileDocs" element={<ProfileDocs />} /> 
+                <Route path="/invoiceApproval" element={<InvoiceApproval />} /> 
+                <Route path="/wcfApproval" element={<WCFApproval />} /> 
+                <Route path="/vendorApproval" element={<VendorApproval />} />
+                <Route path="/printPurchase" element={<PrintPurchase />} /> 
+                <Route path="/resetPassword" element={<ResetPassword />} /> 
+                <Route path="/adminLogin" element={<AdminLogin />} /> 
+                <Route path="/adminDashboard" element={<AdminDashboard />} /> 
             </Routes>
         </Router>
     );

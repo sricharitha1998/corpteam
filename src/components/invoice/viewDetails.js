@@ -46,7 +46,7 @@ function InvoiceViewDetails() {
         }
 
         try {
-            const response = await fetch(` http://localhost:4000/invoice/updateDocs/${id}`, {
+            const response = await fetch(` https://pmsapi.corpteamsolutions.net/invoice/updateDocs/${id}`, {
                 method: 'PATCH',
                 headers: {
                     "Accept": "application/json, text/plain, */*"

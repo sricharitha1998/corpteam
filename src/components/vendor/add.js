@@ -54,7 +54,7 @@ function AddVendor() {
             if (validateEmail(InputDetails.email)){
                 if(!ErrMob){
                     console.log("Input", InputDetails)
-            const response = await fetch(' http://localhost:4000/users/registration' , {
+            const response = await fetch(' https://pmsapi.corpteamsolutions.net/users/registration' , {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

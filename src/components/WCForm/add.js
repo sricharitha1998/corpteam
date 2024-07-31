@@ -34,7 +34,7 @@ function WCForm() {
 
     const getPoDoc = async (workOrderId) => {
         setWorkOrderID(workOrderId)
-        const userInfo = await fetch(` http://localhost:4000/workOrder/getOneRecord/${workOrderId}`);
+        const userInfo = await fetch(` https://pmsapi.corpteamsolutions.net/workOrder/getOneRecord/${workOrderId}`);
         const res = await userInfo.json();
         const details = localStorage.getItem('Details');
         setUserDetails(JSON.parse(details))
@@ -158,7 +158,7 @@ function WCForm() {
 
             try {
 
-                const response = await fetch(' http://localhost:4000/workClosure/CreateDocs', {
+                const response = await fetch(' https://pmsapi.corpteamsolutions.net/workClosure/CreateDocs', {
                     method: 'POST',
                     headers: {
                         "Accept": "application/json, text/plain, */*"
@@ -282,7 +282,7 @@ function WCForm() {
         if(OrderDetails?.workOrderNumber && OrderDetails?.buildingArea){
             const details = localStorage.getItem('Details');
 
-                const response = await fetch(' http://localhost:4000/workOrder/getOrderRecord', {
+                const response = await fetch(' https://pmsapi.corpteamsolutions.net/workOrder/getOrderRecord', {
                     method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

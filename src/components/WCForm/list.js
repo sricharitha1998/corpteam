@@ -22,7 +22,7 @@ function WCFList() {
     useEffect(() => {
       async function provInfo() {
         const details = localStorage.getItem('Details');
-        const userInfo = await fetch(` http://localhost:4000/workClosure/getwcfs/${location?.state ? location?.state?.id : JSON.parse(details)?._id}`);
+        const userInfo = await fetch(` https://pmsapi.corpteamsolutions.net/workClosure/getwcfs/${location?.state ? location?.state?.id : JSON.parse(details)?._id}`);
         const res = await userInfo.json();
         setWCFS(res?.wcfs);
         setSortedWCFS(res?.wcfs);

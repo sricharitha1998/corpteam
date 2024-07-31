@@ -29,17 +29,17 @@ function WorkOrder() {
       const details = localStorage.getItem('Details');
       const userDetails = JSON.parse(details)
 
-      const userInfo = await fetch(` http://localhost:4000/users/getUsers/vendor`);
+      const userInfo = await fetch(` https://pmsapi.corpteamsolutions.net/users/getUsers/vendor`);
       const getAllVendors = await userInfo.json();
       setVendors(getAllVendors?.users)
       setUserDetails(userDetails)
       let res;
       if (userDetails?.role === "admin") {
-        const userInfo = await fetch(` http://localhost:4000/workOrder/getAll`);
+        const userInfo = await fetch(` https://pmsapi.corpteamsolutions.net/workOrder/getAll`);
         res = await userInfo.json();
         if (res) {
           const updateArray = await Promise.all(res?.map(async (details) => {
-            const vendorResponse = await fetch(` http://localhost:4000/users/getById/${details?.vendor_id}`);
+            const vendorResponse = await fetch(` https://pmsapi.corpteamsolutions.net/users/getById/${details?.vendor_id}`);
             const vendor = await vendorResponse.json();
 
             // Add the username to the details object
@@ -53,7 +53,7 @@ function WorkOrder() {
           res = updateArray;
         }
       } else {
-        const userInfo = await fetch(` http://localhost:4000/workOrder/getRecords/${userDetails?._id}`);
+        const userInfo = await fetch(` https://pmsapi.corpteamsolutions.net/workOrder/getRecords/${userDetails?._id}`);
         res = await userInfo.json();
       }
       if (res) {
@@ -85,7 +85,7 @@ function WorkOrder() {
 
   const UpdateVendor = async (event) => {
     event.preventDefault();
-    const response = await fetch(' http://localhost:4000/workOrder/updateVendor', {
+    const response = await fetch(' https://pmsapi.corpteamsolutions.net/workOrder/updateVendor', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -113,7 +113,7 @@ function WorkOrder() {
   const DownloadPDF = async (id, event, username) => {
 
     event.preventDefault();
-    const userInfo = await fetch(` http://localhost:4000/workOrder/getOneRecord/${id}`);
+    const userInfo = await fetch(` https://pmsapi.corpteamsolutions.net/workOrder/getOneRecord/${id}`);
     const res = await userInfo.json();
     const getAllData = {...res, ...{vendorName: username}}
 
@@ -123,7 +123,7 @@ function WorkOrder() {
 
   const UpdateStatus = async (status, event) => {
     event.preventDefault();  // Prevent the default form submission behavior
-    const response = await fetch(' http://localhost:4000/workOrder/updateStatus', {
+    const response = await fetch(' https://pmsapi.corpteamsolutions.net/workOrder/updateStatus', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",

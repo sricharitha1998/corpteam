@@ -18,7 +18,7 @@ function ProfileDocs() {
         async function fetchData() {
             const getDetails = localStorage.getItem('Details');
             setDetails(JSON.parse(getDetails))
-            const userInfo = await fetch(` http://localhost:4000/vendor/getDetails/${JSON.parse(getDetails)?._id}`);
+            const userInfo = await fetch(` https://pmsapi.corpteamsolutions.net/vendor/getDetails/${JSON.parse(getDetails)?._id}`);
             const res = await userInfo.json();
             setVendorDetails(res?.details)
             const allApproved = res?.details?.approvals.every(approval => approval.status !== "Approved");
@@ -52,7 +52,7 @@ function ProfileDocs() {
         formData.append('dateTime', date.toISOString());
         formData.append("vendor_id", details?._id)
 
-        const response = await fetch(' http://localhost:4000/vendor/register', {
+        const response = await fetch(' https://pmsapi.corpteamsolutions.net/vendor/register', {
             method: 'POST',
             headers: {
                 "Accept": "application/json, text/plain, */*"

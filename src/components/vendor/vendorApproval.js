@@ -12,7 +12,7 @@ function VendorApproval() {
     useEffect(() => {
         const provInfo = async () => {
             try {
-                const response = await fetch(` http://localhost:4000/vendor/getVendorDetails/${id}`, {
+                const response = await fetch(` https://pmsapi.corpteamsolutions.net/vendor/getVendorDetails/${id}`, {
                     method: 'GET',
                     headers: {
                         "Accept": "application/json, text/plain, */*"
@@ -69,7 +69,7 @@ function VendorApproval() {
             const isApproved = approvals.every(item => item.status);
             if(isApproved && approvals.length === 9){
                 console.log("detailssss", details._id)
-            const response = await fetch(` http://localhost:4000/vendor/updateApproval`, {
+            const response = await fetch(` https://pmsapi.corpteamsolutions.net/vendor/updateApproval`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -136,7 +136,7 @@ function VendorApproval() {
                                 <td className="noBorder">Financial Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` http://localhost:4000/public/documents/${details?.financialDetails}`}
+                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.financialDetails}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -155,7 +155,7 @@ function VendorApproval() {
                                 <td className="noBorder">ROC Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` http://localhost:4000/public/documents/${details?.roc}`}
+                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.roc}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -174,7 +174,7 @@ function VendorApproval() {
                                 <td className="noBorder">photo</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` http://localhost:4000/public/documents/${details?.photo}`}
+                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.photo}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -193,7 +193,7 @@ function VendorApproval() {
                                 <td className="noBorder">Partnership Lead / AOE / MOA</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` http://localhost:4000/public/documents/${details?.partnerShip}`}
+                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.partnerShip}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -212,7 +212,7 @@ function VendorApproval() {
                                 <td className="noBorder">Company Pancard</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` http://localhost:4000/public/documents/${details?.pancard}`}
+                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.pancard}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >

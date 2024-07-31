@@ -46,7 +46,7 @@ function WCFViewDetails() {
         }
 
         try {
-            const response = await fetch(` http://localhost:4000/workClosure/updateDocs/${id}`, {
+            const response = await fetch(` https://pmsapi.corpteamsolutions.net/workClosure/updateDocs/${id}`, {
                 method: 'PATCH',
                 headers: {
                     "Accept": "application/json, text/plain, */*"

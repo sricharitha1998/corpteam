@@ -30,7 +30,7 @@ function InvoiceForm() {
                 const details = localStorage.getItem('Details');
                 formData.append("vendor_id", JSON.parse(details)._id)
 
-                const response = await fetch(' http://localhost:4000/invoice/register', {
+                const response = await fetch(' https://pmsapi.corpteamsolutions.net/invoice/register', {
                     method: 'POST',
                     headers: {
                         "Accept": "application/json, text/plain, */*"

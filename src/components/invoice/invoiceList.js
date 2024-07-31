@@ -22,7 +22,7 @@ function InvoiceList() {
   useEffect(() => {
     async function provInfo() {
       const details = localStorage.getItem('Details');
-      const userInfo = await fetch(` http://localhost:4000/invoice/getAll/${location?.state ? location?.state?.id : JSON.parse(details)?._id}`);
+      const userInfo = await fetch(` https://pmsapi.corpteamsolutions.net/invoice/getAll/${location?.state ? location?.state?.id : JSON.parse(details)?._id}`);
       const res = await userInfo.json();
       console.log("res", res)
       setWCFS(res?.invoices);

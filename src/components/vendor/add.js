@@ -4,6 +4,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './../navbar';
 import { useNavigate } from "react-router-dom";
+import Footer from '../footer';
 
 function AddVendor() {
     const navigate = useNavigate();
@@ -53,7 +54,7 @@ function AddVendor() {
             if (validateEmail(InputDetails.email)){
                 if(!ErrMob){
                     console.log("Input", InputDetails)
-            const response = await fetch(' http://93.127.185.34:4000/users/registration' , {
+            const response = await fetch(' http://localhost:4000/users/registration' , {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -71,7 +72,7 @@ function AddVendor() {
             if (result.status === true) {
                 // localStorage.setItem('Details', JSON.stringify(result));
                 alert("Profile Registered Successfully");
-                navigate('/vendorsList')
+                navigate('/vendorList')
             }else if(result.status === false){
                 alert("Profile Already Exists")
             }else{
@@ -90,9 +91,7 @@ function AddVendor() {
         } catch (error) {
             console.error('Error uploading files:', error);
         }
-
     }
-
 
     return (
         <div fontSetting>
@@ -104,7 +103,7 @@ function AddVendor() {
                      
                     <div className="row page-titles">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item active">Admin Portal</li>
+                            <li className="breadcrumb-item active"> Add Vendor</li>
                         </ol>
                     </div>
                     <div className="row page-titles">
@@ -152,12 +151,8 @@ function AddVendor() {
                                         </div>
                                     </form>
                                 </div>
-                                
-                                
                                 <div className="row mt-4 align-items-center">
-
                                     <div className="col-sm-6 text-sm-right text-start">
-                                       
                                         <button type="submit" onClick={ClickSubmit} className="btn  btnColor text-white mb-2">Submit</button>
                                     </div>
                                 </div>
@@ -171,11 +166,7 @@ function AddVendor() {
                     </div>
                 </div>
             </div>
-            <div className="footer">
-                <div className="copyright">
-                    <p>Copyright © Designed & Developed by <a href="" target="_blank">CorpTeam Solutions</a> <span className="current-year">2024</span></p>
-                </div>
-            </div>
+            <Footer /> 
         </div>
     );
 }

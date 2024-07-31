@@ -12,7 +12,7 @@ function VendorApproval() {
     useEffect(() => {
         const provInfo = async () => {
             try {
-                const response = await fetch(` http://93.127.185.34:4000/vendor/getVendorDetails/${id}`, {
+                const response = await fetch(` http://localhost:4000/vendor/getVendorDetails/${id}`, {
                     method: 'GET',
                     headers: {
                         "Accept": "application/json, text/plain, */*"
@@ -69,7 +69,7 @@ function VendorApproval() {
             const isApproved = approvals.every(item => item.status);
             if(isApproved && approvals.length === 9){
                 console.log("detailssss", details._id)
-            const response = await fetch(` http://93.127.185.34:4000/vendor/updateApproval`, {
+            const response = await fetch(` http://localhost:4000/vendor/updateApproval`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -100,6 +100,11 @@ function VendorApproval() {
       <div className="m-5">
         <div className="container-fluid">
           <div className="row page-titles">
+          <ol className="breadcrumb my-4 text-center">
+                            <li className="breadcrumb-item active">Vendor Approval</li>
+                        </ol>
+                        </div>
+                        <div className="row page-titles">
             <div className="col-lg-12">
               <div className="card-body">
                 <div className="table-responsive">
@@ -131,7 +136,7 @@ function VendorApproval() {
                                 <td className="noBorder">Financial Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` http://93.127.185.34:4000/public/documents/${details?.financialDetails}`}
+                                        href={` http://localhost:4000/public/documents/${details?.financialDetails}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -150,7 +155,7 @@ function VendorApproval() {
                                 <td className="noBorder">ROC Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` http://93.127.185.34:4000/public/documents/${details?.roc}`}
+                                        href={` http://localhost:4000/public/documents/${details?.roc}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -169,7 +174,7 @@ function VendorApproval() {
                                 <td className="noBorder">photo</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` http://93.127.185.34:4000/public/documents/${details?.photo}`}
+                                        href={` http://localhost:4000/public/documents/${details?.photo}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -188,7 +193,7 @@ function VendorApproval() {
                                 <td className="noBorder">Partnership Lead / AOE / MOA</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` http://93.127.185.34:4000/public/documents/${details?.partnerShip}`}
+                                        href={` http://localhost:4000/public/documents/${details?.partnerShip}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -207,7 +212,7 @@ function VendorApproval() {
                                 <td className="noBorder">Company Pancard</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` http://93.127.185.34:4000/public/documents/${details?.pancard}`}
+                                        href={` http://localhost:4000/public/documents/${details?.pancard}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >

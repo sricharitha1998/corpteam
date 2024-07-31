@@ -8,23 +8,10 @@ const LoginComponent = () => {
 
     const [InputDetails, setInputDetails] = useState({
         email: "",
-        password: ""
+        password: "", role:"vendor"
       });
       
       const navigate = useNavigate();
-      const location = useLocation();
-    
-      useEffect(() => {
-        const provInfo = async () => {
-          setInputDetails({
-            ...InputDetails,
-            role: location?.state?.role
-          })
-          
-        }
-    
-        provInfo();
-      }, [])
     
       const validateEmail = (email) => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -44,7 +31,7 @@ const LoginComponent = () => {
       const Login = async (event) => {
         event.preventDefault();
         if (validateEmail(InputDetails.email) && InputDetails?.password) {
-          const response = await fetch(' http://93.127.185.34:4000/users/login', {
+          const response = await fetch(' http://localhost:4000/users/login', {
             method: 'POST',
             headers: {
               "Content-Type": "application/json",
@@ -52,11 +39,10 @@ const LoginComponent = () => {
             },
             body: JSON.stringify(InputDetails)
           });
-    
           if (response?.status === 200) {
             const data = await response.json();
             if(data){
-            const userInfo = await fetch(` http://93.127.185.34:4000/vendor/getDetails/${data?.details?._id}`);
+            const userInfo = await fetch(` http://localhost:4000/vendor/getDetails/${data?.details?._id}`);
                 const res = await userInfo.json();
                 
             const allApproved = res?.details?.approvals && res?.details?.approvals.every(approval => approval.status === "Approved");

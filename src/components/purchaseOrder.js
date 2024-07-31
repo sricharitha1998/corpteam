@@ -27,7 +27,7 @@ function PurchaseOrder() {
             const RandomCode = "CTS" + month + year + Math.floor(10 + Math.random() * 90);
             setData({ ...data, workOrderNumber: RandomCode });
 
-            const userInfo = await fetch(` http://93.127.185.34:4000/users/getUsers/vendor`);
+            const userInfo = await fetch(` http://localhost:4000/users/getUsers/vendor`);
             const res = await userInfo.json();
             setVendors(res?.users)
         }
@@ -39,7 +39,7 @@ function PurchaseOrder() {
             if (location?.state?.data && location?.state?.services) {
                 setServices(location?.state?.services)
                 setData(location?.state?.data)
-                const userInfo = await fetch(` http://93.127.185.34:4000/vendor/getDetails/${location?.state?.data?.vendorID}`);
+                const userInfo = await fetch(` http://localhost:4000/vendor/getDetails/${location?.state?.data?.vendorID}`);
                 const res = await userInfo.json();
                 setAddress(res?.details?.address)
                 setVendorName(location?.state?.VendorName)
@@ -83,7 +83,7 @@ function PurchaseOrder() {
                 ...data,
                 [name]: SplitValue[0]
             });
-            const userInfo = await fetch(` http://93.127.185.34:4000/vendor/getDetails/${SplitValue[0]}`);
+            const userInfo = await fetch(` http://localhost:4000/vendor/getDetails/${SplitValue[0]}`);
             const res = await userInfo.json();
             setAddress(res?.details?.address)
             setVendorName(SplitValue[1])
@@ -114,7 +114,7 @@ function PurchaseOrder() {
 
             // const formattedDate = new Date().toLocaleDateString();
             const payload = { ...data, services, date: new Date() };
-            const response = await fetch(' http://93.127.185.34:4000/workOrder/insert', {
+            const response = await fetch(' http://localhost:4000/workOrder/insert', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -152,7 +152,7 @@ function PurchaseOrder() {
 
                     <div className="row page-titles">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item active">Admin Portal</li>
+                            <li className="breadcrumb-item active">Purchase Order</li>
                         </ol>
                     </div>
                     <div className="row page-titles">

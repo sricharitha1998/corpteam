@@ -30,7 +30,7 @@ function InvoiceForm() {
                 const details = localStorage.getItem('Details');
                 formData.append("vendor_id", JSON.parse(details)._id)
 
-                const response = await fetch(' http://93.127.185.34:4000/invoice/register', {
+                const response = await fetch(' http://localhost:4000/invoice/register', {
                     method: 'POST',
                     headers: {
                         "Accept": "application/json, text/plain, */*"
@@ -70,7 +70,7 @@ function InvoiceForm() {
                      
                     <div className="row page-titles">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item active">Admin Portal</li>
+                            <li className="breadcrumb-item active">Add Invoice</li>
                         </ol>
                     </div>
                     <div className="row page-titles">

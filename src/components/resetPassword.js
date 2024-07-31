@@ -13,7 +13,7 @@ const ResetPassword = () => {
     const ChangePassword = async (event) => {
       event.preventDefault();
       if(ConfirmPassword == Password){
-          const response = await fetch(' http://93.127.185.34:4000/users/changePassword', {
+          const response = await fetch(' http://localhost:4000/users/changePassword', {
               method: 'POST',
               headers: {
                   "Content-Type": "application/json",

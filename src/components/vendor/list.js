@@ -20,10 +20,10 @@ function VendorList() {
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10; 
-  
+    
     useEffect(() => {
       async function provInfo() {
-        const userInfo = await fetch(` http://93.127.185.34:4000/users/getUsers/vendor`);
+        const userInfo = await fetch(` http://localhost:4000/users/getUsers/vendor`);
         const res = await userInfo.json();
         setVendors(res?.users);
         setSortedVendors(res?.users);
@@ -96,7 +96,7 @@ function VendorList() {
           </div>
           <div className="row page-titles">
             <ol className="breadcrumb">
-              <li className="breadcrumb-item active">Admin Portal</li>
+              <li className="breadcrumb-item active"> List Vendor</li>
             </ol>
           </div>
           <div className="row page-titles">

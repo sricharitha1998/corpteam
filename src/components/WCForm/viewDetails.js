@@ -46,7 +46,7 @@ function WCFViewDetails() {
         }
 
         try {
-            const response = await fetch(` http://93.127.185.34:4000/workClosure/updateDocs/${id}`, {
+            const response = await fetch(` http://localhost:4000/workClosure/updateDocs/${id}`, {
                 method: 'PATCH',
                 headers: {
                     "Accept": "application/json, text/plain, */*"
@@ -63,7 +63,7 @@ function WCFViewDetails() {
             if (result) {
                 alert("Thanks For Uploading Work Closure Form");
                 // window.location.reload();
-                navigate("/wcfTables")
+                navigate("/wcfList")
             }
         } catch (error) {
             console.error('Error uploading files:', error);
@@ -80,7 +80,7 @@ function WCFViewDetails() {
           
           <div className="row page-titles">
             <ol className="breadcrumb">
-              <li className="breadcrumb-item active">Admin Portal</li>
+              <li className="breadcrumb-item active">WCF Approval Status</li>
             </ol>
           </div>
           <div className="row page-titles">

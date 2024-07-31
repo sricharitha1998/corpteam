@@ -22,7 +22,7 @@ const ForgotPassword = () => {
     const SendOTP = async (event) => {
         event.preventDefault();
         if (validateEmail(email)) {
-            const response = await fetch(' http://93.127.185.34:4000/users/sendOTP', {
+            const response = await fetch('http://localhost:4000/users/sendOTP', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

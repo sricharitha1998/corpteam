@@ -29,17 +29,17 @@ function WorkOrder() {
       const details = localStorage.getItem('Details');
       const userDetails = JSON.parse(details)
 
-      const userInfo = await fetch(` http://93.127.185.34:4000/users/getUsers/vendor`);
+      const userInfo = await fetch(` http://localhost:4000/users/getUsers/vendor`);
       const getAllVendors = await userInfo.json();
       setVendors(getAllVendors?.users)
       setUserDetails(userDetails)
       let res;
       if (userDetails?.role === "admin") {
-        const userInfo = await fetch(` http://93.127.185.34:4000/workOrder/getAll`);
+        const userInfo = await fetch(` http://localhost:4000/workOrder/getAll`);
         res = await userInfo.json();
         if (res) {
           const updateArray = await Promise.all(res?.map(async (details) => {
-            const vendorResponse = await fetch(` http://93.127.185.34:4000/users/getById/${details?.vendor_id}`);
+            const vendorResponse = await fetch(` http://localhost:4000/users/getById/${details?.vendor_id}`);
             const vendor = await vendorResponse.json();
 
             // Add the username to the details object
@@ -53,7 +53,7 @@ function WorkOrder() {
           res = updateArray;
         }
       } else {
-        const userInfo = await fetch(` http://93.127.185.34:4000/workOrder/getRecords/${userDetails?._id}`);
+        const userInfo = await fetch(` http://localhost:4000/workOrder/getRecords/${userDetails?._id}`);
         res = await userInfo.json();
       }
       if (res) {
@@ -85,7 +85,7 @@ function WorkOrder() {
 
   const UpdateVendor = async (event) => {
     event.preventDefault();
-    const response = await fetch(' http://93.127.185.34:4000/workOrder/updateVendor', {
+    const response = await fetch(' http://localhost:4000/workOrder/updateVendor', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -113,7 +113,7 @@ function WorkOrder() {
   const DownloadPDF = async (id, event, username) => {
 
     event.preventDefault();
-    const userInfo = await fetch(` http://93.127.185.34:4000/workOrder/getOneRecord/${id}`);
+    const userInfo = await fetch(` http://localhost:4000/workOrder/getOneRecord/${id}`);
     const res = await userInfo.json();
     const getAllData = {...res, ...{vendorName: username}}
 
@@ -123,7 +123,7 @@ function WorkOrder() {
 
   const UpdateStatus = async (status, event) => {
     event.preventDefault();  // Prevent the default form submission behavior
-    const response = await fetch(' http://93.127.185.34:4000/workOrder/updateStatus', {
+    const response = await fetch(' http://localhost:4000/workOrder/updateStatus', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -163,7 +163,7 @@ function WorkOrder() {
           
           <div className="row page-titles">
             <ol className="breadcrumb">
-              <li className="breadcrumb-item active">Admin Portal</li>
+              <li className="breadcrumb-item active">Work Order List</li>
             </ol>
           </div>
           <div className="row page-titles">
@@ -207,7 +207,7 @@ function WorkOrder() {
                           <td className="noBorder">{pt.homePass ? Capitalized(pt.homePass) : "-"}</td>
                           <td className="noBorder">{pt.routeLength ? Capitalized(pt.routeLength) : "-"}</td>
                           <td className="noBorder">{Capitalized(pt.buildingArea)}</td>
-                          <td className="noBorder">{pt.workOrderDate.toLocaleDateString()}</td>
+                          <td className="noBorder">{pt?.workOrderDate?.toLocaleDateString()}</td>
                           <td className="noBorder">{Math.abs(Math.ceil(new Date(pt.date).getTime() -today.getTime() / (1000 * 3600 * 24)))}</td>
                           <td className="noBorder">
                           {

@@ -4,7 +4,7 @@ import '../../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './../navbar';
-import Footer from '../Footer';
+import Footer from '../footer';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
@@ -34,7 +34,7 @@ function WCForm() {
 
     const getPoDoc = async (workOrderId) => {
         setWorkOrderID(workOrderId)
-        const userInfo = await fetch(` http://93.127.185.34:4000/workOrder/getOneRecord/${workOrderId}`);
+        const userInfo = await fetch(` http://localhost:4000/workOrder/getOneRecord/${workOrderId}`);
         const res = await userInfo.json();
         const details = localStorage.getItem('Details');
         setUserDetails(JSON.parse(details))
@@ -158,7 +158,7 @@ function WCForm() {
 
             try {
 
-                const response = await fetch(' http://93.127.185.34:4000/workClosure/CreateDocs', {
+                const response = await fetch(' http://localhost:4000/workClosure/CreateDocs', {
                     method: 'POST',
                     headers: {
                         "Accept": "application/json, text/plain, */*"
@@ -282,7 +282,7 @@ function WCForm() {
         if(OrderDetails?.workOrderNumber && OrderDetails?.buildingArea){
             const details = localStorage.getItem('Details');
 
-                const response = await fetch(' http://93.127.185.34:4000/workOrder/getOrderRecord', {
+                const response = await fetch(' http://localhost:4000/workOrder/getOrderRecord', {
                     method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -313,7 +313,7 @@ function WCForm() {
 
                             <div className="row page-titles">
                                 <ol className="breadcrumb">
-                                    <li className="breadcrumb-item active">Admin Portal</li>
+                                    <li className="breadcrumb-item active">Add Work Form Closure </li>
                                 </ol>
                             </div>
                             <div className="row page-titles">

@@ -6,7 +6,7 @@ import { faCog, faFileAlt, faUser, faFileInvoice, faPuzzlePiece, faSearch, faArr
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './navbar';
-
+import Footer from './footer';
 
 function Dashboard() {
   useEffect(() => {
@@ -22,10 +22,13 @@ function Dashboard() {
       <Navbar />
       
       <div className="content-body">
-        <div className="container-fluid">
-          {/* <div className="form-head mb-sm-5 mb-3 d-flex flex-wrap align-items-center"> */}
-            <h2 className="font-w600 title mb-2 me-auto">Dashboard</h2>
-          </div>
+       
+          <div className="row page-titles">
+          <ol className="breadcrumb my-4 text-center">
+                            <li className="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                        </div>
+                        <div className="row page-titles">
           <div className="row">
             
                 <div className="col-md-4 ">
@@ -48,7 +51,7 @@ function Dashboard() {
                     <div className="card-body p-4" style={{height: "166px"}}>
                       <div className="media">
                         <span className="me-3">
-                        <FontAwesomeIcon icon={faFileInvoice} className="fontAwesomeIcons mt-1"/>
+                        <i className="fa fa-file-invoice" aria-hidden="true"></i>
                         </span>
                         <div className="media-body text-white text-right">
                           <p className="mb-1">Invoice</p>
@@ -79,12 +82,9 @@ function Dashboard() {
                 </div>
           {/* </div> */}
         </div>
-      </div>
-      <div className="footer">
-        <div className="copyright">
-          <p>Copyright © Designed & Developed by <a href="" target="_blank">CorpTeam Solutions</a> <span className="current-year">2024</span></p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

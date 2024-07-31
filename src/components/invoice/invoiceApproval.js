@@ -18,7 +18,7 @@ function InvoiceApproval() {
     useEffect(() => {
         const provInfo = async () => {
             try {
-                const response = await fetch(` http://93.127.185.34:4000/invoice/getDocuments/${id}`, {
+                const response = await fetch(` http://localhost:4000/invoice/getDocuments/${id}`, {
                     method: 'GET',
                     headers: {
                         "Accept": "application/json, text/plain, */*"
@@ -74,7 +74,7 @@ function InvoiceApproval() {
             const isApproved = approvals.every(item => item.status);
             if(isApproved && approvals.length === 3){
                 console.log("detailssss", details._id)
-            const response = await fetch(` http://93.127.185.34:4000/invoice/sendEmail`, {
+            const response = await fetch(` http://localhost:4000/invoice/sendEmail`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -103,6 +103,11 @@ function InvoiceApproval() {
     <div fontSetting>
       <div className="m-5">
         <div className="container-fluid">
+        <div className="row page-titles">
+          <ol className="breadcrumb my-4 text-center">
+                            <li className="breadcrumb-item active">Invoice Approval</li>
+                        </ol>
+                        </div>
           <div className="row page-titles">
             <div className="col-lg-12">
               <div className="card-body">
@@ -122,7 +127,7 @@ function InvoiceApproval() {
                                 <td className="noBorder">Work Closure Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` http://93.127.185.34:4000/public/invoice/${details?.wcf}`}
+                                        href={` http://localhost:4000/public/invoice/${details?.wcf}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -141,7 +146,7 @@ function InvoiceApproval() {
                                 <td className="noBorder">Invoice Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` http://93.127.185.34:4000/public/invoice/${details?.invoiceCopy}`}
+                                        href={` http://localhost:4000/public/invoice/${details?.invoiceCopy}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -160,7 +165,7 @@ function InvoiceApproval() {
                                 <td className="noBorder">Supporting Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` http://93.127.185.34:4000/public/invoice/${details?.supportingDoc}`}
+                                        href={` http://localhost:4000/public/invoice/${details?.supportingDoc}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >

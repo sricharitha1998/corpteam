@@ -23,6 +23,7 @@ import PrintPurchase from './components/printPurchase';
 import ResetPassword from './components/resetPassword';
 import AdminLogin from './components/adminLogin';
 import AdminDashboard from './components/adminDashboard';
+import Error from './components/error'
 
 function App() {
     return ( 
@@ -36,10 +37,10 @@ function App() {
                 <Route path="/invoiceForm" element={<InvoiceForm />} />  
                 <Route path="/invoiceList" element={<InvoiceList />} />  
                 <Route path="/wcform" element={<WCForm />} />  
-                <Route path="/wcfList" element={<WCFList />} /> 
+                <Route path="/wcfList" element={<WCFList />} />
                 <Route path="/workOrder" element={<WorkOrder />} /> 
                 <Route path="/addVendor" element={<AddVendor />} />  
-                <Route path="/vendorList" element={<VendorList />} />  
+                <Route path="/vendorList" element={<VendorList />} />
                 <Route path="/updateVendor" element={<UpdateVendor />} />  
                 <Route path="/wcfViewDetails" element={<WCFViewDetails />} />  
                 <Route path="/profile" element={<Profile />} /> 
@@ -51,6 +52,7 @@ function App() {
                 <Route path="/resetPassword" element={<ResetPassword />} /> 
                 <Route path="/adminLogin" element={<AdminLogin />} /> 
                 <Route path="/adminDashboard" element={<AdminDashboard />} /> 
+                <Route path="*" element={Error} />
             </Routes>
         </Router>
     );

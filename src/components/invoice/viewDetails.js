@@ -46,7 +46,7 @@ function InvoiceViewDetails() {
         }
 
         try {
-            const response = await fetch(` http://93.127.185.34:4000/invoice/updateDocs/${id}`, {
+            const response = await fetch(` http://localhost:4000/invoice/updateDocs/${id}`, {
                 method: 'PATCH',
                 headers: {
                     "Accept": "application/json, text/plain, */*"
@@ -79,7 +79,7 @@ function InvoiceViewDetails() {
           
           <div className="row page-titles">
             <ol className="breadcrumb">
-              <li className="breadcrumb-item active">Admin Portal</li>
+              <li className="breadcrumb-item active">Invoice Approval Status </li>
             </ol>
           </div>
           <div className="row page-titles">

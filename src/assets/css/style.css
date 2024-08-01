@@ -39977,6 +39977,14 @@ color: #004475 !important;
   font-family: 'poppins', sans-serif !important;
 }
 
+.activeNav {
+  background-color: #004475;
+  font-weight: bold;
+  margin-right: 6%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px
+}
+
 .btnColor{
   background-color: #004475 !important;
   }

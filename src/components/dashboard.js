@@ -63,7 +63,7 @@ function Dashboard() {
                 </div>
                 <div className="col-md-4">
                   <div className="widget-stat card bg-color">
-                    <div className="card-body p-4">
+                    <div className="card-body p-4" style={{height: "166px"}}>
                       <div className="media">
                         <span className="me-3">
                           <i className="fas fa-warehouse"></i>

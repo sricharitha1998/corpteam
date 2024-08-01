@@ -9,7 +9,7 @@ function Footer() {
     return (
         <div className="footer">
                 <div className="copyright">
-                    <p>Copyright © Designed & Developed by <a href="" target="_blank">CorpTeam Solutions</a> <span className="current-year">2024</span></p>
+                <p>Copyright © Designed & Developed by <a href="" target="_blank" style={{color: "#E48E03", textDecoration: "none"}}>CorpTeam Solutions</a> <span className="current-year">2024</span></p>
                 </div>
             </div>
     );

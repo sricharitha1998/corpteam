@@ -4,7 +4,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleUp, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faDownload, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Pagination from './pagination';
 import Footer from './footer';
@@ -161,11 +161,22 @@ function WorkOrder() {
       <div className="content-body">
         <div className="container-fluid">
           
-          <div className="row page-titles">
-            <ol className="breadcrumb">
+        <div className="row">
+              <div className="col-md-8">
+              <ol className="breadcrumb">
               <li className="breadcrumb-item active">Work Order List</li>
-            </ol>
-          </div>
+              </ol>
+              </div>
+              <div className="col-md-4 mb-3">
+              <div className="input-group search-area right d-lg-inline-flex d-none">
+                  <input type="text" className="form-control" placeholder="Search By Work Order Number" value={searchTerm}
+                        onChange={handleSearch}/>
+                  <span className="input-group-text">
+                    <a href="javascript:void(0);"><FontAwesomeIcon icon={faSearch} className="fontAwesomeIcons mt-1"/></a>
+                  </span>
+                </div>
+              </div>
+              </div>
           <div className="row page-titles">
             <div className="col-lg-12">
               <div className="card-body">

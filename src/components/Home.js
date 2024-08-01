@@ -10,7 +10,7 @@ import serviceProviderIcon from '../assets/img/icons/service-provider.png';
 const Home = () => {
   return (
     <div className="authincation h-100">
-    <div className='row col-xl-12'>
+    <div className='row col-xl-12 mt-3'>
     <div className='col-xl-10'></div>
                 <div className='col-xl-2'>
                 <a href="/adminLogin" className='btn btnColor text-white'>Admin Login</a>

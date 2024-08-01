@@ -2,11 +2,11 @@ import React, {useEffect, useState, useRef} from 'react';
 import '../assets/css/style.css'; 
 import Logo from '../assets/img/logo/dashboard-logo.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog, faFileAlt, faUser, faFileInvoice, faPuzzlePiece, faSearch, faListCheck, faUserTie, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faFileAlt, faUser, faFileInvoice, faPuzzlePiece, faListCheck, faUserTie, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 // import '../assets/css/dropDown.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 
 function Navbar() {
@@ -22,7 +22,8 @@ function Navbar() {
   const [ MenuShow, setMenuShow ] = useState(true);
   const [ vendorShow, setVenodrShow ] = useState(false);
   const [userDetails, setUserDetails] = useState({});
-  
+  const navigate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
     const details = localStorage.getItem('Details');
     if (!details) {
@@ -32,7 +33,7 @@ function Navbar() {
     }
 }, []);
 
-  const navigate = useNavigate();
+  
   const handleSignOut = () => {
     localStorage.removeItem('Details');
     navigate('/');
@@ -40,7 +41,7 @@ function Navbar() {
 
   const buttonRef = useRef(null);
   const menuRef = useRef(null);
-
+console.log("location.pathname", location.pathname)
   useEffect(() => {
     const closeMenuOnClickOutside = (e) => {
       if (
@@ -59,17 +60,16 @@ function Navbar() {
       document.removeEventListener("click", closeMenuOnClickOutside);
     };
   }, []);
-  
-
 
   return (
     <div fontSetting style={{position: "sticky", top: "0"}}>
 
+      {/* <div id="main-wrapper" className="show menu-toggle"> */}
       <div className="nav-header">
         <a href="index.html" className="brand-logo">
           <img src={Logo} width="100px" alt="Dashboard Logo" />
         </a>
-        <div className="nav-control" onClick={() => setMenuShow(!MenuShow)}>
+        {/* <div className="nav-control" onClick={() => setMenuShow(!MenuShow)}>
         {
           MenuShow ? 
           <div className="hamburger">
@@ -85,7 +85,7 @@ function Navbar() {
           </div>
         }
          
-        </div>
+        </div> */}
       </div>
       
       <div className="header">
@@ -93,12 +93,7 @@ function Navbar() {
           <nav className="navbar navbar-expand">
             <div className="collapse navbar-collapse justify-content-between">
               <div className="header-left">
-                <div className="input-group search-area right d-lg-inline-flex d-none">
-                  <input type="text" className="form-control" placeholder="Search here..." />
-                  <span className="input-group-text">
-                    <a href="javascript:void(0);"><FontAwesomeIcon icon={faSearch} className="fontAwesomeIcons mt-1"/></a>
-                  </span>
-                </div>
+                
               </div>
               {/* <main>
       <details id="menu" ref={menuRef}>
@@ -120,7 +115,7 @@ function Navbar() {
     </main> */}
               <ul className="navbar-nav header-right main-notification">
                 <li className="nav-item dropdown header-profile">
-                  <a className="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
+                  <a className="nav-link" href="#" role="button">
                     <div className="header-info">
                       <span>{userDetails?.username}</span>
                       <small>{userDetails?.role}</small>
@@ -157,13 +152,13 @@ function Navbar() {
             <li>
             {userDetails?.role === "admin" ?
               
-              <a href="/adminDashboard" className="ai-icon" aria-expanded="false">
-              <FontAwesomeIcon icon={faCog} className="fontAwesomeIcons mt-1"/>
+              <a href="/adminDashboard" className={`ai-icon ${location.pathname === '/adminDashboard' ? 'activeNav text-white' : ''}`} aria-expanded="false">
+              <FontAwesomeIcon icon={faCog} className={`fontAwesomeIcons mt-1 ${location.pathname === '/adminDashboard' ? 'text-white' : '' }` }/>
                 <span className="nav-text">Dashboard</span>
               </a>
               :
-              <a href="/dashboard" className="ai-icon" aria-expanded="false">
-              <FontAwesomeIcon icon={faCog} className="fontAwesomeIcons mt-1"/>
+              <a href="/dashboard" className={`ai-icon ${location.pathname === '/dashboard' ? 'activeNav text-white' : ''}`} aria-expanded="false">
+              <FontAwesomeIcon icon={faCog} className={`fontAwesomeIcons mt-1 ${location.pathname === '/dashboard' ? 'text-white' : '' }` }/>
                 <span className="nav-text">Service Partner</span>
               </a>
             }
@@ -177,22 +172,22 @@ function Navbar() {
                 <FontAwesomeIcon icon={faUser} className="fontAwesomeIcons mt-1"/>
                 <span className="nav-text" onClick={() => setVenodrShow(!vendorShow)}>Vendors</span>
               </a>
-              {vendorShow &&
+              {(vendorShow || (location?.pathname === '/addVendor' || location?.pathname === '/vendorList')) &&
               <ul aria-expanded="false">
-                <li><a href="/addVendor">Add</a></li>
-                <li><a href="/vendorList">List</a></li>
+                <li><a href="/addVendor" className={`${location.pathname === '/addVendor' ? 'activeNav text-white' : ''}`}>Add</a></li>
+                <li><a href="/vendorList" className={`${location.pathname === '/vendorList' ? 'activeNav text-white' : ''}`}>List</a></li>
               </ul>
               }
             </li>
             <li>
-              <a href="/purchaseOrder" className="ai-icon" aria-expanded="false">
-              <FontAwesomeIcon icon={faPuzzlePiece} className="fontAwesomeIcons mt-1"/>
+              <a href="/purchaseOrder" className={`ai-icon ${location.pathname === '/purchaseOrder' ? 'activeNav text-white' : ''}`} aria-expanded="false">
+              <FontAwesomeIcon icon={faPuzzlePiece} className={`fontAwesomeIcons mt-1 ${location.pathname === '/purchaseOrder' ? 'text-white' : '' }` }/>
                 <span className="nav-text">Purchase Orders</span>
               </a>
             </li>
             <li>
-              <a href="/workOrder" className="ai-icon" aria-expanded="false">
-              <FontAwesomeIcon icon={faListCheck} className="fontAwesomeIcons mt-1"/>
+              <a href="/workOrder" className={`ai-icon ${location.pathname === '/workOrder' ? 'activeNav text-white' : ''}`} aria-expanded="false">
+              <FontAwesomeIcon icon={faListCheck} className={`fontAwesomeIcons mt-1 ${location.pathname === '/workOrder' ? 'text-white' : '' }` }/>
                 <span className="nav-text">Partner Allocation Work</span>
               </a>
             </li>
@@ -205,10 +200,10 @@ function Navbar() {
                 <FontAwesomeIcon icon={faFileAlt} className="fontAwesomeIcons mt-1"/>
                 <span className="nav-text" onClick={() => setWCFShow(!wcfShow)}>Work Closure Form </span>
               </a>
-              {wcfShow &&
+              { (wcfShow || (location?.pathname === '/wcform' || location?.pathname === '/wcfList')) &&
               <ul aria-expanded="false">
-                <li><a href="/wcform">Add</a></li>
-                <li><a href="/wcfList">List</a></li>
+                <li><a href="/wcform" className={`${location.pathname === '/wcform' ? 'activeNav text-white' : ''}`}>Add</a></li>
+                <li><a href="/wcfList" className={`${location.pathname === '/wcfList' ? 'activeNav text-white' : ''}`}>List</a></li>
               </ul>
               }
             </li>
@@ -217,16 +212,16 @@ function Navbar() {
               <FontAwesomeIcon icon={faFileInvoice} className="fontAwesomeIcons mt-1"/>
                 <span className="nav-text" onClick={() => setInvoiceShow(!InvoiceShow)}>Invoice Form  </span>
               </a>
-              {InvoiceShow && 
+              {(InvoiceShow || (location?.pathname === '/invoiceForm' || location?.pathname === '/invoiceList')) &&
               <ul aria-expanded="false">
-                <li><a href="/invoiceForm">Add</a></li>
-                <li><a href="/invoiceList">List</a></li>
+                <li><a href="/invoiceForm" className={`${location.pathname === '/invoiceForm' ? 'activeNav text-white' : ''}`}>Add</a></li>
+                <li><a href="/invoiceList" className={`${location.pathname === '/invoiceList' ? 'activeNav text-white' : ''}`}>List</a></li>
               </ul>
               }
             </li>
             <li>
-              <a href="/workOrder" className="ai-icon" aria-expanded="false">
-              <FontAwesomeIcon icon={faListCheck} className="fontAwesomeIcons mt-1"/>
+              <a href="/workOrder" className={`ai-icon ${location.pathname === '/workOrder' ? 'activeNav text-white' : ''}`} aria-expanded="false">
+              <FontAwesomeIcon icon={faListCheck} className={`fontAwesomeIcons mt-1 ${location.pathname === '/workOrder' ? 'text-white' : '' }` }/>
                 <span className="nav-text">Work Orders</span>
               </a>
             </li>
@@ -234,8 +229,8 @@ function Navbar() {
             }
             
             <li>
-              <a href="/profile" className="ai-icon" aria-expanded="false">
-              <FontAwesomeIcon icon={faUserTie} className="fontAwesomeIcons mt-1"/>
+              <a href="/profile" className={`ai-icon ${location.pathname === '/profile' ? 'activeNav text-white' : ''}`} aria-expanded="false">
+              <FontAwesomeIcon icon={faUserTie} className={`fontAwesomeIcons mt-1 ${location.pathname === '/profile' ? 'text-white' : '' }` }/>
                 <span className="nav-text">Profile</span>
               </a>
             </li>
@@ -254,6 +249,7 @@ function Navbar() {
       </div>
       
       
+    {/* </div> */}
     </div>
   );
 }

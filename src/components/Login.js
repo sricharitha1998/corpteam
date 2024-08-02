@@ -100,9 +100,9 @@ const LoginComponent = () => {
                           <button type="submit" onClick={Login} className="btn btn-primary btn-block">Sign In</button>
                         </div>
                       </form>
-                      {/* <div className="new-account mt-3">
-                        <p >Don't have an account? <a className="colorText" href="page-register.html">Sign up</a></p>
-                      </div> */}
+                      <div className="new-account mt-3">
+                        <p >Don't have an account? <a className="colorText" href="/register">Sign up</a></p>
+                      </div> 
                     </div>
                   </div>
                 </div>

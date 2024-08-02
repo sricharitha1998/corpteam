@@ -23,7 +23,8 @@ import PrintPurchase from './components/printPurchase';
 import ResetPassword from './components/resetPassword';
 import AdminLogin from './components/adminLogin';
 import AdminDashboard from './components/adminDashboard';
-import Error from './components/error'
+import Error from './components/error';
+import Register from './components/register'
 
 function App() {
     return ( 
@@ -51,7 +52,8 @@ function App() {
                 <Route path="/printPurchase" element={<PrintPurchase />} /> 
                 <Route path="/resetPassword" element={<ResetPassword />} /> 
                 <Route path="/adminLogin" element={<AdminLogin />} /> 
-                <Route path="/adminDashboard" element={<AdminDashboard />} /> 
+                <Route path="/adminDashboard" element={<AdminDashboard />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="*" element={Error} />
             </Routes>
         </Router>

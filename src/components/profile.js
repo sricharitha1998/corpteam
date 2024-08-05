@@ -30,7 +30,7 @@ function Profile() {
         e.preventDefault();
        
         try {
-            const response = await fetch(' https://pmsapi.corpteamsolutions.net/users/changeProfile/'+InputDetails?._id, {
+            const response = await fetch(' https://93.127.185.34:4000/users/changeProfile/'+InputDetails?._id, {
                 method: 'POST',
                 headers: {
             "Content-Type": "application/json",
@@ -57,7 +57,7 @@ function Profile() {
 
     }
     return (
-        <div fontSetting>
+        <div className='fontSetting'>
 
             <Navbar />
 

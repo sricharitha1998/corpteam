@@ -17,7 +17,7 @@ function Dashboard() {
   }, []);
 
   return (
-    <div fontSetting>
+    <div className='fontSetting'>
 
       <Navbar />
       

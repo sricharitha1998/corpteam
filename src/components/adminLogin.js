@@ -30,7 +30,7 @@ function LoginInput(event) {
 const Login = async (event) => {
   event.preventDefault();
   if (validateEmail(InputDetails.email) && InputDetails?.password){
-  const response = await fetch('https://pmsapi.corpteamsolutions.net/users/login', {
+  const response = await fetch('https://93.127.185.34:4000/users/login', {
       method: 'POST',
       headers: {
           "Content-Type": "application/json",

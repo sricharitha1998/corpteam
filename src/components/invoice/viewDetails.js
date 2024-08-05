@@ -46,7 +46,7 @@ function InvoiceViewDetails() {
         }
 
         try {
-            const response = await fetch(` https://pmsapi.corpteamsolutions.net/invoice/updateDocs/${id}`, {
+            const response = await fetch(` https://93.127.185.34:4000/invoice/updateDocs/${id}`, {
                 method: 'PATCH',
                 headers: {
                     "Accept": "application/json, text/plain, */*"
@@ -72,7 +72,7 @@ function InvoiceViewDetails() {
 
 
   return (
-    <div fontSetting>
+    <div className='fontSetting'>
       <Navbar />
       <div className="content-body">
         <div className="container-fluid">

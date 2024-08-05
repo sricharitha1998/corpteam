@@ -46,7 +46,7 @@ function WCFViewDetails() {
         }
 
         try {
-            const response = await fetch(` https://pmsapi.corpteamsolutions.net/workClosure/updateDocs/${id}`, {
+            const response = await fetch(` https://93.127.185.34:4000/workClosure/updateDocs/${id}`, {
                 method: 'PATCH',
                 headers: {
                     "Accept": "application/json, text/plain, */*"
@@ -73,7 +73,7 @@ function WCFViewDetails() {
     const allApproved = approvals.every(approval => approval.status === "Approved");
 
   return (
-    <div fontSetting>
+    <div className='fontSetting'>
       <Navbar />
       <div className="content-body">
         <div className="container-fluid">

@@ -62,7 +62,7 @@ console.log("location.pathname", location.pathname)
   }, []);
 
   return (
-    <div fontSetting style={{position: "sticky", top: "0"}}>
+    <div fontSetting style={{position: "sticky", top: "0", zIndex: "1000", flexShrink: "0"}}>
 
       {/* <div id="main-wrapper" className="show menu-toggle"> */}
       <div className="nav-header">

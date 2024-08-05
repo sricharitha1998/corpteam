@@ -36,7 +36,7 @@ function PrintPurchase() {
     };
 
     return (
-        <div fontSetting>
+        <div className='fontSetting'>
 
             <div className="m-5">
                 <div className="container-fluid">

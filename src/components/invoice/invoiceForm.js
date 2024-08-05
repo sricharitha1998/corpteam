@@ -30,7 +30,7 @@ function InvoiceForm() {
                 const details = localStorage.getItem('Details');
                 formData.append("vendor_id", JSON.parse(details)._id)
 
-                const response = await fetch(' https://pmsapi.corpteamsolutions.net/invoice/register', {
+                const response = await fetch(' https://93.127.185.34:4000/invoice/register', {
                     method: 'POST',
                     headers: {
                         "Accept": "application/json, text/plain, */*"
@@ -61,7 +61,7 @@ function InvoiceForm() {
 
 
     return (
-        <div fontSetting>
+        <div className='fontSetting'>
 
             <Navbar />
 

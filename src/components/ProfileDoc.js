@@ -18,7 +18,7 @@ function ProfileDocs() {
         async function fetchData() {
             const getDetails = localStorage.getItem('Details');
             setDetails(JSON.parse(getDetails))
-            const userInfo = await fetch(` https://pmsapi.corpteamsolutions.net/vendor/getDetails/${JSON.parse(getDetails)?._id}`);
+            const userInfo = await fetch(` https://93.127.185.34:4000/vendor/getDetails/${JSON.parse(getDetails)?._id}`);
             const res = await userInfo.json();
             setVendorDetails(res?.details)
             const allApproved = res?.details?.approvals.every(approval => approval.status !== "Approved");
@@ -38,6 +38,8 @@ function ProfileDocs() {
     }, []);
 
     const CommonFunction = async () => {
+        if(inputDetails?.vendorCode && inputDetails?.financialDetails && inputDetails?.gst && inputDetails?.roc && inputDetails?.partnerShip && inputDetails?.companyTeam && inputDetails?.photo && inputDetails?.pancard && inputDetails?.address && inputDetails?.companyDetails){
+
         const formData = new FormData();
         for (const [key, value] of Object.entries(inputDetails)) {
             if (value instanceof File) {
@@ -52,7 +54,7 @@ function ProfileDocs() {
         formData.append('dateTime', date.toISOString());
         formData.append("vendor_id", details?._id)
 
-        const response = await fetch(' https://pmsapi.corpteamsolutions.net/vendor/register', {
+        const response = await fetch(' https://93.127.185.34:4000/vendor/register', {
             method: 'POST',
             headers: {
                 "Accept": "application/json, text/plain, */*"
@@ -66,23 +68,26 @@ function ProfileDocs() {
             alert("Vendor registered successfully");
             navigate("/login", { state: { role: "vendor" } });
         }
+    }else{
+        alert("Fill All The Fields")
     }
+}
+
     const onChangeFunction = (e) => {
         const { name, type, files, value } = e.target;
         setInputDetails((prevDetails) => ({
             ...prevDetails,
             [name]: type === 'file' ? files[0] : value,
         }));
+        
     };
 
     return (
-        <div fontSetting>
-
-            <Navbar />
-
-            <div className="content-body">
+        <div className="fontSetting">
+            <div className="row">
+                <div className="col-md-1"></div>
+                <div className="col-md-10">
                 <div className="container-fluid">
-                     
                     <div className="row page-titles">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item active">Vendor Profile Documents</li>
@@ -90,7 +95,6 @@ function ProfileDocs() {
                     </div>
                     <div className="row page-titles">
                         <div className="col-lg-12">
-
                             <div className="card-body">
                             {VendorDetails ?
                                 !ApprovalStatus ?
@@ -135,6 +139,58 @@ function ProfileDocs() {
                                                         placeholder='Enter GST Number'
                                                         onChange={onChangeFunction}
                                                     />
+                                                    </div>
+                                                </div>
+                                                <div className="mb-3 row">
+                                                    <label className="col-lg-4 col-form-label" for="validationCustom02">Financial Document<span className="text-danger">*</span>
+                                                    </label>
+                                                    <div className="col-lg-6">
+                                                    <input
+                                                         type='file'
+                                                         name='financialDetails'
+                                                         className='form-control mt-1'
+                                                         required
+                                                         onChange={onChangeFunction}
+                                                    />
+                                                    </div>
+                                                </div>
+                                                <div className="mb-3 row">
+                                                    <label className="col-lg-4 col-form-label" for="validationCustom02">ROC<span className="text-danger">*</span>
+                                                    </label>
+                                                    <div className="col-lg-6">
+                                                    <input
+                                                        type='file'
+                                                        name='roc'
+                                                        className='form-control mt-1'
+                                                        required
+                                                        onChange={onChangeFunction}
+                                                    />
+                                                    </div>
+                                                </div>
+                                                <div className="mb-3 row">
+                                                    <label className="col-lg-4 col-form-label" for="validationCustom02">Partnership Lead / AOE / MOA <span className="text-danger">*</span>
+                                                    </label>
+                                                    <div className="col-lg-6">
+                                                    <input
+                                                        type='file'
+                                                        name='partnerShip'
+                                                        className='form-control mt-1'
+                                                        required
+                                                        onChange={onChangeFunction}
+                                                    />
+                                                    </div>
+                                                </div>
+                                                <div className="mb-3 row">
+                                                    <label className="col-lg-4 col-form-label" for="validationCustom02">Company Team <span className="text-danger">*</span>
+                                                    </label>
+                                                    <div className="col-lg-6">
+                                                    <textarea
+                                                        name='companyTeam'
+                                                        className='form-control mt-1'
+                                                        placeholder='Enter Company Team'
+                                                        required
+                                                        onChange={onChangeFunction}
+                                                    ></textarea>
                                                     </div>
                                                 </div>
                                                 <div className="mb-3 row">
@@ -189,18 +245,13 @@ function ProfileDocs() {
                                                     ></textarea>
                                                     </div>
                                                 </div>
-                                                
-
-                                            </div>
-                                            
+                                            </div>                                            
                                         </div>
                                     </form>
                                 </div>
                                 
                                 <div className="row mt-4 align-items-center">
-
                                     <div className="col-sm-6 text-sm-right text-start">
-                                       
                                         <button type="submit" onClick={CommonFunction} className="btn  btnColor text-white mb-2">Submit</button>
                                     </div>
                                 </div>
@@ -211,11 +262,9 @@ function ProfileDocs() {
 
                     </div>
                 </div>
+           
+           
             </div>
-            <div className="footer">
-                <div className="copyright">
-                    <p>Copyright © Designed & Developed by <a href="" target="_blank">CorpTeam Solutions</a> <span className="current-year">2024</span></p>
-                </div>
             </div>
         </div>
     );

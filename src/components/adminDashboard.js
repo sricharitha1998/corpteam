@@ -13,7 +13,7 @@ function AdminDashboard() {
   }, []);
 
   return (
-    <div fontSetting>
+    <div className='fontSetting'>
 
       <Navbar />
       {}

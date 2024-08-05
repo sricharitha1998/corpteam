@@ -18,7 +18,7 @@ function InvoiceApproval() {
     useEffect(() => {
         const provInfo = async () => {
             try {
-                const response = await fetch(` https://pmsapi.corpteamsolutions.net/invoice/getDocuments/${id}`, {
+                const response = await fetch(` https://93.127.185.34:4000/invoice/getDocuments/${id}`, {
                     method: 'GET',
                     headers: {
                         "Accept": "application/json, text/plain, */*"
@@ -74,7 +74,7 @@ function InvoiceApproval() {
             const isApproved = approvals.every(item => item.status);
             if(isApproved && approvals.length === 3){
                 console.log("detailssss", details._id)
-            const response = await fetch(` https://pmsapi.corpteamsolutions.net/invoice/sendEmail`, {
+            const response = await fetch(` https://93.127.185.34:4000/invoice/sendEmail`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ function InvoiceApproval() {
     }
 
   return (
-    <div fontSetting>
+    <div className='fontSetting'>
       <div className="m-5">
         <div className="container-fluid">
         <div className="row page-titles">
@@ -127,7 +127,7 @@ function InvoiceApproval() {
                                 <td className="noBorder">Work Closure Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/invoice/${details?.wcf}`}
+                                        href={` https://93.127.185.34:4000/public/invoice/${details?.wcf}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -146,7 +146,7 @@ function InvoiceApproval() {
                                 <td className="noBorder">Invoice Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/invoice/${details?.invoiceCopy}`}
+                                        href={` https://93.127.185.34:4000/public/invoice/${details?.invoiceCopy}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -165,7 +165,7 @@ function InvoiceApproval() {
                                 <td className="noBorder">Supporting Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/invoice/${details?.supportingDoc}`}
+                                        href={` https://93.127.185.34:4000/public/invoice/${details?.supportingDoc}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >

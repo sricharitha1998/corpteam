@@ -31,7 +31,7 @@ const LoginComponent = () => {
       const Login = async (event) => {
         event.preventDefault();
         if (validateEmail(InputDetails.email) && InputDetails?.password) {
-          const response = await fetch(' https://pmsapi.corpteamsolutions.net/users/login', {
+          const response = await fetch(' https://93.127.185.34:4000/users/login', {
             method: 'POST',
             headers: {
               "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const LoginComponent = () => {
           if (response?.status === 200) {
             const data = await response.json();
             if(data){
-            const userInfo = await fetch(` https://pmsapi.corpteamsolutions.net/vendor/getDetails/${data?.details?._id}`);
+            const userInfo = await fetch(` https://93.127.185.34:4000/vendor/getDetails/${data?.details?._id}`);
                 const res = await userInfo.json();
                 
             const allApproved = res?.details?.approvals && res?.details?.approvals.every(approval => approval.status === "Approved");
@@ -52,7 +52,7 @@ const LoginComponent = () => {
             if(data.details.ProfileStatus === "1" && res?.details?.approvals.length > 0  && allApproved){
               navigate('/dashboard')
             }else{
-              navigate('/ProfileUpdateDashboard')
+              navigate('/profileDocs')
             }
           } else {
             alert("Enter correct credentials")

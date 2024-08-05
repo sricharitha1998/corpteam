@@ -54,7 +54,7 @@ function AddVendor() {
             if (validateEmail(InputDetails.email)){
                 if(!ErrMob){
                     console.log("Input", InputDetails)
-            const response = await fetch(' https://pmsapi.corpteamsolutions.net/users/registration' , {
+            const response = await fetch(' https://93.127.185.34:4000/users/registration' , {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -94,7 +94,7 @@ function AddVendor() {
     }
 
     return (
-        <div fontSetting>
+        <div className='fontSetting'>
 
             <Navbar />
 
@@ -136,7 +136,7 @@ function AddVendor() {
                                                     </label>
                                                     <div className="col-lg-6">
                                                     <input type="number" className="form-control" name="MobNumber" placeholder='Enter Mobile Number' onChange={OnChangeFunction} required />
-                                                       
+                                                       { ErrMob && <p className='text-danger'>{ErrMob}</p> }
                                                     </div>
                                                 </div>
                                                 <div className="mb-3 row">

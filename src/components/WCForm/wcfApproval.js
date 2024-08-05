@@ -13,7 +13,7 @@ function WCFApproval() {
     useEffect(() => {
         const provInfo = async () => {
             try {
-                const response = await fetch(` https://pmsapi.corpteamsolutions.net/workClosure/getDocuments/${id}`, {
+                const response = await fetch(` https://93.127.185.34:4000/workClosure/getDocuments/${id}`, {
                     method: 'GET',
                     headers: {
                         "Accept": "application/json, text/plain, */*"
@@ -68,7 +68,7 @@ console.log("details", details)
         try {
             const isApproved = approvals.every(item => item.status);
             if(isApproved && approvals.length === 12+details?.others.length){
-            const response = await fetch(` https://pmsapi.corpteamsolutions.net/workClosure/SendEmailVendor`, {
+            const response = await fetch(` https://93.127.185.34:4000/workClosure/SendEmailVendor`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -91,7 +91,7 @@ console.log("details", details)
         }
     }
   return (
-    <div fontSetting>
+    <div className='fontSetting'>
       <div className="m-5">
         <div className="container-fluid">
         <div className="row page-titles">
@@ -118,7 +118,7 @@ console.log("details", details)
                                 <td className="noBorder">PO Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.po}`}
+                                        href={` https://93.127.185.34:4000/public/documents/${details?.po}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -137,7 +137,7 @@ console.log("details", details)
                                 <td className="noBorder">NESA Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.nesa}`}
+                                        href={` https://93.127.185.34:4000/public/documents/${details?.nesa}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -156,7 +156,7 @@ console.log("details", details)
                                 <td className="noBorder">Inventory Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.inventory}`}
+                                        href={` https://93.127.185.34:4000/public/documents/${details?.inventory}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -175,7 +175,7 @@ console.log("details", details)
                                 <td className="noBorder">SignUp ABD Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.signupABD}`}
+                                        href={` https://93.127.185.34:4000/public/documents/${details?.signupABD}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -194,7 +194,7 @@ console.log("details", details)
                                 <td className="noBorder">Civil At Sign Off Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.civilSignOff}`}
+                                        href={` https://93.127.185.34:4000/public/documents/${details?.civilSignOff}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -213,7 +213,7 @@ console.log("details", details)
                                 <td className="noBorder">MRC Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.mrc}`}
+                                        href={` https://93.127.185.34:4000/public/documents/${details?.mrc}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -232,7 +232,7 @@ console.log("details", details)
                                 <td className="noBorder">Official Application Copy</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.officalApp}`}
+                                        href={` https://93.127.185.34:4000/public/documents/${details?.officalApp}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -251,7 +251,7 @@ console.log("details", details)
                                 <td className="noBorder">Official Demand Note</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.officalDemandNote}`}
+                                        href={` https://93.127.185.34:4000/public/documents/${details?.officalDemandNote}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -270,7 +270,7 @@ console.log("details", details)
                                 <td className="noBorder">DD Channel</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.dd}`}
+                                        href={` https://93.127.185.34:4000/public/documents/${details?.dd}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -289,7 +289,7 @@ console.log("details", details)
                                 <td className="noBorder">Final Order Copy</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.finalOrder}`}
+                                        href={` https://93.127.185.34:4000/public/documents/${details?.finalOrder}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -308,7 +308,7 @@ console.log("details", details)
                                 <td className="noBorder">SignUp Doc</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.signup}`}
+                                        href={` https://93.127.185.34:4000/public/documents/${details?.signup}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -328,7 +328,7 @@ console.log("details", details)
                                 <td className="noBorder">SD/BG Doc</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://pmsapi.corpteamsolutions.net/public/documents/${details?.sdOrBg}`}
+                                        href={` https://93.127.185.34:4000/public/documents/${details?.sdOrBg}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -349,7 +349,7 @@ console.log("details", details)
                                     <td className="noBorder">{item.key}</td>
                                     <td className="noBorder">
                                         <a
-                                            href={` https://pmsapi.corpteamsolutions.net/public/documents/${item.value}`}
+                                            href={` https://93.127.185.34:4000/public/documents/${item.value}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >

@@ -34,7 +34,7 @@ function WCForm() {
 
     const getPoDoc = async (workOrderId) => {
         setWorkOrderID(workOrderId)
-        const userInfo = await fetch(` https://pmsapi.corpteamsolutions.net/workOrder/getOneRecord/${workOrderId}`);
+        const userInfo = await fetch(` https://93.127.185.34:4000/workOrder/getOneRecord/${workOrderId}`);
         const res = await userInfo.json();
         const details = localStorage.getItem('Details');
         setUserDetails(JSON.parse(details))
@@ -158,7 +158,7 @@ function WCForm() {
 
             try {
 
-                const response = await fetch(' https://pmsapi.corpteamsolutions.net/workClosure/CreateDocs', {
+                const response = await fetch(' https://93.127.185.34:4000/workClosure/CreateDocs', {
                     method: 'POST',
                     headers: {
                         "Accept": "application/json, text/plain, */*"
@@ -203,7 +203,7 @@ function WCForm() {
 
                         </label>
                         <div className="col-lg-6">
-                        {input.name == "po" && getName ?
+                            {input.name == "po" && getName ?
                                 <input
                                     type="text"
                                     value={getName}
@@ -222,174 +222,173 @@ function WCForm() {
                             }
                         </div>
                     </div>
-                    </div>
-                   
                 </div>
-                ));
+
+            </div>
+        ));
     };
 
     const NewFileInputs = () => {
 
         const addFields = [
-                {name: 'officalApp', label: 'Official Application Copy' },
-                {name: 'officalDemandNote', label: 'Official Demand Note' },
-                {name: 'dd', label: 'DD Channel' },
-                {name: 'finalOrder', label: 'Final Order Copy' },
-                {name: 'signup', label: 'SignUp Document' },
-                {name: 'sdOrBg', label: 'SD/BG Document' },
-                ]
+            { name: 'officalApp', label: 'Official Application Copy' },
+            { name: 'officalDemandNote', label: 'Official Demand Note' },
+            { name: 'dd', label: 'DD Channel' },
+            { name: 'finalOrder', label: 'Final Order Copy' },
+            { name: 'signup', label: 'SignUp Document' },
+            { name: 'sdOrBg', label: 'SD/BG Document' },
+        ]
 
         return addFields.map((input, index) => (
 
-                <div key={index} className="form-group mt-3">
-                    {getShow &&
-                        <div className="row">
-                            <div className="col-lg-4">
+            <div key={index} className="form-group mt-3">
+                {getShow &&
+                    <div className="row">
+                        <div className="col-lg-4">
                             <label className="col-form-label">{input.label}  <span className="text-danger">*</span></label>
-                            </div>
-                            <div className="col-lg-6">
-                                <input
-                                    type="file"
-                                    ref={(ref) => (fileInputRefs.current[input.name] = ref)}
-                                    className="form-control"
-                                    name={input.name}
-                                    onChange={onChangeFunction}
-                                    required
-                                />
-                            </div>
-                            <div className='col-md-1 mt-2'>
-                                {inputDetails[input.name] &&
-                                    <i className="fa fa-times-circle" onClick={() => handleDelete(input.name)}></i>
-                                }
-                            </div>
                         </div>
-                    }
-                </div>
+                        <div className="col-lg-6">
+                            <input
+                                type="file"
+                                ref={(ref) => (fileInputRefs.current[input.name] = ref)}
+                                className="form-control"
+                                name={input.name}
+                                onChange={onChangeFunction}
+                                required
+                            />
+                        </div>
+                        <div className='col-md-1 mt-2'>
+                            {inputDetails[input.name] &&
+                                <i className="fa fa-times-circle" onClick={() => handleDelete(input.name)}></i>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
 
-                ));
+        ));
     };
 
     const UpdateOrderCheck = (event) => {
-        const {name, value} = event.target;
-                setOrderDetails({
-                    ...OrderDetails,
-                    [name]: value
+        const { name, value } = event.target;
+        setOrderDetails({
+            ...OrderDetails,
+            [name]: value
         })
     }
-    
+
     const CheckWCF = async () => {
-       
-        if(OrderDetails?.workOrderNumber && OrderDetails?.buildingArea){
+
+        if (OrderDetails?.workOrderNumber && OrderDetails?.buildingArea) {
             const details = localStorage.getItem('Details');
 
-                const response = await fetch(' https://pmsapi.corpteamsolutions.net/workOrder/getOrderRecord', {
-                    method: 'POST',
+            const response = await fetch(' https://93.127.185.34:4000/workOrder/getOrderRecord', {
+                method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
-                "Accept": "application/json, text/plain, */*"
+                    "Accept": "application/json, text/plain, */*"
                 },
-                body: JSON.stringify({workOrderNumber: OrderDetails?.workOrderNumber,buildingArea: OrderDetails?.buildingArea, vendor_id: JSON.parse(details)?._id }),
-              });
+                body: JSON.stringify({ workOrderNumber: OrderDetails?.workOrderNumber, buildingArea: OrderDetails?.buildingArea, vendor_id: JSON.parse(details)?._id }),
+            });
 
-                const data = await response.json();
-                if(data.status === 200){
-                    setSubmitBtn(false)
+            const data = await response.json();
+            if (data.status === 200) {
+                setSubmitBtn(false)
                 getPoDoc(data?.workOrderId)
-              }else if(data.status === 400){
-                    alert(data?.msg)
-                }
-        }else{
-                    alert("Please Enter Work Order Number and Building Area")
-                }
+            } else if (data.status === 400) {
+                alert(data?.msg)
+            }
+        } else {
+            alert("Please Enter Work Order Number and Building Area")
+        }
     }
 
-                return (
-                <div fontSetting>
+    return (
+        <div className='fontSetting'>
 
-                    <Navbar />
+            <Navbar />
 
-                    <div className="content-body">
-                        <div className="container-fluid">
+            <div className="content-body">
+                <div className="container-fluid">
 
-                            <div className="row page-titles">
-                                <ol className="breadcrumb">
-                                    <li className="breadcrumb-item active">Add Work Form Closure </li>
-                                </ol>
-                            </div>
-                            <div className="row page-titles">
-                                <div className="col-lg-12">
+                    <div className="row page-titles">
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item active">Add Work Form Closure </li>
+                        </ol>
+                    </div>
+                    <div className="row page-titles">
+                        <div className="col-lg-12">
 
-                                    <div className="card-body">
-                                        <div className="form-validation">
-                                            <form className="needs-validation" novalidate="">
-                                                {renderFileInputs()}
-                                                {getShow ?
-                                <button type="button" onClick={() => setShow(false)} className="btn btnColor2 text-white">
-                                    -
-                                </button>
-                                :
-                                <button type="button" onClick={() => setShow(true)} className="btn btnColor text-white">
-                                    +
-                                </button>
-                            }
-                            {NewFileInputs()}
-
-                            {fields.map((field, index) => (
-                                <div key={index} className="form-group mt-3">
-                                    <div className='row col-md-12'>
-                                        <div className='col-md-4'>
-                                            <input
-                                                type="text"
-                                                name="key"
-                                                value={field.key}
-                                                onChange={(e) => handleChange(index, e)}
-                                                placeholder="Document Name"
-                                                className="form-control"
-                                                required
-                                            />
-                                        </div>
-                                        <div className='col-md-6'>
-                                            <input
-                                                type="file"
-                                                className="form-control"
-                                                name="value"
-                                                onChange={(e) => handleChange(index, e)}
-                                            />
-
-                                        </div>
-                                        <div className='col-md-1'>
-                                            <button type="button" onClick={() => removeField(index)} className="btn btn-danger">
-                                                Cancel
+                            <div className="card-body">
+                                <div className="form-validation">
+                                    <form className="needs-validation" novalidate="">
+                                        {renderFileInputs()}
+                                        {getShow ?
+                                            <button type="button" onClick={() => setShow(false)} className="btn btnColor2 text-white">
+                                                -
                                             </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                            <br />
-                            {getShow &&
-                                <button type="button" onClick={addField} className="btn text-primary" style={{ float: 'right' }}>
-                                    Add More Fields
-                                </button>
-                            }
-                                            </form>
-                                        </div>
+                                            :
+                                            <button type="button" onClick={() => setShow(true)} className="btn btnColor text-white">
+                                                +
+                                            </button>
+                                        }
+                                        {NewFileInputs()}
 
-                                        <div className="row mt-4 align-items-center">
+                                        {fields.map((field, index) => (
+                                            <div key={index} className="form-group mt-3">
+                                                <div className='row col-md-12'>
+                                                    <div className='col-md-4'>
+                                                        <input 
+                                                            type="text"
+                                                            name="key"
+                                                            value={field.key}
+                                                            onChange={(e) => handleChange(index, e)}
+                                                            placeholder="Document Name"
+                                                            className="form-control"
+                                                            required
+                                                        />
+                                                    </div>
+                                                    <div className='col-md-6'>
+                                                        <input
+                                                            type="file"
+                                                            className="form-control"
+                                                            name="value"
+                                                            onChange={(e) => handleChange(index, e)}
+                                                        />
 
-                                            <div className="col-sm-6 text-sm-right text-start">
-
-                                                {/* <button type="submit" onClick={ClickSubmit} className="btn  btnColor text-white mb-2">Submit</button> */}
+                                                    </div>
+                                                    <div className='col-md-1'>
+                                                        <button type="button" onClick={() => removeField(index)} className="btn btn-danger">
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        ))}
+                                        <br />
+                                        {getShow &&
+                                            <button type="button" onClick={addField} className="btn text-primary" style={{ float: 'right' }}>
+                                                Add More Fields
+                                            </button>
+                                        }
+                                    </form>
                                 </div>
 
+                                <div className="row mt-3">
+                                    <div className="col-md-4"></div>
+                                    <div className="col-md-4">
+                                        <button type="submit" onClick={clickSubmit} className="btn btnColor text-white" >Submit</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-                    <Footer />
                 </div>
-                );
+            </div>
+            <Footer />
+        </div>
+    );
 }
 
-                export default WCForm;
+export default WCForm;

@@ -80,7 +80,7 @@ const Login = async (event) => {
                         </div>
                         
                         <div className="text-center">
-                          <button type="submit" onClick={Login} className="btn btn-primary btn-block">Sign In</button>
+                          <button type="submit" onClick={Login} className="btn btnColor text-white btn-block">Sign In</button>
                         </div>
                       </form>
                     </div>

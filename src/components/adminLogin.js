@@ -50,7 +50,6 @@ const Login = async (event) => {
   alert("Please enter a valid email and fill all fields")
 }
  }
-
     
   return (
     <div className="vh-100">

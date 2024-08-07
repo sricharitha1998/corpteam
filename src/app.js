@@ -7,6 +7,7 @@ import Dashboard from './components/dashboard';
 import PurchaseOrder from './components/purchaseOrder';
 import InvoiceForm from './components/invoice/invoiceForm';
 import InvoiceList from './components/invoice/invoiceList';
+import InvoiceDetails from './components/invoice/viewDetails'
 import WCForm from './components/WCForm/add';
 import WCFList from './components/WCForm/list';
 import WorkOrder from './components/workOrder';
@@ -45,15 +46,16 @@ function App() {
                 <Route path="/updateVendor" element={<UpdateVendor />} />  
                 <Route path="/wcfViewDetails" element={<WCFViewDetails />} />  
                 <Route path="/profile" element={<Profile />} /> 
-                <Route path="/profileDocs" element={<ProfileDocs />} /> 
-                <Route path="/invoiceApproval" element={<InvoiceApproval />} /> 
-                <Route path="/wcfApproval" element={<WCFApproval />} /> 
-                <Route path="/vendorApproval" element={<VendorApproval />} />
+                <Route path="/profileDocs" element={<ProfileDocs />} />
+                <Route path="/invoiceApproval/:id/:level" element={<InvoiceApproval />} /> 
+                <Route path="/approvalForm/:id/:level" element={<WCFApproval />} /> 
+                <Route path="/VendorApproval/:id" element={<VendorApproval />} />
                 <Route path="/printPurchase" element={<PrintPurchase />} /> 
                 <Route path="/resetPassword" element={<ResetPassword />} /> 
                 <Route path="/adminLogin" element={<AdminLogin />} /> 
                 <Route path="/adminDashboard" element={<AdminDashboard />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/viewInvoice" element={<InvoiceDetails />} />
                 <Route path="*" element={Error} />
             </Routes>
         </Router>

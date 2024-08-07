@@ -27,7 +27,7 @@ function PurchaseOrder() {
             const RandomCode = "CTS" + month + year + Math.floor(10 + Math.random() * 90);
             setData({ ...data, workOrderNumber: RandomCode });
 
-            const userInfo = await fetch(` https://93.127.185.34:4000/users/getUsers/vendor`);
+            const userInfo = await fetch(` http://localhost:4000/users/getUsers/vendor`);
             const res = await userInfo.json();
             setVendors(res?.users)
         }
@@ -39,7 +39,7 @@ function PurchaseOrder() {
             if (location?.state?.data && location?.state?.services) {
                 setServices(location?.state?.services)
                 setData(location?.state?.data)
-                const userInfo = await fetch(` https://93.127.185.34:4000/vendor/getDetails/${location?.state?.data?.vendorID}`);
+                const userInfo = await fetch(` http://localhost:4000/vendor/getDetails/${location?.state?.data?.vendorID}`);
                 const res = await userInfo.json();
                 setAddress(res?.details?.address)
                 setVendorName(location?.state?.VendorName)
@@ -83,7 +83,7 @@ function PurchaseOrder() {
                 ...data,
                 [name]: SplitValue[0]
             });
-            const userInfo = await fetch(` https://93.127.185.34:4000/vendor/getDetails/${SplitValue[0]}`);
+            const userInfo = await fetch(` http://localhost:4000/vendor/getDetails/${SplitValue[0]}`);
             const res = await userInfo.json();
             setAddress(res?.details?.address)
             setVendorName(SplitValue[1])
@@ -114,7 +114,7 @@ function PurchaseOrder() {
 
             // const formattedDate = new Date().toLocaleDateString();
             const payload = { ...data, services, date: new Date() };
-            const response = await fetch(' https://93.127.185.34:4000/workOrder/insert', {
+            const response = await fetch(' http://localhost:4000/workOrder/insert', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -141,6 +141,8 @@ function PurchaseOrder() {
 
     };
 
+    console.log("data", data)
+
     return (
         <div className='fontSetting'>
 
@@ -148,8 +150,6 @@ function PurchaseOrder() {
 
             <div className="content-body">
                 <div className="container-fluid">
-
-
                     <div className="row page-titles">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item active">Purchase Order</li>
@@ -167,7 +167,7 @@ function PurchaseOrder() {
                                                     <label className="col-lg-4 col-form-label">Work Order No  <span className="text-danger">*</span>
                                                     </label>
                                                     <div className="col-lg-6">
-                                                        <input type="text" className="form-control" id="" placeholder="CTS072417" required="" />
+                                                        <input type="text" className="form-control" id="" value="CTS072417" required="" disabled="true"/>
                                                         <div className="invalid-feedback">
                                                             CTS0724000
                                                         </div>
@@ -177,10 +177,8 @@ function PurchaseOrder() {
                                                     <label className="col-lg-4 col-form-label" for="validationCustom02">Home Pass No
                                                     </label>
                                                     <div className="col-lg-6">
-                                                        <input type="text" className="form-control" id="validationCustom02" placeholder="Enter Home Pass Number" required="" />
-                                                        <div className="invalid-feedback">
-                                                            Please enter a Email.
-                                                        </div>
+                                                        <input type="text" onChange={onChangeDetails} className="form-control" id="validationCustom02" placeholder="Enter Home Pass Number" required="" defaultValue={data?.homePass} name="homePass" />
+                                                        
                                                     </div>
                                                 </div>
                                                 <div className="mb-3 row">
@@ -204,7 +202,7 @@ function PurchaseOrder() {
                                                     <label className="col-lg-4 col-form-label" for="validationCustom06">Building Area <span className="text-danger">*</span>
                                                     </label>
                                                     <div className="col-lg-6">
-                                                        <input type="text" className="form-control" id="validationCustom06" placeholder="Building Area" required="" />
+                                                        <input type="text" className="form-control" id="validationCustom06" onChange={onChangeDetails} placeholder="Building Area" required="" name="buildingArea" defaultValue={data?.buildingArea} />
                                                         <div className="invalid-feedback">
                                                             Please enter a Currency.
                                                         </div>
@@ -214,7 +212,7 @@ function PurchaseOrder() {
                                                     <label className="col-lg-4 col-form-label" for="validationCustom07">Route Length  <span className="text-danger">*</span>
                                                     </label>
                                                     <div className="col-lg-6">
-                                                        <input type="text" className="form-control" id="validationCustom07" placeholder="Route Length" required="" />
+                                                        <input type="text" className="form-control" id="validationCustom07" onChange={onChangeDetails} name="routeLength" placeholder="Route Length" required="" defaultValue={data?.routeLength} />
                                                         <div className="invalid-feedback">
                                                             Please enter a url.
                                                         </div>
@@ -270,7 +268,7 @@ function PurchaseOrder() {
                                 <div className="row mt-4 align-items-center">
 
                                     <div className="col-sm-6 text-sm-right text-start">
-                                        <a href="javascript:void(0);" className="btn btnColor text-white mb-2">
+                                        <a href="javascript:void(0);" className="btn btnColor text-white mb-2" onClick={handleSubmit}>
                                             Submit
                                         </a>
                                         <a href="javascript:void(0);" className="btn text-white btnColor2 ms-4 mb-2"  onClick={() => navigate("/printPurchase", {state: {data, services, VendorName }})}>

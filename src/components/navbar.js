@@ -195,6 +195,12 @@ console.log("location.pathname", location.pathname)
             :
             <>
             <li>
+              <a href="/workOrder" className={`ai-icon ${location.pathname === '/workOrder' ? 'activeNav text-white' : ''}`} aria-expanded="false">
+              <FontAwesomeIcon icon={faListCheck} className={`fontAwesomeIcons mt-1 ${location.pathname === '/workOrder' ? 'text-white' : '' }` }/>
+                <span className="nav-text">Work Orders</span>
+              </a>
+            </li>
+            <li>
               <a className="has-arrow ai-icon" href="javascript:void(0);" aria-expanded="false">
             
                 <FontAwesomeIcon icon={faFileAlt} className="fontAwesomeIcons mt-1"/>
@@ -219,12 +225,7 @@ console.log("location.pathname", location.pathname)
               </ul>
               }
             </li>
-            <li>
-              <a href="/workOrder" className={`ai-icon ${location.pathname === '/workOrder' ? 'activeNav text-white' : ''}`} aria-expanded="false">
-              <FontAwesomeIcon icon={faListCheck} className={`fontAwesomeIcons mt-1 ${location.pathname === '/workOrder' ? 'text-white' : '' }` }/>
-                <span className="nav-text">Work Orders</span>
-              </a>
-            </li>
+           
             </>
             }
             

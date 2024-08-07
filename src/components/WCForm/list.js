@@ -22,7 +22,7 @@ function WCFList() {
     useEffect(() => {
       async function provInfo() {
         const details = localStorage.getItem('Details');
-        const userInfo = await fetch(` https://93.127.185.34:4000/workClosure/getwcfs/${location?.state ? location?.state?.id : JSON.parse(details)?._id}`);
+        const userInfo = await fetch(` http://localhost:4000/workClosure/getwcfs/${location?.state ? location?.state?.id : JSON.parse(details)?._id}`);
         const res = await userInfo.json();
         setWCFS(res?.wcfs);
         setSortedWCFS(res?.wcfs);
@@ -107,7 +107,7 @@ function WCFList() {
                           <td className="noBorder">{pt.level3 === "approved" ? "Approved" : pt.level3 === "rejected" ? "Rejected" : "Pending"}</td>
                           <td className="noBorder">
                           {((pt.level1 ==="approved" && pt.level2 ==="approved" && pt.level3 ==="approved") || (pt.level1 ==="" && pt.level2 ==="" && pt.level3 ==="")) ? "-" :
-            <button className="btn btn-sm btn-primary" onClick={() => navigate(`/wcfViewDetails`, { state: { approvals: pt.approvals, id: pt._id } })}>
+            <button className="btn btn-sm btnColor text-white" onClick={() => navigate(`/wcfViewDetails`, { state: { approvals: pt.approvals, id: pt._id } })}>
             Check
             </button>
           }

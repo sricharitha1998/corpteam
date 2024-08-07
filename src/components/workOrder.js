@@ -3,17 +3,19 @@ import '../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './navbar';
+import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleUp, faDownload, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faDownload, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Pagination from './pagination';
 import Footer from './footer';
 import { PDFfile } from './functions/pdfFile';
 import { Capitalized } from './functions/capitalized';
+import '../assets/css/dashboard.css'
 
 function WorkOrder() {
-    const location = useLocation();
-    const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [workOrders, setWorkOrders] = useState([]);
   const [sorted, setSorted] = useState([]);
   const [sortOrder, setSortOrder] = useState('dsc');
@@ -29,17 +31,17 @@ function WorkOrder() {
       const details = localStorage.getItem('Details');
       const userDetails = JSON.parse(details)
 
-      const userInfo = await fetch(` https://93.127.185.34:4000/users/getUsers/vendor`);
+      const userInfo = await fetch(` http://localhost:4000/users/getUsers/vendor`);
       const getAllVendors = await userInfo.json();
       setVendors(getAllVendors?.users)
       setUserDetails(userDetails)
       let res;
       if (userDetails?.role === "admin") {
-        const userInfo = await fetch(` https://93.127.185.34:4000/workOrder/getAll`);
+        const userInfo = await fetch(` http://localhost:4000/workOrder/getAll`);
         res = await userInfo.json();
         if (res) {
           const updateArray = await Promise.all(res?.map(async (details) => {
-            const vendorResponse = await fetch(` https://93.127.185.34:4000/users/getById/${details?.vendor_id}`);
+            const vendorResponse = await fetch(` http://localhost:4000/users/getById/${details?.vendor_id}`);
             const vendor = await vendorResponse.json();
 
             // Add the username to the details object
@@ -53,7 +55,7 @@ function WorkOrder() {
           res = updateArray;
         }
       } else {
-        const userInfo = await fetch(` https://93.127.185.34:4000/workOrder/getRecords/${userDetails?._id}`);
+        const userInfo = await fetch(` http://localhost:4000/workOrder/getRecords/${userDetails?._id}`);
         res = await userInfo.json();
       }
       if (res) {
@@ -85,7 +87,7 @@ function WorkOrder() {
 
   const UpdateVendor = async (event) => {
     event.preventDefault();
-    const response = await fetch(' https://93.127.185.34:4000/workOrder/updateVendor', {
+    const response = await fetch(' http://localhost:4000/workOrder/updateVendor', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -113,9 +115,9 @@ function WorkOrder() {
   const DownloadPDF = async (id, event, username) => {
 
     event.preventDefault();
-    const userInfo = await fetch(` https://93.127.185.34:4000/workOrder/getOneRecord/${id}`);
+    const userInfo = await fetch(` http://localhost:4000/workOrder/getOneRecord/${id}`);
     const res = await userInfo.json();
-    const getAllData = {...res, ...{vendorName: username}}
+    const getAllData = { ...res, ...{ vendorName: username } }
 
     PDFfile(getAllData)
 
@@ -123,7 +125,7 @@ function WorkOrder() {
 
   const UpdateStatus = async (status, event) => {
     event.preventDefault();  // Prevent the default form submission behavior
-    const response = await fetch(' https://93.127.185.34:4000/workOrder/updateStatus', {
+    const response = await fetch(' http://localhost:4000/workOrder/updateStatus', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -133,7 +135,7 @@ function WorkOrder() {
     });
     const data = await response.json();
     if (data) {
-        window.location.reload();
+      window.location.reload();
     }
   };
 
@@ -153,30 +155,31 @@ function WorkOrder() {
   const currentItems = sorted.slice(indexOfFirstItem, indexOfLastItem);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const today = new Date();
-  
 
   return (
     <div className='fontSetting'>
       <Navbar />
       <div className="content-body">
         <div className="container-fluid">
-          
-        <div className="row">
-              <div className="col-md-8">
-              <ol className="breadcrumb">
-              <li className="breadcrumb-item active">Work Order List</li>
-              </ol>
-              </div>
-              <div className="col-md-4 mb-3">
+
+          <div className="row">
+            <div className="col-md-8">
+            <div className="row page-titles">
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item active">Work Order List</li>
+                        </ol>
+                    </div>
+            </div>
+            <div className="col-md-4 mb-3">
               <div className="input-group search-area right d-lg-inline-flex d-none">
-                  <input type="text" className="form-control" placeholder="Search By Work Order Number" value={searchTerm}
-                        onChange={handleSearch}/>
-                  <span className="input-group-text">
-                    <a href="javascript:void(0);"><FontAwesomeIcon icon={faSearch} className="fontAwesomeIcons mt-1"/></a>
-                  </span>
-                </div>
+                <input type="text" className="form-control" placeholder="Search By Work Order Number" value={searchTerm}
+                  onChange={handleSearch} />
+                <span className="input-group-text">
+                  <a href="javascript:void(0);"><FontAwesomeIcon icon={faSearch} className="fontAwesomeIcons mt-1" /></a>
+                </span>
               </div>
-              </div>
+            </div>
+          </div>
           <div className="row page-titles">
             <div className="col-lg-12">
               <div className="card-body">
@@ -184,12 +187,12 @@ function WorkOrder() {
                   <table className="table">
                     <thead>
                       <tr>
-                     
+
                         <th scope="col" >S.NO</th>
-                        <th scope="col" onClick={handleSort}>Work Order Number <FontAwesomeIcon icon={sortOrder === 'asc' ? faAngleUp : faAngleDown}/></th>
+                        <th scope="col" onClick={handleSort}>Work Order Number <FontAwesomeIcon icon={sortOrder === 'asc' ? faAngleUp : faAngleDown} /></th>
                         {
-                            getUserDetails?.role === "admin" &&
-                        <th scope="col">Vendor Name</th>
+                          getUserDetails?.role === "admin" &&
+                          <th scope="col">Vendor Name</th>
                         }
                         <th scope="col">Home Pass Number</th>
                         <th scope="col">Route Length</th>
@@ -198,56 +201,63 @@ function WorkOrder() {
                         <th scope="col">Aging Days</th>
                         <th scope="col">Allocation Status</th>
                         <th scope="col">Download</th>
-                        { getUserDetails?.role === "vendor" && 
-                        <th scope="col">Invoice</th>
+                        {getUserDetails?.role === "vendor" &&
+                          <th scope="col">Invoice</th>
                         }
                       </tr>
                     </thead>
                     <tbody>
-                      {currentItems.map((pt, index) => 
-                        { return(
+                      {currentItems.map((pt, index) => {
+                        const today = new Date();
+                        const workOrderDate = new Date(pt?.date);
+                        const differenceInTime = workOrderDate.getTime() - today.getTime();
+                        const differenceInDays = Math.abs(Math.ceil(differenceInTime / (1000 * 3600 * 24)));
+                        return (
 
-                        <tr key={pt._id}>
-                          <td className="noBorder">{index + 1}</td>
-                          <td className="noBorder">{Capitalized(pt.workOrderNumber)}</td>
-                          <td className="noBorder"> {pt.username &&
-        <td>
-          {Capitalized(pt.username)}{pt.status !== "accept" && <span className="badge bg-secondary" onClick={() => { setVendorModal(true); setIdDetails(pt._id) }}>Change</span>}
-        </td>
-        }</td>
-                          <td className="noBorder">{pt.homePass ? Capitalized(pt.homePass) : "-"}</td>
-                          <td className="noBorder">{pt.routeLength ? Capitalized(pt.routeLength) : "-"}</td>
-                          <td className="noBorder">{Capitalized(pt.buildingArea)}</td>
-                          <td className="noBorder">{pt?.workOrderDate?.toLocaleDateString()}</td>
-                          <td className="noBorder">{Math.abs(Math.ceil(new Date(pt.date).getTime() -today.getTime() / (1000 * 3600 * 24)))}</td>
-                          <td className="noBorder">
-                          {
-                            pt.status === "accept" ? (
-                <span className="badge bg-success p-2">Accepted</span>
-              ) : pt.status === "reject" ? (
-                <span className="badge bg-danger p-2">Rejected</span>
-              ) : getUserDetails?.role === "admin" ? (
-                <span className="badge bg-warning p-2">Vendor Acceptance Pending</span>
-              ) :
-                (
-                  <>
-                    <span onClick={() => { setModal(true); setID(pt._id); }}>Accept</span> /
-                    <span onClick={() => { setRejectModal(true); setID(pt._id); }}>Reject</span>
-                  </>
-                )}
-                          </td>
-                          <td className="noBorder"><FontAwesomeIcon icon={faDownload} onClick={(event) => DownloadPDF(pt._id, event, pt.username ? pt.username : getUserDetails?.username)} /></td>
-                          <td className="noBorder">
-        { pt.status === "accept" ? 
-          <button className="btn btn-sm btn-primary" disabled={ClosureBtn} onClick={() => navigate("/wcform", { state: { id: pt._id } })}>Closure </button>
-          :
-          
-            "Not Accepted"
-          
-         }
-         </td>
-                        </tr>
-                      )})}
+                          <tr key={pt._id}>
+                            <td className="noBorder">{index + 1}</td>
+                            <td className="noBorder">{Capitalized(pt.workOrderNumber)}</td>
+                            {pt.username &&
+                              <td className="noBorder">
+                                {Capitalized(pt.username)}{pt.status !== "accept" && <span className="badge bg-secondary pointerCss" onClick={() => { setVendorModal(true); setIdDetails(pt._id) }}>Change</span>}
+                              </td>
+                            }
+                            <td className="noBorder">{pt.homePass ? Capitalized(pt.homePass) : "-"}</td>
+                            <td className="noBorder">{pt.routeLength ? Capitalized(pt.routeLength) : "-"}</td>
+                            <td className="noBorder">{Capitalized(pt.buildingArea)}</td>
+                            <td className="noBorder">{workOrderDate.toLocaleDateString()}</td>
+                            <td className="noBorder">{differenceInDays >= 0 ? differenceInDays : "-"}</td>
+                            <td className="noBorder">
+                              {
+                                pt.status === "accept" ? (
+                                  <span className="badge bg-success p-2">Accepted</span>
+                                ) : pt.status === "reject" ? (
+                                  <span className="badge bg-danger p-2">Rejected</span>
+                                ) : getUserDetails?.role === "admin" ? (
+                                  <span className="badge bg-warning p-2">Vendor Acceptance Pending</span>
+                                ) :
+                                  (
+                                    <>
+                                      <span className='pointerCss' onClick={() => { setModal(true); setID(pt._id); }}>Accept</span> /
+                                      <span className='pointerCss' onClick={() => { setRejectModal(true); setID(pt._id); }}>Reject</span>
+                                    </>
+                                  )}
+                            </td>
+                            <td className="noBorder"><FontAwesomeIcon icon={faDownload} onClick={(event) => DownloadPDF(pt._id, event, pt.username ? pt.username : getUserDetails?.username)} /></td>
+                            {getUserDetails?.role !== "admin" &&
+                              <td className="noBorder">
+                                {pt.status === "accept" ?
+                                  <button className="btn btn-sm btn-primary" disabled={ClosureBtn} onClick={() => navigate("/wcform", { state: { id: pt._id } })}>Closure </button>
+                                  :
+
+                                  "Not Accepted"
+
+                                }
+                              </td>
+                            }
+                          </tr>
+                        )
+                      })}
                     </tbody>
                   </table>
                 </div>
@@ -266,6 +276,116 @@ function WorkOrder() {
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={getModal}
+        onRequestClose={() => setModal(false)}
+        style={{
+          content: {
+            width: '500px',
+            margin: 'auto',
+            height: 'fit-content',
+            padding: '20px',
+            boxShadow: '30px 30px 30px 30px rgba(0, 0, 0, 0.1)'
+          }
+        }}
+      >
+        <div className='row'>
+          <div className='col-md-11'></div>
+          <div className='col-md-1'>
+            <FontAwesomeIcon icon={faTimes} onClick={() => setModal(false)} />
+          </div>
+        </div>
+        <h5 className='text-center'>Are you sure you want to accept the order?</h5>
+        <br />
+        <form>
+          <div className="row col-md-12">
+            <div className="col-md-4"></div>
+            <div className="col-md-2 text-center">
+              <button className="btn btn-success" onClick={(event) => UpdateStatus("accept", event)}>Yes</button>
+            </div>
+            <div className="col-md-2 text-center">
+              <button className="btn btn-danger" onClick={() => setModal(false)}>No</button>
+            </div>
+          </div>
+        </form>
+      </Modal>
+
+      <Modal
+        isOpen={VendorModal}
+        onRequestClose={() => setVendorModal(false)}
+        style={{
+          content: {
+            width: '500px',
+            margin: 'auto',
+            height: 'fit-content',
+            padding: '20px',
+            boxShadow: '30px 30px 30px 30px rgba(0, 0, 0, 0.1)'
+          }
+        }}
+      >
+        <div className='row'>
+          <div className='col-md-1'></div>
+          <div className='col-md-10'>
+            <h5 className='text-center'>Change Vendor</h5>
+          </div>
+          <div className='col-md-1'>
+            <FontAwesomeIcon icon={faTimes} onClick={() => setVendorModal(false)} />
+          </div>
+        </div>
+
+
+        <br />
+        <form>
+          <div className="row col-md-12">
+            <select className='form-control mx-2' name="vendorID" onChange={(e) => setVendorID(e.target.value)}>
+              <option value="">Select Vendor</option>
+              {vendors && vendors.map((vendor) => (
+                <option key={vendor._id} value={vendor._id}>{vendor.username}</option>
+              ))}
+            </select>
+            <div className='row'>
+              <div className='col-md-4'>
+                <button type="button" onClick={UpdateVendor} className="btn btn-primary my-2">Submit</button>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </Modal>
+
+      <Modal
+        isOpen={rejectModal}
+        onRequestClose={() => setRejectModal(false)}
+        style={{
+          content: {
+            width: '500px',
+            margin: 'auto',
+            height: 'fit-content',
+            padding: '20px',
+            boxShadow: '30px 30px 30px 30px rgba(0, 0, 0, 0.1)'
+          }
+        }}
+      >
+        <div className='row'>
+          <div className='col-md-11'></div>
+          <div className='col-md-1'>
+            <FontAwesomeIcon icon={faTimes} onClick={() => setRejectModal(false)} />
+          </div>
+        </div>
+        <h5 className='text-center'>Are you sure you want to reject the order?</h5>
+        <br />
+        <form>
+          <div className="row col-md-12">
+            <div className="col-md-4"></div>
+            <div className="col-md-2 text-center">
+              <button className="btn btn-success" onClick={(event) => UpdateStatus("reject", event)}>Yes</button>
+            </div>
+            <div className="col-md-2 text-center">
+              <button className="btn btn-danger" onClick={() => setRejectModal(false)}>No</button>
+            </div>
+          </div>
+        </form>
+      </Modal>
       <Footer />
     </div>
   );

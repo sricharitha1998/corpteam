@@ -46,7 +46,7 @@ function WCFViewDetails() {
         }
 
         try {
-            const response = await fetch(` https://93.127.185.34:4000/workClosure/updateDocs/${id}`, {
+            const response = await fetch(` http://localhost:4000/workClosure/updateDocs/${id}`, {
                 method: 'PATCH',
                 headers: {
                     "Accept": "application/json, text/plain, */*"
@@ -123,6 +123,13 @@ function WCFViewDetails() {
                       
                     </tbody>
                   </table>
+                  {approvals && approvals.length > 0 && !allApproved && (
+                            <div className='container row col-md-12 my-2'>
+                                <div className='col-md-2'>
+                                    <button className='btn btnColor text-white' onClick={HandleSubmit}>Submit</button>
+                                </div>
+                            </div>
+                        )}
                 </div>
                 
               </div>

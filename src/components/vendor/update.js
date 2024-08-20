@@ -15,7 +15,7 @@ function UpdateVendor() {
     useEffect(() => {
         const provInfo = async () => {
             if(location?.state?.id){
-                const userInfo = await fetch(` https://93.127.185.34:4000/users/getById/${location?.state?.id}`);
+                const userInfo = await fetch(` /api/users/getById/${location?.state?.id}`);
       const res = await userInfo.json();
       setInputDetails(res)
             }
@@ -56,7 +56,7 @@ function UpdateVendor() {
            
             if (validateEmail(InputDetails.email)){
                 if(!ErrMob){
-            const response = await fetch(` https://93.127.185.34:4000/users/changeProfile/${InputDetails?._id}` , {
+            const response = await fetch(` /api/users/changeProfile/${InputDetails?._id}` , {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

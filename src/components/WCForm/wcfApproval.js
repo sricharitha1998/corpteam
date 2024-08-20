@@ -13,7 +13,7 @@ function WCFApproval() {
     useEffect(() => {
         const provInfo = async () => {
             try {
-                const response = await fetch(` https://93.127.185.34:4000/workClosure/getDocuments/${id}`, {
+                const response = await fetch(` /api/workClosure/getDocuments/${id}`, {
                     method: 'GET',
                     headers: {
                         "Accept": "application/json, text/plain, */*"
@@ -68,7 +68,7 @@ console.log("details", details)
         try {
             const isApproved = approvals.every(item => item.status);
             if(isApproved && approvals.length === 12+details?.others.length){
-            const response = await fetch(` https://93.127.185.34:4000/workClosure/SendEmailVendor`, {
+            const response = await fetch(` /api/workClosure/SendEmailVendor`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -118,7 +118,7 @@ console.log("details", details)
                                 <td className="noBorder">PO Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://93.127.185.34:4000/public/documents/${details?.po}`}
+                                        href={`/api/public/documents/${details?.po}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -137,7 +137,7 @@ console.log("details", details)
                                 <td className="noBorder">NESA Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://93.127.185.34:4000/public/documents/${details?.nesa}`}
+                                        href={` /api/public/documents/${details?.nesa}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -156,7 +156,7 @@ console.log("details", details)
                                 <td className="noBorder">Inventory Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://93.127.185.34:4000/public/documents/${details?.inventory}`}
+                                        href={` /api/public/documents/${details?.inventory}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -175,7 +175,7 @@ console.log("details", details)
                                 <td className="noBorder">SignUp ABD Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://93.127.185.34:4000/public/documents/${details?.signupABD}`}
+                                        href={` /api/public/documents/${details?.signupABD}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -194,7 +194,7 @@ console.log("details", details)
                                 <td className="noBorder">Civil At Sign Off Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://93.127.185.34:4000/public/documents/${details?.civilSignOff}`}
+                                        href={` /api/public/documents/${details?.civilSignOff}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -213,7 +213,7 @@ console.log("details", details)
                                 <td className="noBorder">MRC Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://93.127.185.34:4000/public/documents/${details?.mrc}`}
+                                        href={` /api/public/documents/${details?.mrc}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -232,7 +232,7 @@ console.log("details", details)
                                 <td className="noBorder">Official Application Copy</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://93.127.185.34:4000/public/documents/${details?.officalApp}`}
+                                        href={` /api/public/documents/${details?.officalApp}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -251,7 +251,7 @@ console.log("details", details)
                                 <td className="noBorder">Official Demand Note</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://93.127.185.34:4000/public/documents/${details?.officalDemandNote}`}
+                                        href={` /api/public/documents/${details?.officalDemandNote}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -270,7 +270,7 @@ console.log("details", details)
                                 <td className="noBorder">DD Channel</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://93.127.185.34:4000/public/documents/${details?.dd}`}
+                                        href={` /api/public/documents/${details?.dd}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -289,7 +289,7 @@ console.log("details", details)
                                 <td className="noBorder">Final Order Copy</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://93.127.185.34:4000/public/documents/${details?.finalOrder}`}
+                                        href={` /api/public/documents/${details?.finalOrder}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -308,7 +308,7 @@ console.log("details", details)
                                 <td className="noBorder">SignUp Doc</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://93.127.185.34:4000/public/documents/${details?.signup}`}
+                                        href={` /api/public/documents/${details?.signup}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -328,7 +328,7 @@ console.log("details", details)
                                 <td className="noBorder">SD/BG Doc</td>
                                 <td className="noBorder">
                                     <a
-                                        href={` https://93.127.185.34:4000/public/documents/${details?.sdOrBg}`}
+                                        href={` /api/public/documents/${details?.sdOrBg}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -349,7 +349,7 @@ console.log("details", details)
                                     <td className="noBorder">{item.key}</td>
                                     <td className="noBorder">
                                         <a
-                                            href={` https://93.127.185.34:4000/public/documents/${item.value}`}
+                                            href={` /api/public/documents/${item.value}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >

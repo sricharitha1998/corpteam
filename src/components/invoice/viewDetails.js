@@ -46,7 +46,7 @@ function InvoiceViewDetails() {
         }
 
         try {
-            const response = await fetch(` https://93.127.185.34:4000/invoice/updateDocs/${id}`, {
+            const response = await fetch(` /api/invoice/updateDocs/${id}`, {
                 method: 'PATCH',
                 headers: {
                     "Accept": "application/json, text/plain, */*"

@@ -42,7 +42,7 @@ const Register = () => {
             if (validateEmail(InputDetails.email)){
                 if(!ErrMob){
                     console.log("Input", InputDetails)
-            const response = await fetch(' https://93.127.185.34:4000/users/registration' , {
+            const response = await fetch(' /api/users/registration' , {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

@@ -49,7 +49,7 @@ const workClosure = {
                                 from : "corpteamdigital@gmail.com",
                                 to : "sricharitha1998@gmail.com",
                                 subject : `Work Closure Form`,
-                                html : `<div><p>work closure form submitted by Vendor1 </p><a href=${url}>View Documents</a></div>`
+                                html : `<div><p>work closure form submitted </p><a href=${url}>View Documents</a></div>`
                             };
                             
                             const VendorOptions = {
@@ -225,7 +225,7 @@ const workClosure = {
                             from: 'corpteamdigital@gmail.com',
                             to: 'sricharitha1998@gmail.com',
                             subject: 'Work Closure Form',
-                            html: `<div><p>Work closure form submitted by Vendor1</p><a href=${url}>View Documents</a></div>`
+                            html: `<div><p>Work closure form submitted</p><a href=${url}>View Documents</a></div>`
                         };
             
                         transporter.sendMail(mailOptions, (err, info) => {
@@ -275,7 +275,7 @@ const workClosure = {
                                 from : "corpteamdigital@gmail.com",
                                 to : "sricharitha1998@gmail.com",
                                 subject : `Work Closure Form`,
-                                html : `<div><p>work closure form submitted by Vendor1 </p><a href=${url}>View Documents</a></div>`
+                                html : `<div><p>work closure form submitted </p><a href=${url}>View Documents</a></div>`
                             };
             
                         transporter.sendMail(mailOptions, (err, info) => {

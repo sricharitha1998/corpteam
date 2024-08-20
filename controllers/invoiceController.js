@@ -31,7 +31,7 @@ const Invoice = {
                                 from : "corpteamdigital@gmail.com",
                                 to : "sricharitha1998@gmail.com",
                                 subject : `Invoice Form`,
-                                html : `<div><p>Invoice form submitted by Vendor1 </p><a href=${url}>View Documents</a></div>`
+                                html : `<div><p>Invoice form submitted </p><a href=${url}>View Documents</a></div>`
                             };
                             
                             transporter.sendMail(mailOptions,async function(err,info){
@@ -141,7 +141,7 @@ const Invoice = {
                             from: 'corpteamdigital@gmail.com',
                             to: 'sricharitha1998@gmail.com',
                             subject: 'Invoice Form',
-                            html: `<div><p>Invoice form submitted by Vendor1</p><a href=${url}>View Documents</a></div>`
+                            html: `<div><p>Invoice form submitted</p><a href=${url}>View Documents</a></div>`
                         };
             
                         transporter.sendMail(mailOptions, (err, info) => {

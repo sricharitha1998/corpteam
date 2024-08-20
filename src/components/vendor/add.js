@@ -35,7 +35,7 @@ function AddVendor() {
                 setErrMob("")
             }
         }
-
+        
         setInputDetails({
             ...InputDetails,
             [name]: value

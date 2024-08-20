@@ -5,14 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './../navbar';
 import { useNavigate } from "react-router-dom";
 import Footer from '../footer';
-import { Circles } from 'react-loading-icons'
-
 
 function AddVendor() {
     const navigate = useNavigate();
 
     const [InputDetails, setInputDetails] = useState({status: 1, role: "vendor"})
-    const [loader, setLoader] = useState(false)
     const [ErrMob, setErrMob] = useState("");
     const [userDetails, setUserDetails] = useState({});
 
@@ -53,7 +50,6 @@ function AddVendor() {
     const ClickSubmit = async (e) => {
         e.preventDefault();
         try {
-            setLoader(true)
             if(InputDetails?.username && InputDetails?.password){
             if (validateEmail(InputDetails.email)){
                 if(!ErrMob){
@@ -73,34 +69,26 @@ function AddVendor() {
 
             const result = await response.json();
             console.log("result", result)
-            
             if (result.status === true) {
-                setLoader(false)
                 // localStorage.setItem('Details', JSON.stringify(result));
                 alert("Profile Registered Successfully");
                 navigate('/vendorList')
             }else if(result.status === false){
-                setLoader(false)
                 alert("Profile Already Exists")
             }else{
-                setLoader(false)
                 alert("Profile Update Again")
             }
         }else{
-            setLoader(false)
             alert("Please enter valid mobile number")
         }
         }else{
-            setLoader(false)
             alert("Please enter valid email")
         }
     }else{
-        setLoader(false)
         alert("Please enter all fields")
     }
 
         } catch (error) {
-            setLoader(false)
             console.error('Error uploading files:', error);
         }
     }
@@ -109,11 +97,6 @@ function AddVendor() {
         <div className='fontSetting'>
 
             <Navbar />
-{loader === true ?
-            <div className="loading-container">
-            <Circles style="color: black" />
-        </div>
-: 
 
             <div className="content-body">
                 <div className="container-fluid">
@@ -183,7 +166,6 @@ function AddVendor() {
                     </div>
                 </div>
             </div>
-}
             <Footer /> 
         </div>
     );

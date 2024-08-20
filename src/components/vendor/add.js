@@ -109,9 +109,11 @@ function AddVendor() {
         <div className='fontSetting'>
 
             <Navbar />
-{loader === true &&
-            <Circles />
-}
+{loader === true ?
+            <div className="loading-container">
+            <Circles style="color: black" />
+        </div>
+: 
 
             <div className="content-body">
                 <div className="container-fluid">
@@ -181,6 +183,7 @@ function AddVendor() {
                     </div>
                 </div>
             </div>
+}
             <Footer /> 
         </div>
     );

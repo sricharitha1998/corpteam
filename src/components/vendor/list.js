@@ -23,7 +23,7 @@ function VendorList() {
     
     useEffect(() => {
       async function provInfo() {
-        const userInfo = await fetch(`/api/users/getUsers/vendor`);
+        const userInfo = await fetch(` /api/users/getUsers/vendor`);
         const res = await userInfo.json();
         setVendors(res?.users);
         setSortedVendors(res?.users);

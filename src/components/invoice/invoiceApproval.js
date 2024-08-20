@@ -18,7 +18,7 @@ function InvoiceApproval() {
     useEffect(() => {
         const provInfo = async () => {
             try {
-                const response = await fetch(`/api/invoice/getDocuments/${id}`, {
+                const response = await fetch(` /api/invoice/getDocuments/${id}`, {
                     method: 'GET',
                     headers: {
                         "Accept": "application/json, text/plain, */*"
@@ -74,7 +74,7 @@ function InvoiceApproval() {
             const isApproved = approvals.every(item => item.status);
             if(isApproved && approvals.length === 3){
                 console.log("detailssss", details._id)
-            const response = await fetch(`/api/invoice/sendEmail`, {
+            const response = await fetch(` /api/invoice/sendEmail`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -127,7 +127,7 @@ function InvoiceApproval() {
                                 <td className="noBorder">Work Closure Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={`/api/public/invoice/${details?.wcf}`}
+                                        href={` /api/public/invoice/${details?.wcf}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -146,7 +146,7 @@ function InvoiceApproval() {
                                 <td className="noBorder">Invoice Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={`/api/public/invoice/${details?.invoiceCopy}`}
+                                        href={` /api/public/invoice/${details?.invoiceCopy}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
@@ -165,7 +165,7 @@ function InvoiceApproval() {
                                 <td className="noBorder">Supporting Document</td>
                                 <td className="noBorder">
                                     <a
-                                        href={`/api/public/invoice/${details?.supportingDoc}`}
+                                        href={` /api/public/invoice/${details?.supportingDoc}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >

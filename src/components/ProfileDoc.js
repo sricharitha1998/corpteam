@@ -76,24 +76,10 @@ function ProfileDocs() {
 
     const onChangeFunction = (e) => {
         const { name, type, files, value } = e.target;
-        if(type === 'file'){
-            const file = files[0];
-    const maxSize = 2 * 1024 * 1024;
-    if (file && file.size > maxSize) {
-        alert('File size exceeds 2MB. Unable to upload.')
-    }else{
         setInputDetails((prevDetails) => ({
             ...prevDetails,
-            [name]: type === files[0],
+            [name]: type === 'file' ? files[0] : value,
         }));
-    }
-        }else{
-            setInputDetails((prevDetails) => ({
-                ...prevDetails,
-                [name]: type === value,
-            }));
-        }
-        
         
     };
 

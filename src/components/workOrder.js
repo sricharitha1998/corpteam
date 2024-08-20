@@ -31,17 +31,17 @@ function WorkOrder() {
       const details = localStorage.getItem('Details');
       const userDetails = JSON.parse(details)
 
-      const userInfo = await fetch(`/api/users/getUsers/vendor`);
+      const userInfo = await fetch(` /api/users/getUsers/vendor`);
       const getAllVendors = await userInfo.json();
       setVendors(getAllVendors?.users)
       setUserDetails(userDetails)
       let res;
       if (userDetails?.role === "admin") {
-        const userInfo = await fetch(`/api/workOrder/getAll`);
+        const userInfo = await fetch(` /api/workOrder/getAll`);
         res = await userInfo.json();
         if (res) {
           const updateArray = await Promise.all(res?.map(async (details) => {
-            const vendorResponse = await fetch(`/api/users/getById/${details?.vendor_id}`);
+            const vendorResponse = await fetch(` /api/users/getById/${details?.vendor_id}`);
             const vendor = await vendorResponse.json();
 
             // Add the username to the details object
@@ -55,7 +55,7 @@ function WorkOrder() {
           res = updateArray;
         }
       } else {
-        const userInfo = await fetch(`/api/workOrder/getRecords/${userDetails?._id}`);
+        const userInfo = await fetch(` /api/workOrder/getRecords/${userDetails?._id}`);
         res = await userInfo.json();
       }
       if (res) {
@@ -87,7 +87,7 @@ function WorkOrder() {
 
   const UpdateVendor = async (event) => {
     event.preventDefault();
-    const response = await fetch('/api/workOrder/updateVendor', {
+    const response = await fetch(' /api/workOrder/updateVendor', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -115,7 +115,7 @@ function WorkOrder() {
   const DownloadPDF = async (id, event, username) => {
 
     event.preventDefault();
-    const userInfo = await fetch(`/api/workOrder/getOneRecord/${id}`);
+    const userInfo = await fetch(` /api/workOrder/getOneRecord/${id}`);
     const res = await userInfo.json();
     const getAllData = { ...res, ...{ vendorName: username } }
 
@@ -125,7 +125,7 @@ function WorkOrder() {
 
   const UpdateStatus = async (status, event) => {
     event.preventDefault();  // Prevent the default form submission behavior
-    const response = await fetch('/api/workOrder/updateStatus', {
+    const response = await fetch(' /api/workOrder/updateStatus', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",

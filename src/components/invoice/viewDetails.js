@@ -46,7 +46,7 @@ function InvoiceViewDetails() {
         }
 
         try {
-            const response = await fetch(`/api/invoice/updateDocs/${id}`, {
+            const response = await fetch(` /api/invoice/updateDocs/${id}`, {
                 method: 'PATCH',
                 headers: {
                     "Accept": "application/json, text/plain, */*"

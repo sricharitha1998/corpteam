@@ -46,7 +46,7 @@ function WCFViewDetails() {
         }
 
         try {
-            const response = await fetch(` /api/workClosure/updateDocs/${id}`, {
+            const response = await fetch(`/api/workClosure/updateDocs/${id}`, {
                 method: 'PATCH',
                 headers: {
                     "Accept": "application/json, text/plain, */*"

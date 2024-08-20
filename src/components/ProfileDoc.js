@@ -32,12 +32,13 @@ function ProfileDocs() {
             const month = String(date.getMonth() + 1).padStart(2, '0');
             const year = String(date.getFullYear()).slice(-2);
             const RandomCode = "CTS" + month + year + Math.floor(10 + Math.random() * 90);
-            setInputDetails({ ...inputDetails, code: RandomCode });
+            setInputDetails({ ...inputDetails, vendorCode: RandomCode });
         }
         fetchData();
     }, []);
 
     const CommonFunction = async () => {
+//console.log("inputDetails", inputDetails);
         if(inputDetails?.vendorCode && inputDetails?.financialDetails && inputDetails?.gst && inputDetails?.roc && inputDetails?.partnerShip && inputDetails?.companyTeam && inputDetails?.photo && inputDetails?.pancard && inputDetails?.address && inputDetails?.companyDetails){
 
         const formData = new FormData();
@@ -123,7 +124,7 @@ function ProfileDocs() {
                                                         name='vendorCode'
                                                         className='form-control'
                                                         disabled={true}
-                                                        value={inputDetails.code || ''}
+                                                        value={inputDetails.vendorCode || ''}
                                                     />
                                                     </div>
                                                 </div>

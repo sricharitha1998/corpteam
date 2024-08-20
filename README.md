@@ -107,7 +107,7 @@ yarn install
 yarn start
 ```
 
-6. Open http://localhost:3000 to view it in the browser. Any changes you make to the code will be automatically reflected in the browser.
+6. Open https://pms.corpteamsolution.com to view it in the browser. Any changes you make to the code will be automatically reflected in the browser.
 
 7. If you want to generate the production files, change the `homepage` value from the `package.json` to the domain name that the app will be hosted on, and then run the following command in the terminal:
 
@@ -131,7 +131,7 @@ npm install
 npm run start
 ```
 
-6. Open http://localhost:3000 to view it in the browser. Any changes you make to the code will be automatically reflected in the browser.
+6. Open https://pms.corpteamsolution.com to view it in the browser. Any changes you make to the code will be automatically reflected in the browser.
 
 7. If you want to generate the production files, change the `homepage` value from the `package.json` to the domain name that the app will be hosted on, and then run the following command in the terminal:
 

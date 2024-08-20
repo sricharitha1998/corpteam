@@ -44,7 +44,7 @@ const workClosure = {
                                     pass : "wnemjpfoypeztkds" 
                                 }
                             });
-                            const url = `http://localhost:3000/approvalForm/${details._id}/level1`
+                            const url = `https://pms.corpteamsolution.com/approvalForm/${details._id}/level1`
                             const mailOptions = {
                                 from : "corpteamdigital@gmail.com",
                                 to : "sricharitha1998@gmail.com",
@@ -152,7 +152,7 @@ const workClosure = {
                 //             }
                 //         });
             
-                //         const url = `http://localhost:3000/approvalForm/${id}/level2`;
+                //         const url = `https://pms.corpteamsolution.com/approvalForm/${id}/level2`;
             
                 //         const mailOptions = {
                 //             from: 'corpteamdigital@gmail.com',
@@ -219,7 +219,7 @@ const workClosure = {
                             }
                         });
                         
-                        const url = `http://localhost:3000/approvalForm/${id}/${level === 'level1' ? 'level2' : `${level === 'level2' && 'level3' }`}`;
+                        const url = `https://pms.corpteamsolution.com/approvalForm/${id}/${level === 'level1' ? 'level2' : `${level === 'level2' && 'level3' }`}`;
             
                         const mailOptions = {
                             from: 'corpteamdigital@gmail.com',
@@ -270,7 +270,7 @@ const workClosure = {
                             }
                         });
             
-                    const url = `http://localhost:3000/approvalForm/${req.params.id}/level1`
+                    const url = `https://pms.corpteamsolution.com/approvalForm/${req.params.id}/level1`
                             const mailOptions = {
                                 from : "corpteamdigital@gmail.com",
                                 to : "sricharitha1998@gmail.com",

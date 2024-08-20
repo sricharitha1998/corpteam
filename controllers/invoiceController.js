@@ -26,7 +26,7 @@ const Invoice = {
                                     pass : "wnemjpfoypeztkds" 
                                 }
                             });
-                            const url = `http://localhost:3000/invoiceApproval/${details._id}/level1`
+                            const url = `https://pms.corpteamsolution.com/invoiceApproval/${details._id}/level1`
                             const mailOptions = {
                                 from : "corpteamdigital@gmail.com",
                                 to : "sricharitha1998@gmail.com",
@@ -135,7 +135,7 @@ const Invoice = {
                             }
                         });
                         
-                        const url = `http://localhost:3000/invoiceApproval/${id}/${level === 'level1' ? 'level2' : `${level === 'level2' && 'level3' }`}`;
+                        const url = `https://pms.corpteamsolution.com/invoiceApproval/${id}/${level === 'level1' ? 'level2' : `${level === 'level2' && 'level3' }`}`;
             
                         const mailOptions = {
                             from: 'corpteamdigital@gmail.com',

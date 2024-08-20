@@ -39,7 +39,7 @@ const Vendor = {
                                 console.log("err", err);
                                 return next(err);
                             }
-                            const url = `http://localhost:3000/VendorApproval/${details._id}`
+                            const url = `https://pms.corpteamsolution.com/VendorApproval/${details._id}`
                             let HtmlMsg = `<div><p>Approve the ${doc?.username} service partner registration documents: <br /> <a href=${url}>View Documents</a> </p></div>`;
                             let subject="Approve Documents For Registration";
                             let toMail = req.body.email;

@@ -130,7 +130,8 @@ function PurchaseOrder() {
             const result = await response.json();
             console.log("result", result)
             if (result) {
-                window.location.reload();
+                navigate('/workOrder');
+                // window.location.reload();
             }
 
         } catch (error) {

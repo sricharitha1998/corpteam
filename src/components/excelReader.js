@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as XLSX from 'xlsx';
 import Navbar from './navbar';
 
 const ExcelReader = () => {

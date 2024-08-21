@@ -38,7 +38,7 @@ function ProfileDocs() {
     }, []);
 
     const CommonFunction = async () => {
-//console.log("inputDetails", inputDetails);
+console.log("inputDetails", inputDetails);
         if(inputDetails?.vendorCode && inputDetails?.financialDetails && inputDetails?.gst && inputDetails?.roc && inputDetails?.partnerShip && inputDetails?.companyTeam && inputDetails?.photo && inputDetails?.pancard && inputDetails?.address && inputDetails?.companyDetails){
 
         const formData = new FormData();

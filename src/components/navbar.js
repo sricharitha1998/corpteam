@@ -180,6 +180,18 @@ console.log("location.pathname", location.pathname)
               }
             </li>
             <li>
+              <a href="/ExcelService" className={`ai-icon ${location.pathname === '/ExcelService' ? 'activeNav text-white' : ''}`} aria-expanded="false">
+              <FontAwesomeIcon icon={faPuzzlePiece} className={`fontAwesomeIcons mt-1 ${location.pathname === '/ExcelService' ? 'text-white' : '' }` }/>
+                <span className="nav-text">Service Line Items</span>
+              </a>
+            </li>
+            <li>
+              <a href="/ExcelReader" className={`ai-icon ${location.pathname === '/ExcelReader' ? 'activeNav text-white' : ''}`} aria-expanded="false">
+              <FontAwesomeIcon icon={faPuzzlePiece} className={`fontAwesomeIcons mt-1 ${location.pathname === '/ExcelReader' ? 'text-white' : '' }` }/>
+                <span className="nav-text">Supply Line Items</span>
+              </a>
+            </li>
+            <li>
               <a href="/purchaseOrder" className={`ai-icon ${location.pathname === '/purchaseOrder' ? 'activeNav text-white' : ''}`} aria-expanded="false">
               <FontAwesomeIcon icon={faPuzzlePiece} className={`fontAwesomeIcons mt-1 ${location.pathname === '/purchaseOrder' ? 'text-white' : '' }` }/>
                 <span className="nav-text">Purchase Orders</span>

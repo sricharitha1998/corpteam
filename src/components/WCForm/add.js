@@ -66,6 +66,22 @@ function WCForm() {
 
         doc.autoTable(tableColumn, tableRows, { startY: 60 });
 
+    const tableSupply = ["S.No", "Supply Description", "Supply Code", "UOM", "Quantity"];
+    const tableSupplyrows = [];
+
+    res && res.supplies.forEach((supply, index) => {
+        const supplyData = [
+            index + 1,
+            supply.description,
+            supply.code,
+            supply.uom,
+            supply.quantity,
+        ];
+        tableRows.push(supplyData);
+    });
+
+    doc.autoTable(tableSupply, tableSupplyrows, { startY: 60 });
+
         // res && res.services.forEach((item, index) => {
         //     const yPosition = 20 + (index * 10);
         //     doc.text(`${item.code}\t${item.uom}\t${item.description}\t${item.quantity}`, 10, yPosition);

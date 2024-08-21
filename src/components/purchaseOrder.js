@@ -76,12 +76,14 @@ const [SupplyItems, setSupplyItems] = useState();
         //newServices[index][name] = value;
         //setServices(newServices);
 if(name==="code"){
-            const item = SupplyItems.find((item) => item._id === value);
-		console.log("itemsss", item)
-            if(item){
-            newServices[index].code = item.code;
-            newServices[index].description = item.description;
-            newServices[index].uom = item.uom;
+console.log("supply", SupplyItems);
+console.log("value", value)
+            const getItem = SupplyItems.find((item) => item._id === value);
+		console.log("itemsss", getItem)
+            if(getItem){
+            newServices[index].code = getItem.code;
+            newServices[index].description = getItem.description;
+            newServices[index].uom = getItem.uom;
             setServices(newServices);
             }
         }else{
@@ -261,10 +263,10 @@ console.log("services", services)
                                                 <tr key={index}>
                                                     <td className="noBorder">{index + 1}</td>
                                                     <td className="noBorder">
-                                                        <select className='form-control mx-2' name="code" onChange={onChangeDetails}>
+                                                        <select className='form-control mx-2' name="code" onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.code}>
                                                             <option value="">Select Code</option>
                                                             {SupplyItems && SupplyItems.map((item) => (
-                                                                <option key={item._id} value={item.code}>{item.code}</option>
+                                                                <option key={item._id} value={item._id}>{item.code}</option>
                                                             ))}
                                                         </select>
                               </td>

@@ -12,6 +12,7 @@ function PurchaseOrder() {
     const navigate = useNavigate();
     const [data, setData] = useState({ status: null });
     const [services, setServices] = useState([{ code: '', uom: '', description: '', quantity: '' }]);
+    const [supplies, setSupplies] = useState([{ code: '', uom: '', description: '', quantity: '' }]);
     const [currentPage, setCurrentPage] = useState(1);
     const [Address, setAddress] = useState("");
     const itemsPerPage = 10; // Adjust this value to set items per page
@@ -70,6 +71,10 @@ const [SupplyItems, setSupplyItems] = useState();
         setServices([...services, { code: '', uom: '', description: '', quantity: '' }]);
     };
 
+    const handleAddSupply = () => {
+        setServices([...services, { code: '', uom: '', description: '', quantity: '' }]);
+    };
+
     const handleServiceChange = (e, index) => {
         const { name, value } = e.target;
         const newServices = [...services];
@@ -91,10 +96,31 @@ console.log("value", value)
         setServices(newServices);
         }    
 };
-console.log("services", services)
+
+const handleSupplyChange = (e, index) => {
+    const { name, value } = e.target;
+    const newServices = [...supplies];
+    //newServices[index][name] = value;
+    //setServices(newServices);
+if(name==="code"){
+        const getItem = SupplyItems.find((item) => item._id === value);
+   
+        if(getItem){
+        newServices[index].code = getItem.code;
+        newServices[index].description = getItem.description;
+        newServices[index].uom = getItem.uom;
+        setSupplies(newServices);
+        }
+    }else{
+    newServices[index][name] = value;
+    setSupplies(newServices);
+    }    
+};
+
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = services.slice(indexOfFirstItem, indexOfLastItem);
+    const suppliesItems = supplies.slice(indexOfFirstItem, indexOfLastItem);
 
     const onChangeDetails = async (event) => {
         const { name, value } = event.target;
@@ -252,8 +278,8 @@ console.log("services", services)
                                         <thead>
                                             <tr>
                                                 <th scope="col">S.NO</th>
-                                                <th scope="col">Item Code</th>
-                                                <th scope="col">Item Description</th>
+                                                <th scope="col">Service Code</th>
+                                                <th scope="col">Service Description</th>
                                                 <th scope="col">UOM</th>
                                                 <th scope="col">Quantity</th>
                                             </tr>
@@ -284,11 +310,57 @@ console.log("services", services)
                                             ))}
                                         </tbody>
                                     </table>
-                                </div>
-                                <div className="row">
+
+                                    <div className="row">
                                     <div className="col-sm-6">
                                         <a href="javascript:void(0);" className="btn btn-success text-white mb-2" onClick={handleAddService}>
                                             Add Services<svg className="ms-4 scale3" width="16" height="16" viewbox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.9638 11.5104L16.9721 14.9391L3.78954 1.7565C3.22815 1.19511 2.31799 1.19511 1.75661 1.7565C1.19522 2.31789 1.19522 3.22805 1.75661 3.78943L14.9392 16.972L11.5105 16.9637L11.5105 16.9637C10.7166 16.9619 10.0715 17.6039 10.0696 18.3978C10.0677 19.1919 10.7099 19.8369 11.5036 19.8388L11.5049 19.3388L11.5036 19.8388L18.3976 19.8554L18.4146 19.8555L18.4159 19.8555C18.418 19.8555 18.42 19.8555 18.422 19.8555C19.2131 19.8533 19.8528 19.2114 19.8555 18.4231C19.8556 18.4196 19.8556 18.4158 19.8556 18.4117L19.8389 11.5035L19.8389 11.5035C19.8369 10.7097 19.1919 10.0676 18.3979 10.0695C17.604 10.0713 16.9619 10.7164 16.9638 11.5103L16.9638 11.5104Z" fill="white" stroke="white"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+
+				<table className="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">S.NO</th>
+                                                <th scope="col">Supply Code</th>
+                                                <th scope="col">Supply Description</th>
+                                                <th scope="col">UOM</th>
+                                                <th scope="col">Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {suppliesItems.map((supply, index) => (
+                                                <tr key={index}>
+                                                    <td className="noBorder">{index + 1}</td>
+                                                    <td className="noBorder">
+						    
+                                                        <select className='form-control' name="code" onChange={(e) => handleSupplyChange(e, index)} defaultValue={supply?.code}>
+                                                            <option value="">Select Code</option>
+                                                            {SupplyItems && SupplyItems.map((item) => (
+                                                                <option key={item._id} selected={supply?.code === item.code} value={item._id}>{item.code}</option>
+                                                            ))}
+                                                        </select>
+                              </td>
+                                                    <td className="noBorder">
+                                                        <input className='form-control' name="description" type='text' onChange={(e) => handleSupplyChange(e, index)} defaultValue={supply?.description} />
+                                                    </td>
+                                                    <td className="noBorder">
+                                                        <input className='form-control mx-2' name="uom" type='text' defaultValue={supply?.uom} onChange={(e) => handleSupplyChange(e, index)} />
+                                                    </td>
+                                                    <td className="noBorder">
+                                                        <input className='form-control mx-2' name="quantity" type='text' defaultValue={supply?.quantity} onChange={(e) => handleSupplyChange(e, index)} />
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div className="row">
+                                    <div className="col-sm-6">
+                                        <a href="javascript:void(0);" className="btn btn-success text-white mb-2" onClick={handleAddSupply}>
+                                            Add Supply<svg className="ms-4 scale3" width="16" height="16" viewbox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.9638 11.5104L16.9721 14.9391L3.78954 1.7565C3.22815 1.19511 2.31799 1.19511 1.75661 1.7565C1.19522 2.31789 1.19522 3.22805 1.75661 3.78943L14.9392 16.972L11.5105 16.9637L11.5105 16.9637C10.7166 16.9619 10.0715 17.6039 10.0696 18.3978C10.0677 19.1919 10.7099 19.8369 11.5036 19.8388L11.5049 19.3388L11.5036 19.8388L18.3976 19.8554L18.4146 19.8555L18.4159 19.8555C18.418 19.8555 18.42 19.8555 18.422 19.8555C19.2131 19.8533 19.8528 19.2114 19.8555 18.4231C19.8556 18.4196 19.8556 18.4158 19.8556 18.4117L19.8389 11.5035L19.8389 11.5035C19.8369 10.7097 19.1919 10.0676 18.3979 10.0695C17.604 10.0713 16.9619 10.7164 16.9638 11.5103L16.9638 11.5104Z" fill="white" stroke="white"></path>
                                             </svg>
                                         </a>
                                     </div>

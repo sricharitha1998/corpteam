@@ -49,6 +49,9 @@ app.use('/workClosure/', workClosure);
 const vendor = require('./routes/vendorRoute');
 app.use('/vendor/', vendor);
 
+const SupplyRoute = require('./routes/supplyItemRoute');
+app.use('/supplyItems/', SupplyRoute);
+
 const invoice = require('./routes/invoiceRoute');
 app.use('/invoice/', invoice);
 

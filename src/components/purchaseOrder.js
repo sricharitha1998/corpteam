@@ -72,7 +72,7 @@ const [SupplyItems, setSupplyItems] = useState();
     };
 
     const handleAddSupply = () => {
-        setServices([...services, { code: '', uom: '', description: '', quantity: '' }]);
+        setSupplies([...supplies, { code: '', uom: '', description: '', quantity: '' }]);
     };
 
     const handleServiceChange = (e, index) => {

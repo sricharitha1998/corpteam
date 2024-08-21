@@ -18,7 +18,7 @@ function PurchaseOrder() {
     const [vendors, setVendors] = useState()
     const [VendorName, setVendorName] = useState()
     const [userDetails, setUserDetails] = useState({});
-
+const [SupplyItems, setSupplyItems] = useState();
     useEffect(() => {
         const fetchData = async () => {
             const date = new Date();
@@ -49,7 +49,14 @@ function PurchaseOrder() {
         fetchData();
 
     }, [location?.state])
-
+ useEffect(() => {
+      async function provInfo() {
+        const supplyInfo = await fetch(`/api/supplyItems/allItems`);
+        const res = await supplyInfo.json();
+         setSupplyItems(res)
+      }
+      provInfo();
+    }, []);
     useEffect(() => {
         const details = localStorage.getItem('Details');
         if (!details) {
@@ -66,10 +73,23 @@ function PurchaseOrder() {
     const handleServiceChange = (e, index) => {
         const { name, value } = e.target;
         const newServices = [...services];
+        //newServices[index][name] = value;
+        //setServices(newServices);
+if(name==="code"){
+            const item = SupplyItems.find((item) => item._id === value);
+		console.log("itemsss", item)
+            if(item){
+            newServices[index].code = item.code;
+            newServices[index].description = item.description;
+            newServices[index].uom = item.uom;
+            setServices(newServices);
+            }
+        }else{
         newServices[index][name] = value;
         setServices(newServices);
-    };
-
+        }    
+};
+console.log("services", services)
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = services.slice(indexOfFirstItem, indexOfLastItem);
@@ -241,10 +261,15 @@ function PurchaseOrder() {
                                                 <tr key={index}>
                                                     <td className="noBorder">{index + 1}</td>
                                                     <td className="noBorder">
-                                                        <input className='form-control' name="description" type='text' onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.description} />
-                                                    </td>
+                                                        <select className='form-control mx-2' name="code" onChange={onChangeDetails}>
+                                                            <option value="">Select Code</option>
+                                                            {SupplyItems && SupplyItems.map((item) => (
+                                                                <option key={item._id} value={item.code}>{item.code}</option>
+                                                            ))}
+                                                        </select>
+                              </td>
                                                     <td className="noBorder">
-                                                        <input className='form-control mx-2' name="code" type='text' defaultValue={service?.code} onChange={(e) => handleServiceChange(e, index)} />
+                                                        <input className='form-control' name="description" type='text' onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.description} />
                                                     </td>
                                                     <td className="noBorder">
                                                         <input className='form-control mx-2' name="uom" type='text' defaultValue={service?.uom} onChange={(e) => handleServiceChange(e, index)} />

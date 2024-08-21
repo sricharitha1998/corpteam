@@ -26,6 +26,7 @@ import AdminLogin from './components/adminLogin';
 import AdminDashboard from './components/adminDashboard';
 import Error from './components/error';
 import Register from './components/register'
+import ExcelReader from './components/excelReader';
 
 function App() {
     return ( 
@@ -56,7 +57,8 @@ function App() {
                 <Route path="/adminDashboard" element={<AdminDashboard />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/viewInvoice" element={<InvoiceDetails />} />
-                <Route path="*" element={Error} />
+                <Route path="/ExcelReader" element={<ExcelReader />} />
+		<Route path="*" element={Error} />
             </Routes>
         </Router>
     );

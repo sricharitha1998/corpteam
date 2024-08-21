@@ -120,7 +120,6 @@ export default () => {
               {/* <NavItem title="Purchase Order" link={Routes.Purchase.path} icon={faFileAlt} /> */}
               <NavItem title="Work Order" link={Routes.WorkOrder.path} icon={faPlus} />
               <NavItem title="Purchase Order" link={Routes.Purchase.path} icon={faPlus} />
-                <NavItem title="Line Items" link={Routes.LineItems.path} icon={faPlus} />
             </Nav>
             :
             <Nav className="flex-column pt-3 pt-md-0">

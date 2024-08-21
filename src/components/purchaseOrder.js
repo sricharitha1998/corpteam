@@ -267,7 +267,7 @@ console.log("services", services)
                                                         <select className='form-control mx-2' name="code" onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.code}>
                                                             <option value="">Select Code</option>
                                                             {SupplyItems && SupplyItems.map((item) => (
-                                                                <option key={item._id} value={item._id}>{item.code}</option>
+                                                                <option key={item._id} selected={service?.code === item.code} value={item._id}>{item.code}</option>
                                                             ))}
                                                         </select>
                               </td>

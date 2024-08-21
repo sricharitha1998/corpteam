@@ -28,6 +28,7 @@ const ExcelReader = () => {
       e.preventDefault();
      
       try {
+if(data.length>0){
           const response = await fetch('/api/supplyItems/itemsInsert', {
               method: 'POST',
               headers: {
@@ -48,7 +49,8 @@ const ExcelReader = () => {
               alert("Profile Updated Successfully");
               window.location.reload();
           }
-          
+          }else{
+alert("fill the fields");}
       } catch (error) {
           console.error('Error uploading files:', error);
       }

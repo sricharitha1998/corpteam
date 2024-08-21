@@ -52,6 +52,9 @@ app.use('/vendor/', vendor);
 const SupplyRoute = require('./routes/supplyItemRoute');
 app.use('/supplyItems/', SupplyRoute);
 
+const ServiceRoute = require('./routes/serviceItemRoute');
+app.use('/serviceItems/', ServiceRoute);
+
 const invoice = require('./routes/invoiceRoute');
 app.use('/invoice/', invoice);
 

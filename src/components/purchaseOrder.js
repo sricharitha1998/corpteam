@@ -264,7 +264,7 @@ console.log("services", services)
                                                     <td className="noBorder">{index + 1}</td>
                                                     <td className="noBorder">
 						    
-                                                        <select className='form-control mx-2' name="code" onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.code}>
+                                                        <select className='form-control' name="code" onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.code}>
                                                             <option value="">Select Code</option>
                                                             {SupplyItems && SupplyItems.map((item) => (
                                                                 <option key={item._id} selected={service?.code === item.code} value={item._id}>{item.code}</option>

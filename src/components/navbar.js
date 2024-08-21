@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import '../assets/css/style.css'; 
 import Logo from '../assets/img/logo/dashboard-logo.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog, faFileAlt, faUser, faFileInvoice, faPuzzlePiece, faListCheck, faUserTie, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faFileAlt, faTools, faBoxes, faUser, faFileInvoice, faPuzzlePiece, faListCheck, faUserTie, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 // import '../assets/css/dropDown.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -181,13 +181,13 @@ console.log("location.pathname", location.pathname)
             </li>
             <li>
               <a href="/ExcelService" className={`ai-icon ${location.pathname === '/ExcelService' ? 'activeNav text-white' : ''}`} aria-expanded="false">
-              <FontAwesomeIcon icon={faPuzzlePiece} className={`fontAwesomeIcons mt-1 ${location.pathname === '/ExcelService' ? 'text-white' : '' }` }/>
+              <FontAwesomeIcon icon={faTools} className={`fontAwesomeIcons mt-1 ${location.pathname === '/ExcelService' ? 'text-white' : '' }` }/>
                 <span className="nav-text">Service Line Items</span>
               </a>
             </li>
             <li>
               <a href="/ExcelReader" className={`ai-icon ${location.pathname === '/ExcelReader' ? 'activeNav text-white' : ''}`} aria-expanded="false">
-              <FontAwesomeIcon icon={faPuzzlePiece} className={`fontAwesomeIcons mt-1 ${location.pathname === '/ExcelReader' ? 'text-white' : '' }` }/>
+              <FontAwesomeIcon icon={faBoxes} className={`fontAwesomeIcons mt-1 ${location.pathname === '/ExcelReader' ? 'text-white' : '' }` }/>
                 <span className="nav-text">Supply Line Items</span>
               </a>
             </li>

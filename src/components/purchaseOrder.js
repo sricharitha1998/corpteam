@@ -158,13 +158,20 @@ if(name==="code"){
                 }
             }
 
+            for (const supply of supplies) {
+                if (!supply.code || !supply.uom || !supply.description || !supply.quantity) {
+                    alert('All supply fields are required.');
+                    return;
+                }
+            }
+
             if (!data?.routeLength || !data?.vendorID || !data?.buildingArea) {
                 alert('All fields are required.');
                 return;
             }
 
             // const formattedDate = new Date().toLocaleDateString();
-            const payload = { ...data, services, date: new Date() };
+            const payload = { ...data, services, supplies, date: new Date() };
             const response = await fetch('/api/workOrder/insert', {
                 method: 'POST',
                 headers: {

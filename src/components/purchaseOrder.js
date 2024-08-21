@@ -282,7 +282,7 @@ if(name==="code"){
                                         </div>
                                     </form>
                                 </div>
-				<h2 className="mx-2 text-center">Services</h2>
+				<h5 className="mx-2 text-center">Services</h5>
                                 <div className="table-responsive">
                                     <table className="table">
                                         <thead>
@@ -329,13 +329,13 @@ if(name==="code"){
                                         </a>
                                     </div>
                                 </div>
-
+<h5 className="mx-2 text-center">Supply </h5>
 				<table className="table">
                                         <thead>
                                             <tr>
                                                 <th scope="col">S.NO</th>
-                                                <th scope="col">Supply Code</th>
-                                                <th scope="col">Supply Description</th>
+                                                <th scope="col">Item Code</th>
+                                                <th scope="col">Item Description</th>
                                                 <th scope="col">UOM</th>
                                                 <th scope="col">Quantity</th>
                                             </tr>

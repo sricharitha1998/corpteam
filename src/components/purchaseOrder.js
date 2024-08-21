@@ -20,6 +20,8 @@ function PurchaseOrder() {
     const [VendorName, setVendorName] = useState()
     const [userDetails, setUserDetails] = useState({});
 const [SupplyItems, setSupplyItems] = useState();
+const [ServiceItems, setServiceItems] = useState();
+
     useEffect(() => {
         const fetchData = async () => {
             const date = new Date();
@@ -55,6 +57,9 @@ const [SupplyItems, setSupplyItems] = useState();
         const supplyInfo = await fetch(`/api/supplyItems/allItems`);
         const res = await supplyInfo.json();
          setSupplyItems(res)
+         const serviceInfo = await fetch(`/api/serviceItems/allItems`);
+        const serviceRes = await serviceInfo.json();
+         setServiceItems(serviceRes)
       }
       provInfo();
     }, []);
@@ -81,9 +86,7 @@ const [SupplyItems, setSupplyItems] = useState();
         //newServices[index][name] = value;
         //setServices(newServices);
 if(name==="code"){
-console.log("supply", SupplyItems);
-console.log("value", value)
-            const getItem = SupplyItems.find((item) => item._id === value);
+            const getItem = ServiceItems.find((item) => item._id === value);
 		console.log("itemsss", getItem)
             if(getItem){
             newServices[index].code = getItem.code;
@@ -292,7 +295,7 @@ if(name==="code"){
 						    
                                                         <select className='form-control' name="code" onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.code}>
                                                             <option value="">Select Code</option>
-                                                            {SupplyItems && SupplyItems.map((item) => (
+                                                            {ServiceItems && ServiceItems.map((item) => (
                                                                 <option key={item._id} selected={service?.code === item.code} value={item._id}>{item.code}</option>
                                                             ))}
                                                         </select>

@@ -282,7 +282,7 @@ if(name==="code"){
                                         </div>
                                     </form>
                                 </div>
-
+				<h2 className="mx-2 text-center">Services</h2>
                                 <div className="table-responsive">
                                     <table className="table">
                                         <thead>

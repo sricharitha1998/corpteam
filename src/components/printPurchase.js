@@ -71,17 +71,17 @@ function PrintPurchase() {
                                         <tbody>
                                             {services?.map((service, index) => (
                                                 <tr key={index}>
-                                                    <td className="noBorder" style={{width:"10%", overflowWrap: "anywhere"}}>{index + 1}</td>
-                                                    <td className="noBorder" style={{width:"40%", overflowWrap: "anywhere"}}>
+                                                    <td className="noBorder" style={{width:"10%", overflowWrap: "break-word"}}>{index + 1}</td>
+                                                    <td className="noBorder" style={{width:"40%", overflowWrap: "break-word"}}>
                                                     {service.description}
                                                     </td>
-                                                    <td className="noBorder" style={{width:"20%", overflowWrap: "anywhere"}}>
+                                                    <td className="noBorder" style={{width:"20%", overflowWrap: "break-word"}}>
                                                         {service.code}
                                                     </td>
-                                                    <td className="noBorder" style={{width:"20%", overflowWrap: "anywhere"}}>
+                                                    <td className="noBorder" style={{width:"20%", overflowWrap: "break-word"}}>
                                                        {service.uom}
                                                     </td>
-                                                    <td className="noBorder" style={{width:"20%", overflowWrap: "anywhere"}}>
+                                                    <td className="noBorder" style={{width:"20%", overflowWrap: "break-word"}}>
                                                         {service.quantity}
                                                     </td>
                                                 </tr>

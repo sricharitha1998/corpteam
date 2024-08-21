@@ -66,7 +66,7 @@ alert("fill the fields");}
                      
                     <div className="row page-titles">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item active">Excel Upload</li>
+                            <li className="breadcrumb-item active">Service Upload</li>
                         </ol>
                     </div>
                     <div className="row page-titles">

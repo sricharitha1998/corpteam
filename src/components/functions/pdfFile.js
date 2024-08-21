@@ -28,5 +28,22 @@ export const PDFfile = (data) => {
     });
 
     doc.autoTable(tableColumn, tableRows, { startY: 60 });
+
+    const tableSupply = ["S.No", "Supply Description", "Supply Code", "UOM", "Quantity"];
+    const tableSupplyrows = [];
+
+    data && data.supplies.forEach((supply, index) => {
+      const supplyData = [
+        index + 1,
+        Capitalized(supply.description),
+        Capitalized(supply.code),
+        Capitalized(supply.uom),
+        Capitalized(supply.quantity),
+      ];
+      tableSupplyrows.push(supplyData);
+    });
+
+    doc.autoTable(tableSupply, tableSupplyrows, { startY: 60 });
+
     doc.save('purchase_order.pdf');
 }

@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './navbar';
 import Footer from './footer';
 import { PDFfile } from './functions/pdfFile';
-import SelectSearch from 'react-select-search';
 
 function PurchaseOrder() {
     const location = useLocation();
@@ -264,18 +263,13 @@ console.log("services", services)
                                                 <tr key={index}>
                                                     <td className="noBorder">{index + 1}</td>
                                                     <td className="noBorder">
-						    <SelectSearch
-                                                            options={SupplyItems.map(item => ({ value: item._id, name: item.code }))}
-                                                            value={service.code}
-                                                            onChange={(value) => handleServiceChange({ target: { name: 'code', value } }, index)}
-                                                            placeholder="Select Code"
-                                                        />
-                                                        // <select className='form-control mx-2' name="code" onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.code}>
-                                                        //     <option value="">Select Code</option>
-                                                        //     {SupplyItems && SupplyItems.map((item) => (
-                                                        //         <option key={item._id} value={item._id}>{item.code}</option>
-                                                        //     ))}
-                                                        // </select>
+						    
+                                                        <select className='form-control mx-2' name="code" onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.code}>
+                                                            <option value="">Select Code</option>
+                                                            {SupplyItems && SupplyItems.map((item) => (
+                                                                <option key={item._id} value={item._id}>{item.code}</option>
+                                                            ))}
+                                                        </select>
                               </td>
                                                     <td className="noBorder">
                                                         <input className='form-control' name="description" type='text' onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.description} />

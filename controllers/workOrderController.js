@@ -16,6 +16,7 @@ const WorkOrder = {
                         homePass: req.body.homePass,
                         routeLength: req.body.routeLength,
                         status: req.body.status,
+                        supplies: req.body.supplies
                     });
 
                     OrdersForm.save().then((details, err) => {

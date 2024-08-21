@@ -6,6 +6,7 @@ const WorkOrderSchema = new Schema({
     buildingArea: String,
     vendor_id: String,
     services: Array,
+    supplies: Array,
     status: String,
     date: String,
     homePass: String,

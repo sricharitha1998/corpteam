@@ -252,8 +252,8 @@ console.log("services", services)
                                         <thead>
                                             <tr>
                                                 <th scope="col">S.NO</th>
-                                                <th scope="col">Services Description</th>
-                                                <th scope="col">Service Code</th>
+                                                <th scope="col">Item Code</th>
+                                                <th scope="col">Item Description</th>
                                                 <th scope="col">UOM</th>
                                                 <th scope="col">Quantity</th>
                                             </tr>

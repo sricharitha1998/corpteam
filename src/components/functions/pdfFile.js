@@ -4,8 +4,8 @@ import { Capitalized } from './capitalized';
 
 export const PDFfile = (data) => {
     const doc = new jsPDF();
-    // doc.text("Code\tUOM\tDescription\tQuantity", 10, 10);
 
+    // Header Information
     doc.text('Purchase Order', 20, 20);
     doc.text(`Work Order No: ${Capitalized(data.workOrderNumber)}`, 20, 30);
     doc.text(`Home Pass No: ${Capitalized(data.homePass) || ''}`, 110, 30);
@@ -13,10 +13,11 @@ export const PDFfile = (data) => {
     doc.text(`Building Area: ${Capitalized(data.buildingArea) || ''}`, 20, 40);
     doc.text(`Vendor Name: ${Capitalized(data?.vendorName) || ''}`, 20, 50);
 
-    const tableColumn = ["S.No", "Service Description", "Service Code", "UOM", "Quantity"];
-    const tableRows = [];
+    // Services Table
+    const tableColumnServices = ["S.No", "Service Description", "Service Code", "UOM", "Quantity"];
+    const tableRowsServices = [];
 
-    data && data.services.forEach((service, index) => {
+    data.services.forEach((service, index) => {
       const serviceData = [
         index + 1,
         Capitalized(service.description),
@@ -24,15 +25,23 @@ export const PDFfile = (data) => {
         Capitalized(service.uom),
         Capitalized(service.quantity),
       ];
-      tableRows.push(serviceData);
+      tableRowsServices.push(serviceData);
     });
 
-    doc.autoTable(tableColumn, tableRows, { startY: 60 });
+    doc.autoTable({
+        head: [tableColumnServices],
+        body: tableRowsServices,
+        startY: 60
+    });
 
-    const tableSupply = ["S.No", "Supply Description", "Supply Code", "UOM", "Quantity"];
-    const tableSupplyrows = [];
+    // Get the final Y position after the services table
+    const finalY = doc.lastAutoTable.finalY;
 
-    data && data.supplies.forEach((supply, index) => {
+    // Supplies Table (start after the Services table)
+    const tableColumnSupplies = ["S.No", "Supply Description", "Supply Code", "UOM", "Quantity"];
+    const tableRowsSupplies = [];
+
+    data.supplies.forEach((supply, index) => {
       const supplyData = [
         index + 1,
         Capitalized(supply.description),
@@ -40,10 +49,14 @@ export const PDFfile = (data) => {
         Capitalized(supply.uom),
         Capitalized(supply.quantity),
       ];
-      tableSupplyrows.push(supplyData);
+      tableRowsSupplies.push(supplyData);
     });
 
-    doc.autoTable(tableSupply, tableSupplyrows, { startY: 60 });
+    doc.autoTable({
+        head: [tableColumnSupplies],
+        body: tableRowsSupplies,
+        startY: finalY + 10 // Start 10 units below the end of the first table
+    });
 
     doc.save('purchase_order.pdf');
 }

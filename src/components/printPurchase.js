@@ -72,7 +72,7 @@ function PrintPurchase() {
                                             {services?.map((service, index) => (
                                                 <tr key={index}>
                                                     <td className="noBorder" style={{width:"10%", overflowWrap: "break-word"}}>{index + 1}</td>
-                                                    <td className="noBorder" style={{maxWidth: "50px", wordBreak: "break-word"}}>
+                                                    <td className="noBorder" style={{ maxWidth: "50px", overflowWrap: "break-word", wordWrap: "break-word" }}>
                                                     {service.description}
                                                     </td>
                                                     <td className="noBorder" style={{width:"20%", overflowWrap: "break-word"}}>

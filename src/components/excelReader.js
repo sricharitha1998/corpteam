@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import '../../assets/css/style.css';
+import '../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './../navbar';
+import Navbar from './navbar';
 
 const ExcelReader = () => {
     const [data, setData] = useState([]);

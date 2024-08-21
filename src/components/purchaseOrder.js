@@ -329,7 +329,7 @@ if(name==="code"){
                                         </a>
                                     </div>
                                 </div>
-<h5 className="mx-2 text-center">Supply </h5>
+<h5 className="text-center" style={{backgroundColor: "#d6d6d4", padding: "10px 0px 10px 0px"}}>Supply </h5>
 				<table className="table">
                                         <thead>
                                             <tr>

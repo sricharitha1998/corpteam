@@ -270,12 +270,12 @@ console.log("services", services)
                                                             onChange={(value) => handleServiceChange({ target: { name: 'code', value } }, index)}
                                                             placeholder="Select Code"
                                                         />
-                                                        <select className='form-control mx-2' name="code" onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.code}>
-                                                            <option value="">Select Code</option>
-                                                            {SupplyItems && SupplyItems.map((item) => (
-                                                                <option key={item._id} value={item._id}>{item.code}</option>
-                                                            ))}
-                                                        </select>
+                                                        // <select className='form-control mx-2' name="code" onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.code}>
+                                                        //     <option value="">Select Code</option>
+                                                        //     {SupplyItems && SupplyItems.map((item) => (
+                                                        //         <option key={item._id} value={item._id}>{item.code}</option>
+                                                        //     ))}
+                                                        // </select>
                               </td>
                                                     <td className="noBorder">
                                                         <input className='form-control' name="description" type='text' onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.description} />

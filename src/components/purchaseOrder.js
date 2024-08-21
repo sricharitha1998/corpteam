@@ -282,7 +282,7 @@ if(name==="code"){
                                         </div>
                                     </form>
                                 </div>
-				<h5 className="mx-2 text-center">Services</h5>
+				<h5 className="text-center" style={{backgroundColor: "#d6d6d4", padding: "10px 0px 10px 0px"}}>Services</h5>
                                 <div className="table-responsive">
                                     <table className="table">
                                         <thead>

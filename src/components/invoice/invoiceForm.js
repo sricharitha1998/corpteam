@@ -3,6 +3,7 @@ import '../../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './../navbar';
+import Footer from '../footer';
 
 function InvoiceForm() {
 
@@ -30,7 +31,7 @@ function InvoiceForm() {
                 const details = localStorage.getItem('Details');
                 formData.append("vendor_id", JSON.parse(details)._id)
 
-                const response = await fetch('/api/invoice/register', {
+                const response = await fetch('https://pms.corpteamsolution.com/api/invoice/register', {
                     method: 'POST',
                     headers: {
                         "Accept": "application/json, text/plain, */*"
@@ -124,11 +125,7 @@ function InvoiceForm() {
                     </div>
                 </div>
             </div>
-            <div className="footer">
-                <div className="copyright">
-                    <p>Copyright © Designed & Developed by <a href="" target="_blank">CorpTeam Solutions</a> <span className="current-year">2024</span></p>
-                </div>
-            </div>
+           <Footer />
         </div>
     );
 }

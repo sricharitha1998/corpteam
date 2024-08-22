@@ -1,12 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from 'xlsx';
 import Navbar from './navbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { Capitalized } from './functions/capitalized';
+import Pagination from './pagination';
+import Footer from './footer';
 
 const ExcelReader = () => {
     const [data, setData] = useState([]);
+    const [ServiceItems, setServiceItems] = useState();
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+    const [sorted, setSorted] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+    useEffect(() => {
+        async function provInfo() {
+            const serviceInfo = await fetch(`https://pms.corpteamsolution.com/api/supplyItems/allItems`);
+            const serviceRes = await serviceInfo.json();
+            setServiceItems(serviceRes)
+            setSorted(serviceRes)
+        }
+        provInfo();
+    }, []);
   
     const handleFileUpload = (event) => {
       const file = event.target.files[0];
@@ -29,7 +49,7 @@ const ExcelReader = () => {
      
       try {
 if(data.length>0){
-          const response = await fetch('/api/supplyItems/itemsInsert', {
+          const response = await fetch('https://pms.corpteamsolution.com/api/supplyItems/itemsInsert', {
               method: 'POST',
               headers: {
           "Content-Type": "application/json",
@@ -57,6 +77,20 @@ alert("fill the fields");}
   
   }
   
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+    const filtered = ServiceItems.filter(item =>
+      item.code.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    setSorted(filtered);
+    setCurrentPage(1);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = sorted.slice(indexOfFirstItem, indexOfLastItem);
+const paginate = (pageNumber) => setCurrentPage(pageNumber);
+console.log("services", ServiceItems)
 
     return (
         <div className='fontSetting'>
@@ -66,11 +100,24 @@ alert("fill the fields");}
             <div className="content-body">
                 <div className="container-fluid">
                      
-                    <div className="row page-titles">
+                <div className="row">
+            <div className="col-md-8">
+            <div className="row page-titles">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item active">Service Upload</li>
+                            <li className="breadcrumb-item active">Service List</li>
                         </ol>
                     </div>
+            </div>
+            <div className="col-md-4 mb-3">
+              <div className="input-group search-area right d-lg-inline-flex d-none">
+                <input type="text" className="form-control" placeholder="Search By Item Code" value={searchTerm}
+                  onChange={handleSearch} />
+                <span className="input-group-text">
+                  <a href="javascript:void(0);"><FontAwesomeIcon icon={faSearch} className="fontAwesomeIcons mt-1" /></a>
+                </span>
+              </div>
+            </div>
+          </div>
                     <div className="row page-titles">
                         <div className="col-lg-12">
 
@@ -114,11 +161,42 @@ alert("fill the fields");}
                                     </form>
                                 </div>
                                 
-                                <div className="row mt-4 align-items-center">
+                                <div className="card-body">
+                                    <div className="table-responsive">
+                                        <table className="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" >S.NO</th>
+                                                    <th scope="col">Item Code</th>
+                                                    <th scope="col">Item Description</th>
+                                                    <th scope="col">UOM</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {currentItems.map((pt, index) => {
+                                                    
+                                                    return (
 
-                                    <div className="col-sm-6 text-sm-right text-start">
-                                       
-                                        {/* <button type="submit" onClick={ClickSubmit} className="btn  btnColor text-white mb-2">Submit</button> */}
+                                                        <tr key={pt._id}>
+                                                            <td className="noBorder">{index + 1}</td>
+                                                            <td className="noBorder">{Capitalized(pt.code)}</td>
+                                                            <td className="noBorder">{Capitalized(pt.description)}</td>
+                                                            <td className="noBorder">{Capitalized(pt.uom)}</td>
+                                                        </tr>
+                                                    )
+                                                })}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-sm-6">
+                                            <Pagination
+                                                itemsPerPage={itemsPerPage}
+                                                totalItems={ServiceItems?.length}
+                                                paginate={paginate}
+                                                currentPage={currentPage}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -127,11 +205,7 @@ alert("fill the fields");}
                     </div>
                 </div>
             </div>
-            <div className="footer">
-                <div className="copyright">
-                    <p>Copyright © Designed & Developed by <a href="" target="_blank">CorpTeam Solutions</a> <span className="current-year">2024</span></p>
-                </div>
-            </div>
+            <Footer />
         </div>
     );
 }
@@ -166,7 +240,7 @@ export default ExcelReader;
 //     e.preventDefault();
    
 //     try {
-//         const response = await fetch('/api/supplyItems/itemsInsert', {
+//         const response = await fetch('https://pms.corpteamsolution.com/api/supplyItems/itemsInsert', {
 //             method: 'POST',
 //             headers: {
 //         "Content-Type": "application/json",

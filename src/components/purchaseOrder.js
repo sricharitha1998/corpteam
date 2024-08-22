@@ -30,7 +30,7 @@ const [ServiceItems, setServiceItems] = useState();
             const RandomCode = "CTS" + month + year + Math.floor(10 + Math.random() * 90);
             setData({ ...data, workOrderNumber: RandomCode });
 
-            const userInfo = await fetch(`/api/users/getUsers/vendor`);
+            const userInfo = await fetch(`https://pms.corpteamsolution.com/api/users/getUsers/vendor`);
             const res = await userInfo.json();
             setVendors(res?.users)
         }
@@ -42,7 +42,7 @@ const [ServiceItems, setServiceItems] = useState();
             if (location?.state?.data && location?.state?.services) {
                 setServices(location?.state?.services)
                 setData(location?.state?.data)
-                const userInfo = await fetch(`/api/vendor/getDetails/${location?.state?.data?.vendorID}`);
+                const userInfo = await fetch(`https://pms.corpteamsolution.com/api/vendor/getDetails/${location?.state?.data?.vendorID}`);
                 const res = await userInfo.json();
                 setAddress(res?.details?.address)
                 setVendorName(location?.state?.VendorName)
@@ -54,10 +54,10 @@ const [ServiceItems, setServiceItems] = useState();
     }, [location?.state])
  useEffect(() => {
       async function provInfo() {
-        const supplyInfo = await fetch(`/api/supplyItems/allItems`);
+        const supplyInfo = await fetch(`https://pms.corpteamsolution.com/api/supplyItems/allItems`);
         const res = await supplyInfo.json();
          setSupplyItems(res)
-         const serviceInfo = await fetch(`/api/serviceItems/allItems`);
+         const serviceInfo = await fetch(`https://pms.corpteamsolution.com/api/serviceItems/allItems`);
         const serviceRes = await serviceInfo.json();
          setServiceItems(serviceRes)
       }
@@ -134,7 +134,7 @@ if(name==="code"){
                 ...data,
                 [name]: SplitValue[0]
             });
-            const userInfo = await fetch(`/api/vendor/getDetails/${SplitValue[0]}`);
+            const userInfo = await fetch(`https://pms.corpteamsolution.com/api/vendor/getDetails/${SplitValue[0]}`);
             const res = await userInfo.json();
             setAddress(res?.details?.address)
             setVendorName(SplitValue[1])
@@ -172,7 +172,7 @@ if(name==="code"){
 
             // const formattedDate = new Date().toLocaleDateString();
             const payload = { ...data, services, supplies, date: new Date() };
-            const response = await fetch('/api/workOrder/insert', {
+            const response = await fetch('https://pms.corpteamsolution.com/api/workOrder/insert', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

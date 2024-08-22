@@ -4,6 +4,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../navbar';
 import { useNavigate, useLocation } from "react-router-dom";
+import Footer from '../footer';
 
 function UpdateVendor() {
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ function UpdateVendor() {
     useEffect(() => {
         const provInfo = async () => {
             if(location?.state?.id){
-                const userInfo = await fetch(`/api/users/getById/${location?.state?.id}`);
+                const userInfo = await fetch(`https://pms.corpteamsolution.com/api/users/getById/${location?.state?.id}`);
       const res = await userInfo.json();
       setInputDetails(res)
             }
@@ -56,7 +57,7 @@ function UpdateVendor() {
            
             if (validateEmail(InputDetails.email)){
                 if(!ErrMob){
-            const response = await fetch(`/api/users/changeProfile/${InputDetails?._id}` , {
+            const response = await fetch(`https://pms.corpteamsolution.com/api/users/changeProfile/${InputDetails?._id}` , {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -153,11 +154,7 @@ function UpdateVendor() {
                     </div>
                 </div>
             </div>
-            <div className="footer">
-                <div className="copyright">
-                    <p>Copyright © Designed & Developed by <a href="" target="_blank">CorpTeam Solutions</a> <span className="current-year">2024</span></p>
-                </div>
-            </div>
+            <Footer />
         </div>
     );
 }

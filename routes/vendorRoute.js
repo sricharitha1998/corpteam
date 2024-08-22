@@ -31,6 +31,6 @@ router.get('/getVendorDetails/:id', Vendor.VendorDetails);
 router.get('/getDetails/:vendorID', Vendor.GetDetails);
 router.get('/updateProfile/:id', uploadFields, Vendor.UpdateProfile);
 router.post('/updateApproval', uploadFields, Vendor.UpdateApproval);
-router.patch('/updateDocs', uploadFields, Vendor.UpdateDocs);
+router.patch('/updateDocs/:id', uploadFields, Vendor.UpdateDocs);
 
 module.exports = router;

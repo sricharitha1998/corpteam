@@ -132,6 +132,41 @@ const Vendor = {
         }
 
     },
+    UpdateDocs: async (req, res) => {
+        const methods = req.method;
+        switch (methods) {
+            case "PATCH": 
+                try {
+                    const fileData = req.files.reduce((acc, file) => { 
+                        acc[file.fieldname] = file.originalname;
+                        return acc;
+                    }, {});
+                    
+                    const document = await vendorModel.findByIdAndUpdate(req.params.id, fileData);
+                    if (!document) {
+                        return res.status(404).json({ msg: 'Document not found' });
+                    }             
+                    await userModel.findOne({ _id: req.body?.vendor_id }).then(function(doc, err) {
+                        if (err) {
+                            console.log("err", err);
+                            return next(err);
+                        }
+                        const url = `https://pms.corpteamsolution.com/VendorApproval/${document._id}`
+                        let HtmlMsg = `<div><p>Approve the ${doc?.username} service partner registration documents: <br /> <a href=${url}>View Documents</a> </p></div>`;
+                        let subject="Approve Documents For Registration";
+                        let SendToMail = "sricharitha1998@gmail.com";
+                        MailFunction(HtmlMsg, subject, SendToMail)
+                        res.json(doc);
+                    });
+            
+                    res.json({ msg: 'Document updated successfully' });
+                } catch (error) {
+                    console.error('Error handling form submission:', error);
+                    res.status(500).json({ msg: 'Server error' });
+                }
+        }
+
+    },
 };
 
 module.exports = Vendor; 

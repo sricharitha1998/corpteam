@@ -142,13 +142,13 @@ const Vendor = {
                         return acc;
                     }, {});
                     console.log("req.params.id", req.params.id)
-                    const document = await vendorModel.findByIdAndUpdate(req.params.id, fileData);
+                    const document = await vendorModel.findOneAndUpdate({ vendor_id: req.params.id }, fileData, { upsert: true });
                     
                     console.log("document", document)
                     if (!document) {
                         return res.status(404).json({ msg: 'Document not found' });
                     }             
-                    await userModel.findOne({ _id: req.body?.vendor_id }).then(function(doc, err) {
+                    await userModel.findOne({ _id: req.params.id }).then(function(doc, err) {
                         if (err) {
                             console.log("err", err);
                             return next(err);

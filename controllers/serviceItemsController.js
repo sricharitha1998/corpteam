@@ -58,16 +58,15 @@ const ServiceItems = {
                     const description = req.body.description;
                     const code = req.body.code;
 
-                   
-                    serviceItemsModel.findOne({ code }).then(function (existingUser, err) {
+                    await serviceItemsModel.findOne({ code }).then(function (existingUser, err) {
                         if (existingUser) {
                             return res.json({ message: 'That code is already in use.', status: false });
                         }
 
-                        const user = new serviceItemsModel({
+                        const itemInsert = new serviceItemsModel({
                             code, description, uom
                         });
-                        serviceItemsModel.save().then(async (item, err) => {
+                        itemInsert.save().then(async (item, err) => {
                           
                             return res.json({ status: true, item });
                             

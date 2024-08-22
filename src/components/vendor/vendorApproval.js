@@ -101,7 +101,7 @@ function VendorApproval() {
         <div className="container-fluid">
           <div className="row page-titles">
           <ol className="breadcrumb my-4 text-center">
-                            <li className="breadcrumb-item active">Vendor Approval</li>
+                            <li className="breadcrumb-item active">Service Partner Approval</li>
                         </ol>
                         </div>
                         <div className="row page-titles">

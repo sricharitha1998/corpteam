@@ -192,7 +192,7 @@ function WorkOrder() {
                         <th scope="col" onClick={handleSort}>Work Order Number <FontAwesomeIcon icon={sortOrder === 'asc' ? faAngleUp : faAngleDown} /></th>
                         {
                           getUserDetails?.role === "admin" &&
-                          <th scope="col">Vendor Name</th>
+                          <th scope="col">Service Partner Name</th>
                         }
                         <th scope="col">Home Pass Number</th>
                         <th scope="col">Route Length</th>
@@ -234,7 +234,7 @@ function WorkOrder() {
                                 ) : pt.status === "reject" ? (
                                   <span className="badge bg-danger p-2">Rejected</span>
                                 ) : getUserDetails?.role === "admin" ? (
-                                  <span className="badge bg-warning p-2">Vendor Acceptance Pending</span>
+                                  <span className="badge bg-warning p-2">Service Partner Acceptance Pending</span>
                                 ) :
                                   (
                                     <>
@@ -326,7 +326,7 @@ function WorkOrder() {
         <div className='row'>
           <div className='col-md-1'></div>
           <div className='col-md-10'>
-            <h5 className='text-center'>Change Vendor</h5>
+            <h5 className='text-center'>Change Service Partner</h5>
           </div>
           <div className='col-md-1'>
             <FontAwesomeIcon icon={faTimes} onClick={() => setVendorModal(false)} />
@@ -338,7 +338,7 @@ function WorkOrder() {
         <form>
           <div className="row col-md-12">
             <select className='form-control mx-2' name="vendorID" onChange={(e) => setVendorID(e.target.value)}>
-              <option value="">Select Vendor</option>
+              <option value="">Select Service Partner</option>
               {vendors && vendors.map((vendor) => (
                 <option key={vendor._id} value={vendor._id}>{vendor.username}</option>
               ))}

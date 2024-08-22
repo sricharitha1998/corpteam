@@ -50,7 +50,7 @@ function PrintPurchase() {
               <div className='col-md-4 mt-5'><h6>Work Order Number: {Details?.workOrderNumber}</h6></div>
               <div className='col-md-4 mt-5'><h6>Home Pass Number: {Details?.homePass}</h6></div>
               <div className='col-md-4 mt-5'><h6>Route Length: {Details?.routeLength}</h6></div>
-              <div className='col-md-4'><h6>Vendor Name: {location?.state?.VendorName}</h6></div>
+              <div className='col-md-4'><h6>Service Partner Name: {location?.state?.VendorName}</h6></div>
               <div className='col-md-4'><h6>Building Area: {Details?.buildingArea}</h6></div>
             
               </div>

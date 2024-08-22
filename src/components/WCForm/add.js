@@ -47,7 +47,7 @@ function WCForm() {
         doc.text(`Home Pass No: ${res.homePass || ''}`, 110, 30);
         doc.text(`Route Length: ${res.routeLength || ''}`, 110, 40);
         doc.text(`Building Area: ${res.buildingArea || ''}`, 20, 40);
-        doc.text(`Vendor Name: ${JSON.parse(details)?.username || ''}`, 20, 50);
+        doc.text(`Service Partner Name: ${JSON.parse(details)?.username || ''}`, 20, 50);
 
 
         const tableColumn = ["S.No", "Service Description", "Service Code", "UOM", "Quantity"];

@@ -103,7 +103,7 @@ function AddVendor() {
                      
                     <div className="row page-titles">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item active"> Add Vendor</li>
+                            <li className="breadcrumb-item active"> Add Service Partner</li>
                         </ol>
                     </div>
                     <div className="row page-titles">

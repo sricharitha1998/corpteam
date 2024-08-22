@@ -96,7 +96,7 @@ function VendorList() {
           </div>
           <div className="row page-titles">
             <ol className="breadcrumb">
-              <li className="breadcrumb-item active"> List Vendor</li>
+              <li className="breadcrumb-item active"> List Service Partners</li>
             </ol>
           </div>
           <div className="row page-titles">

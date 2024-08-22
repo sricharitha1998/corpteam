@@ -66,7 +66,7 @@ console.log("location.pathname", location.pathname)
 
       {/* <div id="main-wrapper" className="show menu-toggle"> */}
       <div className="nav-header">
-        <a href="index.html" className="brand-logo">
+        <a href="https://corpteamsolution.com/" className="brand-logo">
           <img src={Logo} width="100px" alt="Dashboard Logo" />
         </a>
         {/* <div className="nav-control" onClick={() => setMenuShow(!MenuShow)}>
@@ -170,7 +170,7 @@ console.log("location.pathname", location.pathname)
               <a className="has-arrow ai-icon" href="javascript:void(0);" aria-expanded="false">
             
                 <FontAwesomeIcon icon={faUser} className="fontAwesomeIcons mt-1"/>
-                <span className="nav-text" onClick={() => setVenodrShow(!vendorShow)}>Vendors</span>
+                <span className="nav-text" onClick={() => setVenodrShow(!vendorShow)}>Service Partner</span>
               </a>
               {(vendorShow || (location?.pathname === '/addVendor' || location?.pathname === '/vendorList')) &&
               <ul aria-expanded="false">

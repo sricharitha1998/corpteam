@@ -97,7 +97,7 @@ function UpdateVendor() {
                      
                     <div className="row page-titles">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item active">Update Vendor</li>
+                            <li className="breadcrumb-item active">Update Service Partners</li>
                         </ol>
                     </div>
                     <div className="row page-titles">

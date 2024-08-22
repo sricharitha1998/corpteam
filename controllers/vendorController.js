@@ -141,8 +141,10 @@ const Vendor = {
                         acc[file.fieldname] = file.originalname;
                         return acc;
                     }, {});
-                    
+                    console.log("req.params.id", req.params.id)
                     const document = await vendorModel.findByIdAndUpdate(req.params.id, fileData);
+                    
+                    console.log("document", document)
                     if (!document) {
                         return res.status(404).json({ msg: 'Document not found' });
                     }             
@@ -151,6 +153,7 @@ const Vendor = {
                             console.log("err", err);
                             return next(err);
                         }
+                        console.log("doc", doc)
                         const url = `https://pms.corpteamsolution.com/VendorApproval/${document._id}`
                         let HtmlMsg = `<div><p>Approve the ${doc?.username} service partner registration documents: <br /> <a href=${url}>View Documents</a> </p></div>`;
                         let subject="Approve Documents For Registration";

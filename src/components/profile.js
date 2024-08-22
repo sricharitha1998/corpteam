@@ -31,7 +31,7 @@ function Profile() {
         e.preventDefault();
        
         try {
-            const response = await fetch('https://pms.corpteamsolution.com/api/users/changeProfile/'+InputDetails?._id, {
+            const response = await fetch('/api/users/changeProfile/'+InputDetails?._id, {
                 method: 'POST',
                 headers: {
             "Content-Type": "application/json",

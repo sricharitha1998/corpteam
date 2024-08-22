@@ -24,7 +24,7 @@ function WorkOrder() {
   const [currentPage, setCurrentPage] = useState(1);
   const [getUserDetails, setUserDetails] = useState();
   const [ClosureBtn, setClosureBtn] = useState(false);
-  const itemsPerPage = 10;
+  const itemsPerPage = 25;
 
   useEffect(() => {
     async function provInfo() {
@@ -215,7 +215,7 @@ function WorkOrder() {
                         return (
 
                           <tr key={pt._id}>
-                            <td className="noBorder">{index + 1}</td>
+                            <td className="noBorder">{indexOfFirstItem + index + 1}</td>
                             <td className="noBorder">{Capitalized(pt.workOrderNumber)}</td>
                             {pt.username &&
                               <td className="noBorder">

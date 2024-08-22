@@ -17,7 +17,7 @@ function InvoiceList() {
   const [sortOrder, setSortOrder] = useState('dsc');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 25;
 
   useEffect(() => {
     async function provInfo() {
@@ -128,7 +128,7 @@ function InvoiceList() {
                     <tbody>
                       {currentItems.map((pt, index) => (
                         <tr key={pt._id}>
-                          <td className="noBorder">{index + 1}</td>
+                          <td className="noBorder">{indexOfFirstItem + index + 1}</td>
                           <td className="noBorder">{pt.wcf}</td>
                           <td className="noBorder">{pt.level1 === "approved" ? "Approved" : pt.level1 === "rejected" ? "Rejected" : "Pending"}</td>
                           <td className="noBorder">{pt.level2 === "approved" ? "Approved" : pt.level2 === "rejected" ? "Rejected" : "Pending"}</td>

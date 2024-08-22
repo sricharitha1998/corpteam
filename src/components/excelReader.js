@@ -14,13 +14,13 @@ const ExcelReader = () => {
     const [data, setData] = useState([]);
     const [ServiceItems, setServiceItems] = useState();
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
+    const itemsPerPage = 25;
     const [sorted, setSorted] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         async function provInfo() {
-            const serviceInfo = await fetch(`https://pms.corpteamsolution.com/api/supplyItems/allItems`);
+            const serviceInfo = await fetch(`/api/supplyItems/allItems`);
             const serviceRes = await serviceInfo.json();
             setServiceItems(serviceRes)
             setSorted(serviceRes)
@@ -49,7 +49,7 @@ const ExcelReader = () => {
      
       try {
 if(data.length>0){
-          const response = await fetch('https://pms.corpteamsolution.com/api/supplyItems/itemsInsert', {
+          const response = await fetch('/api/supplyItems/itemsInsert', {
               method: 'POST',
               headers: {
           "Content-Type": "application/json",
@@ -178,7 +178,7 @@ console.log("services", ServiceItems)
                                                     return (
 
                                                         <tr key={pt._id}>
-                                                            <td className="noBorder">{index + 1}</td>
+                                                            <td className="noBorder">{indexOfFirstItem + index + 1}</td>
                                                             <td className="noBorder">{Capitalized(pt.code)}</td>
                                                             <td className="noBorder">{Capitalized(pt.description)}</td>
                                                             <td className="noBorder">{Capitalized(pt.uom)}</td>
@@ -240,7 +240,7 @@ export default ExcelReader;
 //     e.preventDefault();
    
 //     try {
-//         const response = await fetch('https://pms.corpteamsolution.com/api/supplyItems/itemsInsert', {
+//         const response = await fetch('/api/supplyItems/itemsInsert', {
 //             method: 'POST',
 //             headers: {
 //         "Content-Type": "application/json",

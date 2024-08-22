@@ -17,7 +17,7 @@ function WCFList() {
     const [sortOrder, setSortOrder] = useState('dsc');
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10; // Adjust this value to set items per page
+    const itemsPerPage = 25; // Adjust this value to set items per page
   
     useEffect(() => {
       async function provInfo() {
@@ -100,7 +100,7 @@ function WCFList() {
                     <tbody>
                       {currentItems.map((pt, index) => (
                         <tr key={pt._id}>
-                          <td className="noBorder">{index + 1}</td>
+                          <td className="noBorder">{indexOfFirstItem + index + 1}</td>
                           <td className="noBorder">{pt.po}</td>
                           <td className="noBorder">{pt.level1 === "approved" ? "Approved" : pt.level1 === "rejected" ? "Rejected" : "Pending"}</td>
                           <td className="noBorder">{pt.level2 === "approved" ? "Approved" : pt.level2 === "rejected" ? "Rejected" : "Pending"}</td>

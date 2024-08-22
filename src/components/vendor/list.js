@@ -19,7 +19,7 @@ function VendorList() {
     const [sortOrder, setSortOrder] = useState('dsc');
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10; 
+    const itemsPerPage = 25; 
     
     useEffect(() => {
       async function provInfo() {
@@ -116,7 +116,7 @@ function VendorList() {
                     <tbody>
                       {currentItems.map((pt, index) => (
                         <tr key={pt._id}>
-                          <td className="noBorder">{index + 1}</td>
+                          <td className="noBorder">{indexOfFirstItem + index + 1}</td>
                           <td className="noBorder">{Capitalized(pt.username)}</td>
                           <td className="noBorder">{Capitalized(pt.email)}</td>
                           <td className="noBorder">{pt.MobNumber}</td>

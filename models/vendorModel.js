@@ -18,7 +18,7 @@ const VenorSchema = new Schema({
     vendor_id:String,
     address: String,
     gst: String,
-    companyTeam: String,
+    // companyTeam: String,
     approvals: Array
 });
 

@@ -21,7 +21,7 @@ const Vendor = {
                         vendor_id: req.body?.vendor_id,
                         gst: req.body?.gst,
                         address: req.body?.address,
-                        companyTeam: req.body?.companyTeam,
+                        // companyTeam: req.body?.companyTeam,
                     };
 
                     const VendorRegister = new vendorModel({

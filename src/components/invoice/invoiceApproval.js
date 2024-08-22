@@ -89,7 +89,7 @@ function InvoiceApproval() {
 
             const result = await response.json();
             if(result){
-                alert("Approval Submitted Successfully")
+                alert("Feedback Submitted Successfully")
             }
         }else{
             alert("Fill all file status")

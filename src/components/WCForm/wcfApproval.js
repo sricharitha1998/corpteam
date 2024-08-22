@@ -82,7 +82,7 @@ console.log("details", details)
 
             const result = await response.json();
             console.log('Checkboxes submitted successfully:', result);
-            alert("Approval Submitted Successfully")
+            alert("Feedback Submitted Successfully")
         }else{
             alert("Fill all file status")
         }

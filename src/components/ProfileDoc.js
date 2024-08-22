@@ -39,7 +39,7 @@ function ProfileDocs() {
 
     const CommonFunction = async () => {
 console.log("inputDetails", inputDetails);
-        if(inputDetails?.vendorCode && inputDetails?.financialDetails && inputDetails?.gst && inputDetails?.roc && inputDetails?.partnerShip && inputDetails?.companyTeam && inputDetails?.photo && inputDetails?.pancard && inputDetails?.address && inputDetails?.companyDetails){
+        if(inputDetails?.vendorCode && inputDetails?.financialDetails && inputDetails?.gst && inputDetails?.roc && inputDetails?.partnerShip && inputDetails?.photo && inputDetails?.pancard && inputDetails?.address && inputDetails?.companyDetails){
 
         const formData = new FormData();
         for (const [key, value] of Object.entries(inputDetails)) {
@@ -169,7 +169,7 @@ console.log("inputDetails", inputDetails);
                                                     </div>
                                                 </div>
                                                 <div className="mb-3 row">
-                                                    <label className="col-lg-4 col-form-label" for="validationCustom02">Partnership Lead / AOE / MOA <span className="text-danger">*</span>
+                                                    <label className="col-lg-4 col-form-label" for="validationCustom02">Partnership Deed / AOA / MOA <span className="text-danger">*</span>
                                                     </label>
                                                     <div className="col-lg-6">
                                                     <input
@@ -181,7 +181,7 @@ console.log("inputDetails", inputDetails);
                                                     />
                                                     </div>
                                                 </div>
-                                                <div className="mb-3 row">
+                                                {/* <div className="mb-3 row">
                                                     <label className="col-lg-4 col-form-label" for="validationCustom02">Company Team <span className="text-danger">*</span>
                                                     </label>
                                                     <div className="col-lg-6">
@@ -193,7 +193,7 @@ console.log("inputDetails", inputDetails);
                                                         onChange={onChangeFunction}
                                                     ></textarea>
                                                     </div>
-                                                </div>
+                                                </div> */}
                                                 <div className="mb-3 row">
                                                     <label className="col-lg-4 col-form-label" for="validationCustom05">Photo  <span className="text-danger">*</span>
                                                     </label>

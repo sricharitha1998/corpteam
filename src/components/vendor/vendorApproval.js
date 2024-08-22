@@ -67,7 +67,7 @@ function VendorApproval() {
     const handleSubmit = async () => {
         try {
             const isApproved = approvals.every(item => item.status);
-            if(isApproved && approvals.length === 9){
+            if(isApproved && approvals.length === 8){
                 console.log("detailssss", details._id)
             const response = await fetch(`/api/vendor/updateApproval`, {
                 method: 'POST',
@@ -84,7 +84,7 @@ function VendorApproval() {
 
             const result = await response.json();
             if(result){
-                alert("Approval Submitted Successfully")
+                alert("Feedback Submitted Successfully")
                 window.location.reload();
             }
         }else{
@@ -190,7 +190,7 @@ function VendorApproval() {
                                 <td className="noBorder"><input type="text" className='form-control' name="photo" onChange={handleCommentChange} /></td>
                             </tr>
                             <tr>
-                                <td className="noBorder">Partnership Lead / AOE / MOA</td>
+                                <td className="noBorder">Partnership Deed / AOE / MOA</td>
                                 <td className="noBorder">
                                     <a
                                         href={`/api/public/documents/${details?.partnerShip}`}
@@ -227,7 +227,7 @@ function VendorApproval() {
                                 </td>
                                 <td className="noBorder"><input type="text" className='form-control' name="pancard" onChange={handleCommentChange} /></td>
                             </tr>
-                            <tr>
+                            {/* <tr>
                                 <td className="noBorder">Company Team</td>
                                 <td className="noBorder">
                                         {details?.companyTeam}
@@ -239,7 +239,7 @@ function VendorApproval() {
                                     <input type="radio" name="companyTeam" value="Not Approved" onChange={handleCheckboxChange} />
                                 </td>
                                 <td className="noBorder"><input type="text" className='form-control' name="companyTeam" onChange={handleCommentChange} /></td>
-                            </tr>
+                            </tr> */}
                             <tr>
                                 <td className="noBorder">Company Address</td>
                                 <td className="noBorder">

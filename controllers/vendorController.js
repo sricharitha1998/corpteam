@@ -159,7 +159,7 @@ const Vendor = {
                         res.json(doc);
                     });
             
-                    res.json({ msg: 'Document updated successfully' });
+                    // res.json({ msg: 'Document updated successfully' });
                 } catch (error) {
                     console.error('Error handling form submission:', error);
                     res.status(500).json({ msg: 'Server error' });

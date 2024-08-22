@@ -66,7 +66,7 @@ function VendorViewDetails() {
         }
 
         const response = await fetch('https://pms.corpteamsolution.com/api/vendor/updateDocs', {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 "Accept": "application/json, text/plain, */*"
             },

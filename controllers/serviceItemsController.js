@@ -49,6 +49,36 @@ const ServiceItems = {
         }
 
     },
+    singleInsert: async (req, res) => {
+        const methods = req.method;
+        switch (methods) {
+            case "POST":
+                try {
+                    const uom = req.body.uom;
+                    const description = req.body.description;
+                    const code = req.body.code;
+
+                   
+                    serviceItemsModel.findOne({ code }).then(function (existingUser, err) {
+                        if (existingUser) {
+                            return res.json({ message: 'That code is already in use.', status: false });
+                        }
+
+                        const user = new serviceItemsModel({
+                            code, description, uom
+                        });
+                        serviceItemsModel.save().then(async (item, err) => {
+                          
+                            return res.json({ status: true, item });
+                            
+                        });
+                    })
+                } catch (err) {
+                    return res.status(500).json({ msg: err.message });
+                }
+        }
+
+    },
 };
 
 module.exports = ServiceItems;

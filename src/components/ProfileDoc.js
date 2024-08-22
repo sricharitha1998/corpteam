@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import '../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './navbar';
 import VendorViewDetails from "./vendor/viewDetails";
 
 function ProfileDocs() {
@@ -92,7 +91,7 @@ console.log("inputDetails", inputDetails);
                 <div className="container-fluid">
                     <div className="row page-titles">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item active">Vendor Profile Documents</li>
+                            <li className="breadcrumb-item active ">Service Partner Profile Documents</li>
                         </ol>
                     </div>
                     <div className="row page-titles">

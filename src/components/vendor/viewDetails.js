@@ -38,11 +38,18 @@ function VendorViewDetails() {
     }, []);
 
     const onChangeFunction = (e) => {
-        const { name, files: selectedFiles } = e.target;
+        const { name, files: selectedFiles, value } = e.target;
+        if(selectedFiles ){
         setInputDetails((prevDetails) => ({
             ...prevDetails,
             [name]: selectedFiles[0],
         }));
+    }else{
+        setInputDetails((prevDetails) => ({
+            ...prevDetails,
+            [name]: [value],
+        }));
+    }
     };
 
     const CommonFunction = async () => {
@@ -58,7 +65,7 @@ function VendorViewDetails() {
             }
         }
 
-        const response = await fetch('/api/vendor/updateDocs', {
+        const response = await fetch('https://pms.corpteamsolution.com/api/vendor/updateDocs', {
             method: 'POST',
             headers: {
                 "Accept": "application/json, text/plain, */*"
@@ -76,14 +83,10 @@ function VendorViewDetails() {
 
     return (
         <div className='fontSetting'>
-            <div className="content-body">
+            <div className="">
                 <div className="container-fluid">
 
-                    <div className="row page-titles">
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item active">Service Partner Document Status </li>
-                        </ol>
-                    </div>
+                    
                     <div className="row page-titles">
                         <div className="col-lg-12">
                             <div className="card-body">
@@ -114,15 +117,24 @@ function VendorViewDetails() {
                                                         <th className="noBorder">Partner Ship Deed / AOA</th>
                                                         : approval.key === "pancard" ?
                                                         <th className="noBorder">Pancard</th>
-                                                        : approval.key === "address	" ?
+                                                        : approval.key === "address" ?
                                                         <th className="noBorder">Company Address</th>
-                                                        : approval.key === "companyTeam	" ?
-                                                        <th className="noBorder">Company Details</th>
+                                                        : approval.key === "companyDetails" ?
+                                                        <th className="noBorder">Others</th>
                                                          : null }
                                                         
                                                         <td className="noBorder">{Capitalized(approval.status)}</td>
                                                         <td className="noBorder">{approval.comments ? approval.comments : "No Comments"}</td>
                                                         <td className="noBorder">{approval.status !== "Approved" && (
+                                                            approval.key === "address" || approval.key === "companyDetails" || approval.key === "gst" ? 
+                                                            <input
+                                                            type="text"
+                                                            className="inputFiled form-control"
+                                                            name={approval.key}
+                                                            onChange={onChangeFunction}
+                                                            required
+                                                        />
+                                                            :
                                                             <input
                                                                 type="file"
                                                                 className="inputFiled form-control"
@@ -154,7 +166,6 @@ function VendorViewDetails() {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

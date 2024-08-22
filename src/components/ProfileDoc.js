@@ -4,6 +4,7 @@ import '../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './navbar';
+import VendorViewDetails from "./vendor/viewDetails";
 
 function ProfileDocs() {
 
@@ -18,7 +19,7 @@ function ProfileDocs() {
         async function fetchData() {
             const getDetails = localStorage.getItem('Details');
             setDetails(JSON.parse(getDetails))
-            const userInfo = await fetch(`/api/vendor/getDetails/${JSON.parse(getDetails)?._id}`);
+            const userInfo = await fetch(`https://pms.corpteamsolution.com/api/vendor/getDetails/${JSON.parse(getDetails)?._id}`);
             const res = await userInfo.json();
             setVendorDetails(res?.details)
             const allApproved = res?.details?.approvals.every(approval => approval.status !== "Approved");
@@ -55,7 +56,7 @@ console.log("inputDetails", inputDetails);
         formData.append('dateTime', date.toISOString());
         formData.append("vendor_id", details?._id)
 
-        const response = await fetch('/api/vendor/register', {
+        const response = await fetch('https://pms.corpteamsolution.com/api/vendor/register', {
             method: 'POST',
             headers: {
                 "Accept": "application/json, text/plain, */*"
@@ -99,8 +100,11 @@ console.log("inputDetails", inputDetails);
                             <div className="card-body">
                             {VendorDetails ?
                                 !ApprovalStatus ?
-                                
+                                <>
                                         <p className="text-center text-danger">**Approval Rejected**</p>
+
+                                        <VendorViewDetails />
+                                        </>
                                         
                                     :
                                     <>

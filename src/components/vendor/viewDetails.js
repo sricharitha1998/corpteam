@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import '../../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './../navbar';
 import Footer from '../footer';
 import { Capitalized } from '../functions/capitalized';
 
@@ -77,7 +76,6 @@ function VendorViewDetails() {
 
   return (
     <div className='fontSetting'>
-      <Navbar />
       <div className="content-body">
         <div className="container-fluid">
           

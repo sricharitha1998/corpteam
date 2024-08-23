@@ -1,4 +1,10 @@
-
+.table-cell {
+  max-width: 200px; /* Set your desired max-width */
+  word-wrap: break-word; /* Break long words */
+  white-space: normal; /* Allow text to wrap to the next line */
+  overflow: hidden; /* Hide any overflowing content */
+  text-overflow: ellipsis; /* Optional: Adds "..." to indicate overflow */
+}
 :root {
   --primary: #eb8153;
   --secondary: #6418c3;

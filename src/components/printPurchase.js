@@ -3,21 +3,21 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import '../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './navbar';
-import Footer from './footer';
-import { PDFfile } from './functions/pdfFile';
+
 
 function PrintPurchase() {
     const location = useLocation();
     const navigate = useNavigate();
    
     const [services, setServices] = useState()
+    const [supplies, setSupplies] = useState()
     const [Details, setDetails] = useState()
     
     useEffect(() => {
         if(location?.state?.data && location?.state?.services){
             setServices(location?.state?.services)
             setDetails(location?.state?.data)
+            setSupplies(location?.state?.supplies)
         }
     }, [location?.state])
 
@@ -56,7 +56,7 @@ function PrintPurchase() {
               </div>
                                       
                                 </div>
-
+                                <h4 className='text-center'>Services</h4>
                                 <div className="table-responsive">
                                     <table className="table">
                                         <thead>
@@ -72,7 +72,7 @@ function PrintPurchase() {
                                             {services?.map((service, index) => (
                                                 <tr key={index}>
                                                     <td className="noBorder">{index + 1}</td>
-                                                    <td className="noBorder">
+                                                    <td className="noBorder table-cell">
                                                     {service.description}
                                                     </td>
                                                     <td className="noBorder">
@@ -89,11 +89,45 @@ function PrintPurchase() {
                                         </tbody>
                                     </table>
                                 </div>
+
+                                <h4 className='text-center'>Supplies</h4>
+                                <div className="table-responsive">
+                                    <table className="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">S.NO</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Code</th>
+                                                <th scope="col">UOM</th>
+                                                <th scope="col">Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {supplies?.map((supply, index) => (
+                                                <tr key={index}>
+                                                    <td className="noBorder">{index + 1}</td>
+                                                    <td className="noBorder">
+                                                    {supply.description}
+                                                    </td>
+                                                    <td className="noBorder">
+                                                        {supply.code}
+                                                    </td>
+                                                    <td className="noBorder">
+                                                       {supply.uom}
+                                                    </td>
+                                                    <td className="noBorder" >
+                                                        {supply.quantity}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             
                                 <div className="row mt-4 align-items-center">
 
                                     <div className="col-sm-6 text-sm-right text-start">
-                                        <a href="javascript:void(0);" className="btn btnColor text-white mb-2" onClick={() => navigate("/purchaseOrder", {state: {data: Details, services, VendorName: location?.state?.VendorName }})}>
+                                        <a href="javascript:void(0);" className="btn btnColor text-white mb-2" onClick={() => navigate("/purchaseOrder", {state: {data: Details, services, VendorName: location?.state?.VendorName, supplies }})}>
                                         Back
                                         </a>
                                         <a href="javascript:void(0);" className="btn text-white btnColor2 ms-4 mb-2" onClick={handlePrint}>Print

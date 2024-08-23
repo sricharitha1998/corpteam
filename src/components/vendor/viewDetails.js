@@ -11,7 +11,8 @@ function VendorViewDetails() {
     const [inputDetails, setInputDetails] = useState({});
     const [approvals, setApprovals] = useState([]);
     const [id, setId] = useState(null);
-
+    const [Error, setError] = useState();
+    
     useEffect(() => {
         const ProvInfo = async () => {
             const getDetails = localStorage.getItem('Details');
@@ -45,15 +46,19 @@ function VendorViewDetails() {
             [name]: selectedFiles[0],
         }));
     }else{
+        if(name==="gst"){
+            validateGST(value);
+        }else{
         setInputDetails((prevDetails) => ({
             ...prevDetails,
             [name]: [value],
         }));
     }
+    }
     };
 
     const CommonFunction = async () => {
-
+        if(Error === ""){
         const formData = new FormData();
         for (const [key, value] of Object.entries(inputDetails)) {
             if (value instanceof File) {
@@ -65,7 +70,7 @@ function VendorViewDetails() {
             }
         }
 
-        const response = await fetch('https://pms.corpteamsolution.com/api/vendor/updateDocs', {
+        const response = await fetch(`https://pms.corpteamsolution.com/api/vendor/updateDocs/${id}`, {
             method: 'PATCH',
             headers: {
                 "Accept": "application/json, text/plain, */*"
@@ -79,25 +84,45 @@ function VendorViewDetails() {
             alert("Vendor updated successfully");
             navigate("/login", { state: { role: "vendor" } });
         }
+    }else{
+        alert("Enter Valid GST Number")
     }
+    }
+
+    const validateGST = (gstNumber) => {
+        // Regular expression to validate GST number
+        const gstRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+    
+        if (gstRegex.test(gstNumber)) {
+            setInputDetails((prevDetails) => ({
+                ...prevDetails,
+                gst: gstNumber,
+            }));
+            setError("")
+        } else {
+          setError('Invalid GST number');
+          
+        }
+      };
 
     return (
         <div className='fontSetting'>
             <div className="">
                 <div className="container-fluid">
 
-                    
                     <div className="row page-titles">
                         <div className="col-lg-12">
                             <div className="card-body">
+                                <p className='text-danger'>{Error}</p>
                                 <div className="table-responsive">
                                     <table className="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">S.NO</th>
+                                                
                                                 <th scope="col">Document</th>
                                                 <th scope="col">Status  </th>
                                                 <th scope="col">Comments</th>
+                                                <th scope="col">File Upload</th>
                                             </tr>
                                         </thead>
                                         <tbody>

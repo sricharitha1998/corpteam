@@ -17,10 +17,12 @@ const ExcelReader = () => {
     const itemsPerPage = 25;
     const [sorted, setSorted] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [InputDetails, setInputDetails] = useState();
+  const [activeTab, setActiveTab] = useState('bulk');
 
     useEffect(() => {
         async function provInfo() {
-            const serviceInfo = await fetch(`/api/supplyItems/allItems`);
+            const serviceInfo = await fetch(`https://pms.corpteamsolution.com/api/supplyItems/allItems`);
             const serviceRes = await serviceInfo.json();
             setServiceItems(serviceRes)
             setSorted(serviceRes)
@@ -37,7 +39,7 @@ const ExcelReader = () => {
         const workbook = XLSX.read(e.target.result, { type: 'array' });
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
-        console.log("jsonData", jsonData)
+        // console.log("jsonData", jsonData)
         setData(jsonData);
       };
       reader.readAsArrayBuffer(file);
@@ -49,7 +51,7 @@ const ExcelReader = () => {
      
       try {
 if(data.length>0){
-          const response = await fetch('/api/supplyItems/itemsInsert', {
+          const response = await fetch('https://pms.corpteamsolution.com/api/supplyItems/itemsInsert', {
               method: 'POST',
               headers: {
           "Content-Type": "application/json",
@@ -90,7 +92,52 @@ alert("fill the fields");}
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = sorted.slice(indexOfFirstItem, indexOfLastItem);
 const paginate = (pageNumber) => setCurrentPage(pageNumber);
-console.log("services", ServiceItems)
+// console.log("services", ServiceItems)
+
+const SubmitSingleFile = async (e) => {
+  e.preventDefault();
+  try {
+      if(InputDetails?.uom && InputDetails?.code && InputDetails?.description){
+      
+      const response = await fetch('https://pms.corpteamsolution.com/api/supplyItems/singleInsert' , {
+          method: 'POST',
+          headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json, text/plain, */*"
+          },
+          body: JSON.stringify(InputDetails),
+      });
+
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      if (result.status === true) {
+          // localStorage.setItem('Details', JSON.stringify(result));
+          alert("Service Item Inserted Successfully");
+          window.location.reload();
+      }else if(result.status === false){
+          alert("Service Item Already Exists")
+      }
+  }else{
+      alert("Fill all fields")
+  }
+
+  } catch (error) {
+      console.error('Error uploading files:', error);
+  }
+};
+
+let name, value;
+    const ChangeDetails = (event) => {
+        name = event.target.name;
+        value = event.target.value;        
+        setInputDetails({
+            ...InputDetails,
+            [name]: value
+        })
+    }
 
     return (
         <div className='fontSetting'>
@@ -108,7 +155,88 @@ console.log("services", ServiceItems)
                         </ol>
                     </div>
             </div>
-            <div className="col-md-4 mb-3">
+           
+          </div>
+                    <div className="row page-titles">
+                        <div className="col-lg-12">
+
+                            <div className="card-body">
+                                <div className="form-validation">
+                                <ul className="nav nav-tabs">
+                                        <li className="nav-item">
+                                            <a 
+                                                className={`nav-link ${activeTab === 'bulk' ? 'active' : ''}`}
+                                                onClick={() => setActiveTab('bulk')}
+                                                href="#"
+                                            >
+                                                Bulk Upload
+                                            </a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a 
+                                                className={`nav-link ${activeTab === 'single' ? 'active' : ''}`}
+                                                onClick={() => setActiveTab('single')}
+                                                href="#"
+                                            >
+                                                Single Upload
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <form className="needs-validation" novalidate="">
+                                    <div className="row">
+                                            <div className="col-xl-12">
+                                              <br />
+                                                {activeTab === 'bulk' && (
+                                                    <div className="mb-3 row">
+                                                        <label className="col-lg-4 col-form-label">Upload Excel<span className="text-danger">*</span></label>
+                                                        <div className="col-lg-6">
+                                                            <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} className="form-control" />
+                                                        </div>
+                                                        <div className='row'>
+                                                            <div className='col-md-2'>
+                                                            <button type="submit" onClick={ClickSubmit} className="btn  btnColor text-white mb-2">Submit</button>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                )}
+
+                                                {activeTab === 'single' && (
+                                                    <>
+                                                    <br />
+                                                        <div className="mb-3 row">
+                                                            <label className="col-lg-4 col-form-label">Item Code<span className="text-danger">*</span></label>
+                                                            <div className="col-lg-6">
+                                                                <input type="text" className="form-control" name="code" placeholder="Enter Item Code" onChange={ChangeDetails} />
+                                                            </div>
+                                                        </div>
+                                                        <div className="mb-3 row">
+                                                            <label className="col-lg-4 col-form-label">Item Description<span className="text-danger">*</span></label>
+                                                            <div className="col-lg-6">
+                                                                <input type="text" className="form-control" placeholder="Enter Item Description" name="description" onChange={ChangeDetails}/>
+                                                            </div>
+                                                        </div>
+                                                        <div className="mb-3 row">
+                                                            <label className="col-lg-4 col-form-label">UOM<span className="text-danger">*</span></label>
+                                                            <div className="col-lg-6">
+                                                                <input type="text" className="form-control" placeholder="Enter UOM" name="uom" onChange={ChangeDetails}/>
+                                                            </div>
+                                                        </div>
+                                                        <button type="submit" onClick={SubmitSingleFile} className="btn  btnColor text-white mb-2">Submit</button>
+                                                    </>
+
+                                                )}
+
+                                               
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                                <div className="card-body">
+                                  <div className='row'>
+                                  <div className="col-md-8 mb-3"></div>
+                                  <div className="col-md-4 mb-3">
               <div className="input-group search-area right d-lg-inline-flex d-none">
                 <input type="text" className="form-control" placeholder="Search By Item Code" value={searchTerm}
                   onChange={handleSearch} />
@@ -117,51 +245,7 @@ console.log("services", ServiceItems)
                 </span>
               </div>
             </div>
-          </div>
-                    <div className="row page-titles">
-                        <div className="col-lg-12">
-
-                            <div className="card-body">
-                                <div className="form-validation">
-                                    <form className="needs-validation" novalidate="">
-                                        <div className="row">
-                                            <div className="col-xl-12">
-                                                <div className="mb-3 row">
-                                                    <label className="col-lg-4 col-form-label">Upload Excel<span className="text-danger">*</span>
-                                                        
-                                                    </label>
-                                                    <div className="col-lg-6">
-                                                    <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} />
-                                                    </div>
-                                                </div>
-                                               
-                                                <table>
-        <thead>
-          <tr>
-            {data[0] && Object.keys(data[0]).map((key) => (
-              <th key={key}>{key}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, index) => (
-            <tr key={index}>
-              {Object.values(row).map((value, i) => (
-                <td key={i}>{value}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-<button type="submit" onClick={ClickSubmit} className="btn  btnColor text-white mb-2">Submit</button>
-    
-                                            </div>
-                                            
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                                <div className="card-body">
+                                  </div>
                                     <div className="table-responsive">
                                         <table className="table">
                                             <thead>
@@ -240,7 +324,7 @@ export default ExcelReader;
 //     e.preventDefault();
    
 //     try {
-//         const response = await fetch('/api/supplyItems/itemsInsert', {
+//         const response = await fetch('https://pms.corpteamsolution.com/api/supplyItems/itemsInsert', {
 //             method: 'POST',
 //             headers: {
 //         "Content-Type": "application/json",

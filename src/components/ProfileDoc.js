@@ -38,8 +38,12 @@ function ProfileDocs() {
     }, []);
 
     const CommonFunction = async () => {
-console.log("inputDetails", inputDetails);
+
         if(inputDetails?.vendorCode && inputDetails?.financialDetails && inputDetails?.gst && inputDetails?.roc && inputDetails?.partnerShip && inputDetails?.photo && inputDetails?.pancard && inputDetails?.address && inputDetails?.companyDetails){
+
+            const gstRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+    
+        if (gstRegex.test(inputDetails?.gst)) {
 
         const formData = new FormData();
         for (const [key, value] of Object.entries(inputDetails)) {
@@ -69,6 +73,9 @@ console.log("inputDetails", inputDetails);
             alert("Vendor registered successfully");
             navigate("/login", { state: { role: "vendor" } });
         }
+    }else{
+        alert("Enter Valid GST Number")
+    }
     }else{
         alert("Fill All The Fields")
     }

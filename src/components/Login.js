@@ -31,7 +31,7 @@ const LoginComponent = () => {
       const Login = async (event) => {
         event.preventDefault();
         if (validateEmail(InputDetails.email) && InputDetails?.password) {
-          const response = await fetch('/api/users/login', {
+          const response = await fetch('https://pms.corpteamsolution.com/api/users/login', {
             method: 'POST',
             headers: {
               "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const LoginComponent = () => {
           if (response?.status === 200) {
             const data = await response.json();
             if(data){
-            const userInfo = await fetch(`/api/vendor/getDetails/${data?.details?._id}`);
+            const userInfo = await fetch(`https://pms.corpteamsolution.com/api/vendor/getDetails/${data?.details?._id}`);
                 const res = await userInfo.json();
                 
             const allApproved = res?.details?.approvals && res?.details?.approvals.every(approval => approval.status === "Approved");
@@ -100,9 +100,9 @@ const LoginComponent = () => {
                           <button type="submit" onClick={Login} className="btn btnColor text-white btn-block">Sign In</button>
                         </div>
                       </form>
-                      <div className="new-account mt-3">
+                      {/* <div className="new-account mt-3">
                         <p >Don't have an account? <a className="colorText" href="/register">Sign up</a></p>
-                      </div> 
+                      </div>  */}
                     </div>
                   </div>
                 </div>

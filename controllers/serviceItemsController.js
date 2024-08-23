@@ -54,7 +54,8 @@ const ServiceItems = {
         switch (methods) {
             case "POST":
                 try {
-                    const uom = req.body.uom;
+                    //console.log("req.body", req.body);
+const uom = req.body.uom;
                     const description = req.body.description;
                     const code = req.body.code;
 
@@ -64,13 +65,12 @@ const ServiceItems = {
                             return res.json({ message: 'That code is already in use.', status: false });
                         }
 
-                        const user = new serviceItemsModel({
+                         const itemInsert = new serviceItemsModel({
                             code, description, uom
                         });
-                        serviceItemsModel.save().then(async (item, err) => {
+                        itemInsert.save().then(async (item, err) => {
                           
-                            return res.json({ status: true, item });
-                            
+                            return res.json({ status: true, item });                            
                         });
                     })
                 } catch (err) {

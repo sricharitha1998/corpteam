@@ -106,7 +106,6 @@ const ExcelService = () => {
             const result = await response.json();
             console.log("result", result)
             if (result.status === true) {
-                // localStorage.setItem('Details', JSON.stringify(result));
                 alert("Service Item Inserted Successfully");
                 window.location.reload();
             }else if(result.status === false){

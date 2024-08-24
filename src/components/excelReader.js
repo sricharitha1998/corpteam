@@ -67,8 +67,7 @@ if(data){
           const result = await response.json();
           console.log("result", result)
           if(result){
-              localStorage.setItem('Details', JSON.stringify(result));
-              alert("Profile Updated Successfully");
+              alert("Supply Items Inserted Successfully");
               window.location.reload();
           }
           }else{
@@ -115,7 +114,7 @@ const SubmitSingleFile = async (e) => {
       const result = await response.json();
       if (result.status === true) {
           // localStorage.setItem('Details', JSON.stringify(result));
-          alert("Supply Item Inserted Successfully");
+          alert("Supply Items Inserted Successfully");
           window.location.reload();
       }else if(result.status === false){
           alert("Supply Item Already Exists")

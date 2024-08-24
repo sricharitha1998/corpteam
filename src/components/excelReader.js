@@ -50,7 +50,7 @@ const ExcelReader = () => {
       e.preventDefault();
      
       try {
-if(data.length>0){
+if(data){
           const response = await fetch('https://pms.corpteamsolution.com/api/supplyItems/itemsInsert', {
               method: 'POST',
               headers: {
@@ -115,10 +115,10 @@ const SubmitSingleFile = async (e) => {
       const result = await response.json();
       if (result.status === true) {
           // localStorage.setItem('Details', JSON.stringify(result));
-          alert("Service Item Inserted Successfully");
+          alert("Supply Item Inserted Successfully");
           window.location.reload();
       }else if(result.status === false){
-          alert("Service Item Already Exists")
+          alert("Supply Item Already Exists")
       }
   }else{
       alert("Fill all fields")

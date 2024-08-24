@@ -2,13 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './../navbar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import { useLocation, useNavigate } from 'react-router-dom';
-import Pagination from '../pagination';
 import { useParams } from 'react-router-dom';
-import Footer from '../footer';
 
 function InvoiceApproval() {
     const { id, level } = useParams();

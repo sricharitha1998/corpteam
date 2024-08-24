@@ -6,6 +6,8 @@ import 'bootstrap-select/dist/css/bootstrap-select.min.css';
 import dashboardLogo from '../assets/img/logo/dashboard-logo.png';
 import employeeIcon from '../assets/img/icons/employee.png';
 import serviceProviderIcon from '../assets/img/icons/service-provider.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
   return (
@@ -45,13 +47,16 @@ const Home = () => {
                           &nbsp;Service Partner
                         </a>
                       </div>
+                      <a className="text-center mt-3 text-dark" style={{textDecoration:"none"}} href='https://corpteamsolution.com/'> <FontAwesomeIcon icon={faAngleLeft} className='mx-2' />Redirect to company page</a>
                     </div>
+                    
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        
       </div>
     </div>
   );

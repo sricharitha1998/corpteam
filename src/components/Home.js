@@ -36,7 +36,7 @@ const Home = () => {
                     </h4>
                     <div className="row pt-sm-4 pt-3 align-items-center">
                       <div className="col-sm-6 mb-sm-0 mb-3">
-                        <a href="#" className="btn d-block btn-lg" style={{backgroundColor:"#004377", color: "white", }}>
+                        <a href="/EmpLogin" className="btn d-block btn-lg" style={{backgroundColor:"#004377", color: "white", }}>
                           <img src={employeeIcon} width="30px" alt="Employee Icon"/>
                           &nbsp;&nbsp;Employee
                         </a>

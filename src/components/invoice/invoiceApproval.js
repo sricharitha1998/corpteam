@@ -98,7 +98,7 @@ function InvoiceApproval() {
       <div className="m-5">
         <div className="container-fluid">
         <div className="row page-titles">
-          <ol className="breadcrumb my-4 text-center">
+          <ol className="breadcrumb text-center">
                             <li className="breadcrumb-item active">Invoice Approval</li>
                         </ol>
                         </div>

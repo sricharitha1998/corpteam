@@ -36,7 +36,7 @@ function WorkOrder() {
       setVendors(getAllVendors?.users)
       setUserDetails(userDetails)
       let res;
-      if (userDetails?.role === "admin") {
+      if (userDetails?.role === "admin" || userDetails?.role === "employee") {
         const userInfo = await fetch(`https://pms.corpteamsolution.com/api/workOrder/getAll`);
         res = await userInfo.json();
         if (res) {
@@ -191,7 +191,7 @@ function WorkOrder() {
                         <th scope="col" >S.NO</th>
                         <th scope="col" onClick={handleSort}>Work Order Number <FontAwesomeIcon icon={sortOrder === 'asc' ? faAngleUp : faAngleDown} /></th>
                         {
-                          getUserDetails?.role === "admin" &&
+                          (getUserDetails?.role === "admin" || getUserDetails?.role === "employee") &&
                           <th scope="col">Service Partner Name</th>
                         }
                         <th scope="col">Aging Days</th>
@@ -234,7 +234,7 @@ function WorkOrder() {
                                   <span className="badge bg-success p-2">Accepted</span>
                                 ) : pt.status === "reject" ? (
                                   <span className="badge bg-danger p-2">Rejected</span>
-                                ) : getUserDetails?.role === "admin" ? (
+                                ) : (getUserDetails?.role === "admin" || getUserDetails?.role === "employee") ? (
                                   <span className="badge bg-warning p-2">Service Partner Acceptance Pending</span>
                                 ) :
                                   (
@@ -245,7 +245,7 @@ function WorkOrder() {
                                   )}
                             </td>
                             <td className="noBorder"><FontAwesomeIcon icon={faDownload} onClick={(event) => DownloadPDF(pt._id, event, pt.username ? pt.username : getUserDetails?.username)} /></td>
-                            {getUserDetails?.role !== "admin" &&
+                            {(getUserDetails?.role !== "admin" || getUserDetails?.role !== "employee") &&
                               <td className="noBorder">
                                 {pt.status === "accept" ?
                                   <button className="btn btn-sm btn-primary" disabled={ClosureBtn} onClick={() => navigate("/wcform", { state: { id: pt._id } })}>Closure </button>

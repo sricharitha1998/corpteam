@@ -95,7 +95,7 @@ console.log("details", details)
       <div className="m-5">
         <div className="container-fluid">
         <div className="row page-titles">
-          <ol className="breadcrumb my-4 text-center">
+          <ol className="breadcrumb text-center">
                             <li className="breadcrumb-item active">Work Closure Form Approval</li>
                         </ol>
                         </div>

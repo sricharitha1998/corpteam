@@ -29,6 +29,9 @@ import Register from './components/register'
 import ExcelReader from './components/excelReader';
 import ExcelService from './components/excelService';
 import VendorProfile from './components/vendor/vendorProfile';
+import EmployeeList from './components/employee/list';
+import AddEmployee from './components/employee/add';
+import EmployeeLogin from './components/empLogin';
 
 function App() {
     return ( 
@@ -62,7 +65,10 @@ function App() {
                 <Route path="/ExcelReader" element={<ExcelReader />} />
                 <Route path="/ExcelService" element={<ExcelService />} />
                 <Route path="/vendorProfile" element={<VendorProfile />} />
-		<Route path="*" element={Error} />
+                <Route path="/addEmployee" element={<AddEmployee />} />
+                <Route path="/listEmployees" element={<EmployeeList />} />
+                <Route path="/EmpLogin" element={<EmployeeLogin />} />
+		        <Route path="*" element={Error} />
             </Routes>
         </Router>
     );

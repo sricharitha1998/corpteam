@@ -6,10 +6,10 @@ import Navbar from './../navbar';
 import { useNavigate } from "react-router-dom";
 import Footer from '../footer';
 
-function AddVendor() {
+function AddEmployee() {
     const navigate = useNavigate();
 
-    const [InputDetails, setInputDetails] = useState({status: 1, role: "vendor"})
+    const [InputDetails, setInputDetails] = useState({status: 1, role: "employee"})
     const [ErrMob, setErrMob] = useState("");
     const [userDetails, setUserDetails] = useState({});
 
@@ -50,11 +50,10 @@ function AddVendor() {
     const ClickSubmit = async (e) => {
         e.preventDefault();
         try {
-            if(InputDetails?.username && InputDetails?.password){
+            if(InputDetails?.empID && InputDetails?.password){
             if (validateEmail(InputDetails.email)){
                 if(!ErrMob){
-                    console.log("Input", InputDetails)
-            const response = await fetch('/api/users/registration' , {
+            const response = await fetch('https://pms.corpteamsolution.com/api/emp/registration' , {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -72,7 +71,7 @@ function AddVendor() {
             if (result.status === true) {
                 // localStorage.setItem('Details', JSON.stringify(result));
                 alert("Profile Registered Successfully");
-                navigate('/vendorList')
+                navigate('/listEmployees')
             }else if(result.status === false){
                 alert("Profile Already Exists")
             }else{
@@ -103,7 +102,7 @@ function AddVendor() {
                      
                     <div className="row page-titles">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item active"> Add Service Partner</li>
+                            <li className="breadcrumb-item active"> Add Employee</li>
                         </ol>
                     </div>
                     <div className="row page-titles">
@@ -117,11 +116,11 @@ function AddVendor() {
                                         <div className="row">
                                             <div className="col-xl-12">
                                                 <div className="mb-3 row">
-                                                    <label className="col-lg-4 col-form-label">Username    <span className="text-danger">*</span>
+                                                    <label className="col-lg-4 col-form-label">Employee ID    <span className="text-danger">*</span>
                                                         
                                                     </label>
                                                     <div className="col-lg-6">
-                                                    <input type="text" className="form-control" name="username" placeholder='Enter Username' onChange={OnChangeFunction} required />
+                                                    <input type="text" className="form-control" name="empID" placeholder='Enter Employee ID' onChange={OnChangeFunction} required />
                                                     </div>
                                                 </div>
                                                 <div className="mb-3 row">
@@ -171,4 +170,4 @@ function AddVendor() {
     );
 }
 
-export default AddVendor;
+export default AddEmployee;

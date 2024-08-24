@@ -25,8 +25,8 @@ function EmployeeList() {
         const userInfo = await fetch(`https://pms.corpteamsolution.com/api/emp/getEmployees`);
         const res = await userInfo.json();
         console.log("res",res)
-        setVendors(res?.employess);
-        setSortedVendors(res?.employess);
+        setVendors(res?.employees);
+        setSortedVendors(res?.employees);
       }
       provInfo();
     }, [location?.state]);

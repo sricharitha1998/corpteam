@@ -184,20 +184,7 @@ console.log("location.pathname", location.pathname)
 
             {userDetails?.role === "admin" || userDetails?.role === "employee" ?
             <>
-//            <li>
-  //            <a className="has-arrow ai-icon" href="javascript:void(0);" aria-expanded="false">
-            
-    //            <FontAwesomeIcon icon={faUser} className="fontAwesomeIcons mt-1"/>
-      //          <span className="nav-text" onClick={() => setEmpShow(!EmpShow)}>Employee</span>
-        //      </a>
 
-          //    {(EmpShow || (location?.pathname === '/addEmployee' || location?.pathname === '/listEmployees')) &&
-            //  <ul aria-expanded="false">
-          //      <li><a href="/addEmployee" className={`${location.pathname === '/addEmployee' ? 'activeNav text-white' : ''}`}>Add</a></li>
-            //    <li><a href="/listEmployees" className={`${location.pathname === '/listEmployees' ? 'activeNav text-white' : ''}`}>List</a></li>
-              //</ul>
-             // }
-            //</li>
             <li>
               <a className="has-arrow ai-icon" href="javascript:void(0);" aria-expanded="false">
             

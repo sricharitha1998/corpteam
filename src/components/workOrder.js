@@ -31,17 +31,17 @@ function WorkOrder() {
       const details = localStorage.getItem('Details');
       const userDetails = JSON.parse(details)
 
-      const userInfo = await fetch(`/api/users/getUsers/vendor`);
+      const userInfo = await fetch(`https://pms.corpteamsolution.com/api/users/getUsers/vendor`);
       const getAllVendors = await userInfo.json();
       setVendors(getAllVendors?.users)
       setUserDetails(userDetails)
       let res;
       if (userDetails?.role === "admin") {
-        const userInfo = await fetch(`/api/workOrder/getAll`);
+        const userInfo = await fetch(`https://pms.corpteamsolution.com/api/workOrder/getAll`);
         res = await userInfo.json();
         if (res) {
           const updateArray = await Promise.all(res?.map(async (details) => {
-            const vendorResponse = await fetch(`/api/users/getById/${details?.vendor_id}`);
+            const vendorResponse = await fetch(`https://pms.corpteamsolution.com/api/users/getById/${details?.vendor_id}`);
             const vendor = await vendorResponse.json();
 
             // Add the username to the details object
@@ -87,7 +87,7 @@ function WorkOrder() {
 
   const UpdateVendor = async (event) => {
     event.preventDefault();
-    const response = await fetch('/api/workOrder/updateVendor', {
+    const response = await fetch('https://pms.corpteamsolution.com/api/workOrder/updateVendor', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -115,7 +115,7 @@ function WorkOrder() {
   const DownloadPDF = async (id, event, username) => {
 
     event.preventDefault();
-    const userInfo = await fetch(`/api/workOrder/getOneRecord/${id}`);
+    const userInfo = await fetch(`https://pms.corpteamsolution.com/api/workOrder/getOneRecord/${id}`);
     const res = await userInfo.json();
     const getAllData = { ...res, ...{ vendorName: username } }
 
@@ -164,11 +164,11 @@ function WorkOrder() {
 
           <div className="row page-titles">
             <div className="col-md-8">
-            <div className="row ">
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item active">Work Order List</li>
-                        </ol>
-                    </div>
+              <div className="row ">
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item active">Work Order List</li>
+                </ol>
+              </div>
             </div>
             <div className="col-md-4">
               <div className="input-group search-area right d-lg-inline-flex d-none">
@@ -194,11 +194,11 @@ function WorkOrder() {
                           getUserDetails?.role === "admin" &&
                           <th scope="col">Service Partner Name</th>
                         }
+                        <th scope="col">Aging Days</th>
                         <th scope="col">Home Pass Number</th>
                         <th scope="col">Route Length</th>
                         <th scope="col">Building Area</th>
                         <th scope="col">Issued Date</th>
-                        <th scope="col">Aging Days</th>
                         <th scope="col">Allocation Status</th>
                         <th scope="col">Download</th>
                         {getUserDetails?.role === "vendor" &&
@@ -222,11 +222,12 @@ function WorkOrder() {
                                 {Capitalized(pt.username)}{pt.status !== "accept" && <span className="badge bg-secondary pointerCss" onClick={() => { setVendorModal(true); setIdDetails(pt._id) }}>Change</span>}
                               </td>
                             }
+                            <td className="noBorder">{differenceInDays >= 0 ? differenceInDays : "-"}</td>
                             <td className="noBorder">{pt.homePass ? Capitalized(pt.homePass) : "-"}</td>
                             <td className="noBorder">{pt.routeLength ? Capitalized(pt.routeLength) : "-"}</td>
                             <td className="noBorder">{Capitalized(pt.buildingArea)}</td>
                             <td className="noBorder">{workOrderDate.toLocaleDateString()}</td>
-                            <td className="noBorder">{differenceInDays >= 0 ? differenceInDays : "-"}</td>
+
                             <td className="noBorder">
                               {
                                 pt.status === "accept" ? (

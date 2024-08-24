@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as XLSX from 'xlsx';
 import Navbar from './navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Capitalized } from './functions/capitalized';
 import Pagination from './pagination';
 import Footer from './footer';
@@ -138,6 +138,18 @@ let name, value;
         })
     }
 
+    const handleDownload = () => {
+        const headings = [
+            { code: "code", description: "description", uom: "uom" }
+        ];
+        
+        const worksheet = XLSX.utils.json_to_sheet(headings, { header: ["code", "description", "uom"], skipHeader: true });
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Supply Items");
+
+        XLSX.writeFile(workbook, "SupplyItems.xlsx");
+    };
+
     return (
         <div className='fontSetting'>
 
@@ -184,15 +196,13 @@ let name, value;
                                               <br />
                                                 {activeTab === 'bulk' && (
                                                     <div className="mb-3 row">
-                                                        <label className="col-lg-4 col-form-label">Upload Excel<span className="text-danger">*</span></label>
-                                                        <div className="col-lg-6">
+                                                        <label className="col-lg-3 col-form-label">Upload Excel<span className="text-danger">*</span></label>
+                                                        <div className="col-lg-7">
                                                             <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} className="form-control" />
                                                         </div>
-                                                        <div className='row'>
-                                                            <div className='col-md-2'>
-                                                            <button type="submit" onClick={ClickSubmit} className="btn  btnColor text-white mb-2">Submit</button>
+                                                        <div className="col-lg-2">
+                                                            <button type="submit" onClick={ClickSubmit} className="btn mt-1 btnColor text-white mb-2">Submit</button>
                                                             </div>
-                                                        </div>
                                                         
                                                     </div>
                                                 )}
@@ -231,8 +241,9 @@ let name, value;
                                 
                                 <div className="card-body">
                                   <div className='row'>
-                                  <div className="col-md-8 mb-3"></div>
+                                  <div className="col-md-8 mt-3"><FontAwesomeIcon icon={faDownload} style={{float: "right", cursor:"pointer"}} onClick={handleDownload}/></div>
                                   <div className="col-md-4 mb-3">
+                                  
               <div className="input-group search-area right d-lg-inline-flex d-none">
                 <input type="text" className="form-control" placeholder="Search By Item Code" value={searchTerm}
                   onChange={handleSearch} />

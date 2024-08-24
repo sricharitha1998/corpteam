@@ -28,6 +28,7 @@ import Error from './components/error';
 import Register from './components/register'
 import ExcelReader from './components/excelReader';
 import ExcelService from './components/excelService';
+import VendorProfile from './components/vendor/vendorProfile';
 
 function App() {
     return ( 
@@ -60,6 +61,7 @@ function App() {
                 <Route path="/viewInvoice" element={<InvoiceDetails />} />
                 <Route path="/ExcelReader" element={<ExcelReader />} />
                 <Route path="/ExcelService" element={<ExcelService />} />
+                <Route path="/vendorProfile" element={<VendorProfile />} />
 		<Route path="*" element={Error} />
             </Routes>
         </Router>

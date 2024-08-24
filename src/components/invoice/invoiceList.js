@@ -22,7 +22,7 @@ function InvoiceList() {
   useEffect(() => {
     async function provInfo() {
       const details = localStorage.getItem('Details');
-      const userInfo = await fetch(`/api/invoice/getAll/${location?.state ? location?.state?.id : JSON.parse(details)?._id}`);
+      const userInfo = await fetch(`https://pms.corpteamsolution.com/api/invoice/getAll/${location?.state ? location?.state?.id : JSON.parse(details)?._id}`);
       const res = await userInfo.json();
       console.log("res", res)
       setWCFS(res?.invoices);
@@ -99,7 +99,7 @@ function InvoiceList() {
               <li className="breadcrumb-item active">List Invoice</li>
             </ol>
               </div>
-              <div className="col-md-4 mb-3">
+              <div className="col-md-4">
               <div className="input-group search-area right d-lg-inline-flex d-none">
                   <input type="text" className="form-control" placeholder="Search By WCF Document" value={searchTerm}
                         onChange={handleSearch}/>

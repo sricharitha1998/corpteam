@@ -22,7 +22,7 @@ const ForgotPassword = () => {
     const SendOTP = async (event) => {
         event.preventDefault();
         if (validateEmail(email)) {
-            const response = await fetch('/api/users/sendOTP', {
+            const response = await fetch('https://pms.corpteamsolution.com/api/users/sendOTP', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const ForgotPassword = () => {
             <div className="col-md-6">
               <div className="authincation-content">
                 <div className="row no-gutters">
-                  <div className="col-xl-12">
+                  <div className="col-xl-12 boxCSSShadow">
                     <div className="auth-form">
                       <div className="text-center mb-3">
                         <img

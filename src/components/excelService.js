@@ -142,15 +142,10 @@ const ExcelService = () => {
 
             <div className="content-body">
                 <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-md-8">
-                            <div className="row page-titles">
-                                <ol className="breadcrumb">
-                                    <li className="breadcrumb-item active">Service List</li>
-                                </ol>
-                            </div>
-                        </div>
-                        
+                <div className="row page-titles">
+                        <ol className="breadcrumb">
+                            <li className="breadcrumb-item active">Service List</li>
+                        </ol>
                     </div>
                     <div className="row page-titles">
                         <div className="col-lg-12">
@@ -258,7 +253,7 @@ const ExcelService = () => {
                                                         <tr key={pt._id}>
                                                             <td className="noBorder">{indexOfFirstItem + index + 1}</td>
                                                             <td className="noBorder">{Capitalized(pt.code)}</td>
-                                                            <td className="noBorder">{Capitalized(pt.description)}</td>
+                                                            <td className="noBorder" style={{ whiteSpace: 'normal', wordWrap: 'break-word', width:"60%" }}>{Capitalized(pt.description)}</td>
                                                             <td className="noBorder">{Capitalized(pt.uom)}</td>
                                                         </tr>
                                                     )

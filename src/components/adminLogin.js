@@ -33,7 +33,7 @@ const Login = async (event) => {
 //  const response = await fetch('https://93.127.185.34:4000/users/login', {
  //const response = await fetch('https://pms.corpteamsolution.com/users/login', {
 
-const response = await fetch('/api/users/login', {
+const response = await fetch('https://pms.corpteamsolution.com/api/users/login', {
       method: 'POST',
       headers: {
           "Content-Type": "application/json",
@@ -62,7 +62,7 @@ const response = await fetch('/api/users/login', {
             <div className="col-md-6">
               <div className="authincation-content">
                 <div className="row no-gutters">
-                  <div className="col-xl-12">
+                  <div className="col-xl-12 boxCSSShadow">
                     <div className="auth-form">
                       <div className="text-center mb-3">
                         <a href="index.html" className="brand-logo">

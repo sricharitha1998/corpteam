@@ -23,7 +23,7 @@ function VendorList() {
     
     useEffect(() => {
       async function provInfo() {
-        const userInfo = await fetch(`/api/users/getUsers/vendor`);
+        const userInfo = await fetch(`https://pms.corpteamsolution.com/api/users/getUsers/vendor`);
         const res = await userInfo.json();
         setVendors(res?.users);
         setSortedVendors(res?.users);
@@ -123,6 +123,9 @@ function VendorList() {
                           <td className="noBorder">
                           <button className="btn text-white btnColor" onClick={() => navigate('/updateVendor', {state: {id:pt._id}})}>
               Edit
+            </button>
+            <button className="btn text-white mx-2 btnColor" onClick={() => navigate('/vendorProfile', {state: {id:pt._id}})}>
+              View
             </button>
                           </td>
                         </tr>

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import '../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import logo from '../assets/img/logo/dashboard-logo.png';
 
 function PrintPurchase() {
     const location = useLocation();
@@ -46,6 +46,9 @@ function PrintPurchase() {
                             <div className="card-body">
                                 <div className="form-validation">
                                 <div className='row col-md-12'>
+                                <div className="text-center mb-4">
+                                <img src={logo} alt="Company Logo" style={{ maxWidth: '200px' }} />
+                            </div>
               <h4 className='text-center'>Purchase Order</h4>
               <div className='col-md-4 mt-5'><h6>Work Order Number: {Details?.workOrderNumber}</h6></div>
               <div className='col-md-4 mt-5'><h6>Home Pass Number: {Details?.homePass}</h6></div>
@@ -72,7 +75,7 @@ function PrintPurchase() {
                                             {services?.map((service, index) => (
                                                 <tr key={index}>
                                                     <td className="noBorder">{index + 1}</td>
-                                                    <td className="noBorder table-cell">
+                                                    <td className="noBorder table-cell" style={{ whiteSpace: 'normal', wordWrap: 'break-word', width:"60%" }}>
                                                     {service.description}
                                                     </td>
                                                     <td className="noBorder">
@@ -106,7 +109,7 @@ function PrintPurchase() {
                                             {supplies?.map((supply, index) => (
                                                 <tr key={index}>
                                                     <td className="noBorder">{index + 1}</td>
-                                                    <td className="noBorder">
+                                                    <td className="noBorder" style={{ whiteSpace: 'normal', wordWrap: 'break-word', width:"60%" }}>
                                                     {supply.description}
                                                     </td>
                                                     <td className="noBorder">

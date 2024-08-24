@@ -71,7 +71,7 @@ const LoginComponent = () => {
             <div className="col-md-6">
               <div className="authincation-content">
                 <div className="row no-gutters">
-                  <div className="col-xl-12">
+                  <div className="col-xl-12 boxCSSShadow">
                     <div className="auth-form">
                       <div className="text-center mb-3">
                         <a href="index.html" className="brand-logo">

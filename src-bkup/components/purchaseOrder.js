@@ -188,7 +188,7 @@ function PurchaseOrder() {
                                                     </label>
                                                     <div className="col-lg-6">
                                                         <select className='form-control mx-2' name="vendorID" onChange={onChangeDetails}>
-                                                            <option value="">Select Vendor</option>
+                                                            <option value="">Select Service Partner</option>
                                                             {vendors && vendors.map((vendor) => (
                                                                 <option key={vendor._id} selected={data?.vendorID === vendor._id} value={vendor._id + "-" + vendor.username}>{vendor.username}</option>
                                                             ))}

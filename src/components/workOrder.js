@@ -162,15 +162,15 @@ function WorkOrder() {
       <div className="content-body">
         <div className="container-fluid">
 
-          <div className="row">
+          <div className="row page-titles">
             <div className="col-md-8">
-            <div className="row page-titles">
+            <div className="row ">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item active">Work Order List</li>
                         </ol>
                     </div>
             </div>
-            <div className="col-md-4 mb-3">
+            <div className="col-md-4">
               <div className="input-group search-area right d-lg-inline-flex d-none">
                 <input type="text" className="form-control" placeholder="Search By Work Order Number" value={searchTerm}
                   onChange={handleSearch} />

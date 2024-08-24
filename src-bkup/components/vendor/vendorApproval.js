@@ -84,7 +84,7 @@ function VendorApproval() {
 
             const result = await response.json();
             if(result){
-                alert("Approval Submitted Successfully")
+                alert("Feedback Submitted Successfully")
                 window.location.reload();
             }
         }else{

@@ -22,7 +22,7 @@ function WCFList() {
     useEffect(() => {
       async function provInfo() {
         const details = localStorage.getItem('Details');
-        const userInfo = await fetch(`/api/workClosure/getwcfs/${location?.state ? location?.state?.id : JSON.parse(details)?._id}`);
+        const userInfo = await fetch(`https://pms.corpteamsolution.com/api/workClosure/getwcfs/${location?.state ? location?.state?.id : JSON.parse(details)?._id}`);
         const res = await userInfo.json();
         setWCFS(res?.wcfs);
         setSortedWCFS(res?.wcfs);
@@ -71,7 +71,7 @@ function WCFList() {
               <li className="breadcrumb-item active">List Work Closure Form</li>
             </ol>
               </div>
-              <div className="col-md-4 mb-3">
+              <div className="col-md-4">
               <div className="input-group search-area right d-lg-inline-flex d-none">
                   <input type="text" className="form-control" placeholder="Search By PO Document" value={searchTerm}
                         onChange={handleSearch}/>

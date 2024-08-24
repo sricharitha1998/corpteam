@@ -13,7 +13,7 @@ const ResetPassword = () => {
     const ChangePassword = async (event) => {
       event.preventDefault();
       if(ConfirmPassword == Password){
-          const response = await fetch('/api/users/changePassword', {
+          const response = await fetch('https://pms.corpteamsolution.com/api/users/changePassword', {
               method: 'POST',
               headers: {
                   "Content-Type": "application/json",
@@ -40,7 +40,7 @@ const ResetPassword = () => {
             <div className="col-md-6">
               <div className="authincation-content">
                 <div className="row no-gutters">
-                  <div className="col-xl-12">
+                  <div className="col-xl-12 boxCSSShadow">
                     <div className="auth-form">
                       <div className="text-center mb-3">
                         <img

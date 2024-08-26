@@ -69,6 +69,7 @@ function PrintPurchase() {
                                                 <th scope="col">Code</th>
                                                 <th scope="col">UOM</th>
                                                 <th scope="col">Quantity</th>
+                                                <th scope="col">Rate</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -87,6 +88,9 @@ function PrintPurchase() {
                                                     <td className="noBorder" >
                                                         {service.quantity}
                                                     </td>
+                                                    <td className="noBorder" >
+                                                        {service.rate}
+                                                    </td>
                                                 </tr>
                                             ))}
                                         </tbody>
@@ -103,6 +107,7 @@ function PrintPurchase() {
                                                 <th scope="col">Code</th>
                                                 <th scope="col">UOM</th>
                                                 <th scope="col">Quantity</th>
+                                                <th scope="col">Rate</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -120,6 +125,9 @@ function PrintPurchase() {
                                                     </td>
                                                     <td className="noBorder" >
                                                         {supply.quantity}
+                                                    </td>
+                                                    <td className="noBorder" >
+                                                        {supply.rate}
                                                     </td>
                                                 </tr>
                                             ))}

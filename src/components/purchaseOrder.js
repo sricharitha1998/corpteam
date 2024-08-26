@@ -11,8 +11,8 @@ function PurchaseOrder() {
     const location = useLocation();
     const navigate = useNavigate();
     const [data, setData] = useState({ status: null });
-    const [services, setServices] = useState([{ code: '', uom: '', description: '', quantity: '' }]);
-    const [supplies, setSupplies] = useState([{ code: '', uom: '', description: '', quantity: '' }]);
+    const [services, setServices] = useState([{ code: '', uom: '', description: '', quantity: '', rate:'' }]);
+    const [supplies, setSupplies] = useState([{ code: '', uom: '', description: '', quantity: '', rate:'' }]);
     const [currentPage, setCurrentPage] = useState(1);
     const [Address, setAddress] = useState("");
     const itemsPerPage = 25; // Adjust this value to set items per page
@@ -74,11 +74,11 @@ function PurchaseOrder() {
     }, []);
 
     const handleAddService = () => {
-        setServices([...services, { code: '', uom: '', description: '', quantity: '' }]);
+        setServices([...services, { code: '', uom: '', description: '', quantity: '', rate:'' }]);
     };
 
     const handleAddSupply = () => {
-        setSupplies([...supplies, { code: '', uom: '', description: '', quantity: '' }]);
+        setSupplies([...supplies, { code: '', uom: '', description: '', quantity: '', rate:'' }]);
     };
 
     const handleServiceChange = (e, index) => {
@@ -153,14 +153,14 @@ function PurchaseOrder() {
         e.preventDefault();
         try {
             for (const service of services) {
-                if (!service.code || !service.uom || !service.description || !service.quantity) {
+                if (!service.code || !service.uom || !service.description || !service.quantity || !service.rate) {
                     alert('All service fields are required.');
                     return;
                 }
             }
 
             for (const supply of supplies) {
-                if (!supply.code || !supply.uom || !supply.description || !supply.quantity) {
+                if (!supply.code || !supply.uom || !supply.description || !supply.quantity || !supply.rate) {
                     alert('All supply fields are required.');
                     return;
                 }
@@ -292,6 +292,7 @@ function PurchaseOrder() {
                                                 <th scope="col">Service Description</th>
                                                 <th scope="col">UOM</th>
                                                 <th scope="col">Quantity</th>
+                                                <th scope="col">Rate</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -317,6 +318,9 @@ function PurchaseOrder() {
                                                     <td className="noBorder">
                                                         <input className='form-control mx-2' name="quantity" type='text' defaultValue={service?.quantity} onChange={(e) => handleServiceChange(e, index)} />
                                                     </td>
+                                                    <td className="noBorder">
+                                                        <input className='form-control mx-2' name="rate" type='text' defaultValue={service?.rate} onChange={(e) => handleServiceChange(e, index)} />
+                                                    </td>
                                                 </tr>
                                             ))}
                                         </tbody>
@@ -339,6 +343,7 @@ function PurchaseOrder() {
                                                 <th scope="col">Item Description</th>
                                                 <th scope="col">UOM</th>
                                                 <th scope="col">Quantity</th>
+                                                <th scope="col">Rate</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -362,6 +367,9 @@ function PurchaseOrder() {
                                                     </td>
                                                     <td className="noBorder">
                                                         <input className='form-control mx-2' name="quantity" type='text' defaultValue={supply?.quantity} onChange={(e) => handleSupplyChange(e, index)} />
+                                                    </td>
+                                                    <td className="noBorder">
+                                                        <input className='form-control mx-2' name="rate" type='text' defaultValue={supply?.rate} onChange={(e) => handleSupplyChange(e, index)} />
                                                     </td>
                                                 </tr>
                                             ))}

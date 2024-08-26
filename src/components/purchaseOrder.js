@@ -385,7 +385,8 @@ function PurchaseOrder() {
                                                         </select>
                                                     </td>
                                                     <td className="noBorder">
-                                                        <input className='form-control' name="description" type='text' onChange={(e) => handleSupplyChange(e, index)} defaultValue={supply?.description} />
+                                                        {/* <input className='form-control' name="description" type='text' onChange={(e) => handleSupplyChange(e, index)} defaultValue={supply?.description} /> */}
+                                                        <textarea className='form-control' name="description" type='text' onChange={(e) => handleSupplyChange(e, index)} defaultValue={supply?.description}></textarea>
                                                     </td>
                                                     <td className="noBorder">
                                                         <input className='form-control mx-2' name="uom" type='text' defaultValue={supply?.uom} onChange={(e) => handleSupplyChange(e, index)} />
@@ -394,8 +395,8 @@ function PurchaseOrder() {
                                                         <input className='form-control mx-2' name="quantity" type='text' defaultValue={supply?.quantity} onChange={(e) => handleSupplyChange(e, index)} />
                                                     </td>
                                                     <td className="noBorder">
-                                                        {/* <input className='form-control mx-2' name="rate" type='text' defaultValue={supply?.rate} onChange={(e) => handleSupplyChange(e, index)} /> */}
-                                                        <textarea className='form-control mx-2' name="rate" type='text' defaultValue={supply?.rate} onChange={(e) => handleSupplyChange(e, index)}></textarea>
+                                                        <input className='form-control mx-2' name="rate" type='text' defaultValue={supply?.rate} onChange={(e) => handleSupplyChange(e, index)} />
+                                                       
                                                     </td>
                                                 </tr>
                                             ))}

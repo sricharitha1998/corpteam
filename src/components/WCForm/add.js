@@ -171,6 +171,7 @@ function WCForm() {
             formData.append('others', JSON.stringify(formattedFields));
             formData.append('workOrder_id', getWorkOrderID)
             formData.append("vendor_id", UserDetails._id)
+            formData.append("vendor_email", UserDetails.email)
 
             try {
 

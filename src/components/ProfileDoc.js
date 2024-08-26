@@ -104,20 +104,16 @@ function ProfileDocs() {
                     <div className="row page-titles">
                         <div className="col-lg-12">
                             <div className="card-body">
-                            {VendorDetails ?
-                                !ApprovalStatus ?
-                                <>
-                                        <p className="text-center text-danger">**Approval Rejected**</p>
-
-                                        <VendorViewDetails />
-                                        </>
-                                        
-                                    :
-                                    <>
-                                        <p className="text-center text-warning">**Approval Pending**</p>
-                                        <p className="text-center"><b className="text-danger">Note:</b> Kindly wait for approval</p>
-                                    </>
-                                :
+                            {VendorDetails ? (
+                                        ApprovalStatus ? (
+                                            <a href="/login">Click Here TO Login</a>
+                                        ) : (
+                                            <>
+                                                <p className="text-center text-danger">**Approval Rejected**</p>
+                                                <VendorViewDetails />
+                                            </>
+                                        )
+                                    ) : (
                                 <>
                                     <p className="text-center"><b className="text-danger">Note:</b> Kindly update your profile</p>
                                 <div className="form-validation">
@@ -267,6 +263,7 @@ function ProfileDocs() {
                                     </div>
                                 </div>
                                 </>
+                                    )
                             }
                             </div>
                         </div>

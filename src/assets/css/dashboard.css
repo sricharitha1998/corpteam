@@ -33,9 +33,9 @@
   cursor: pointer;
 }
 
-.no-print {
+/* .no-print {
   display: none;
-}
+} */
 
 .getFontSize{
     font-size: 12px;

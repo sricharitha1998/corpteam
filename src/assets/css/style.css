@@ -1,7 +1,11 @@
 .page-titles{
   box-shadow: 0 2px 10px -3px #7e8286 !important;
 }
-
+@media print {
+  .page-break {
+      page-break-before: always;
+  }
+}
 :root {
   --primary: #eb8153;
   --secondary: #6418c3;
@@ -1259,6 +1263,23 @@
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
+  }
+}
+
+@media print {
+  .no-print {
+      display: none;
+  }
+  table {
+      width: 100%;
+      border-collapse: collapse;
+  }
+  th, td {
+      border: 1px solid black;
+      padding: 8px;
+  }
+  .table-responsive {
+      overflow: visible; /* Ensures the table fits in the print view */
   }
 }
 

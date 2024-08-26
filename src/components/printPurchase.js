@@ -40,7 +40,7 @@ function PrintPurchase() {
 
             <div className="m-5">
                 <div className="container-fluid">
-                    <div className="row page-titles">
+                    <div className="">
                         <div className="col-lg-12">
 
                             <div className="card-body">
@@ -93,6 +93,12 @@ function PrintPurchase() {
                                                     </td>
                                                 </tr>
                                             ))}
+                                             <tr>
+    <td colSpan="5" className="text-end"><strong>Total</strong></td>
+    <td className="noBorder">
+    {location?.state?.serviceTotalRate}
+    </td>
+</tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -131,6 +137,12 @@ function PrintPurchase() {
                                                     </td>
                                                 </tr>
                                             ))}
+                                            <tr>
+    <td colSpan="5" className="text-end"><strong>Total</strong></td>
+    <td className="noBorder">
+    {location?.state?.supplyTotalRate}
+    </td>
+</tr>
                                         </tbody>
                                     </table>
                                 </div>

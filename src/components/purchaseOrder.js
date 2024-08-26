@@ -430,7 +430,7 @@ function PurchaseOrder() {
                                         <a href="javascript:void(0);" className="btn btnColor text-white mb-2" onClick={handleSubmit}>
                                             Submit
                                         </a>
-                                        <a href="javascript:void(0);" className="btn text-white btnColor2 ms-4 mb-2" onClick={() => navigate("/printPurchase", { state: { data, services, VendorName, supplies } })}>
+                                        <a href="javascript:void(0);" className="btn text-white btnColor2 ms-4 mb-2" onClick={() => navigate("/printPurchase", { state: { data, services, VendorName, supplies, supplyTotalRate, serviceTotalRate } })}>
                                             Preview Print
                                         </a>
                                     </div>

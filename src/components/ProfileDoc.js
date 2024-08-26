@@ -21,7 +21,8 @@ function ProfileDocs() {
             const userInfo = await fetch(`https://pms.corpteamsolution.com/api/vendor/getDetails/${JSON.parse(getDetails)?._id}`);
             const res = await userInfo.json();
             setVendorDetails(res?.details)
-            const allApproved = res?.details?.approvals.every(approval => approval.status !== "Approved");
+            const allApproved = res?.details?.approvals.every(approval => approval.status === "Approved");
+            console.log("res?.details?.approvals", res?.details?.approvals)
             setApprovalStatus(allApproved)
         }
         fetchData()
@@ -105,8 +106,8 @@ function ProfileDocs() {
                         <div className="col-lg-12">
                             <div className="card-body">
                             {VendorDetails ? (
-                                        ApprovalStatus ? (
-                                            <a href="/login">Click Here TO Login</a>
+                                        ApprovalStatus ===true ? (
+                                            <h7>Documents are approved <a href="/login">Click Here To Login</a></h7>
                                         ) : (
                                             <>
                                                 <p className="text-center text-danger">**Approval Rejected**</p>

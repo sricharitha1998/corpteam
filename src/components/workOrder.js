@@ -55,7 +55,7 @@ function WorkOrder() {
           res = updateArray;
         }
       } else {
-        const userInfo = await fetch(`/api/workOrder/getRecords/${userDetails?._id}`);
+        const userInfo = await fetch(`https://pms.corpteamsolution.com/api/workOrder/getRecords/${userDetails?._id}`);
         res = await userInfo.json();
       }
       if (res) {
@@ -125,7 +125,7 @@ function WorkOrder() {
 
   const UpdateStatus = async (status, event) => {
     event.preventDefault();  // Prevent the default form submission behavior
-    const response = await fetch('/api/workOrder/updateStatus', {
+    const response = await fetch('https://pms.corpteamsolution.com/api/workOrder/updateStatus', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -189,14 +189,14 @@ function WorkOrder() {
                       <tr>
 
                         <th scope="col" >S.NO</th>
-                        <th scope="col" onClick={handleSort}>Work Order Number <FontAwesomeIcon icon={sortOrder === 'asc' ? faAngleUp : faAngleDown} /></th>
+                        <th scope="col" onClick={handleSort}>W.O Number <FontAwesomeIcon icon={sortOrder === 'asc' ? faAngleUp : faAngleDown} /></th>
                         {
                           (getUserDetails?.role === "admin" || getUserDetails?.role === "employee") &&
-                          <th scope="col">Service Partner Name</th>
+                          <th scope="col">Partner</th>
                         }
-                        <th scope="col">Aging Days</th>
-                        <th scope="col">Home Pass Number</th>
-                        <th scope="col">Route Length</th>
+                        <th scope="col">Aging</th>
+                        <th scope="col">H.P</th>
+                        <th scope="col">Route</th>
                         <th scope="col">Building Area</th>
                         <th scope="col">Issued Date</th>
                         <th scope="col">Allocation Status</th>
@@ -239,13 +239,13 @@ function WorkOrder() {
                                 ) :
                                   (
                                     <>
-                                      <span className='pointerCss' onClick={() => { setModal(true); setID(pt._id); }}>Accept</span> /
-                                      <span className='pointerCss' onClick={() => { setRejectModal(true); setID(pt._id); }}>Reject</span>
+                                      <span className='badge bg-success pointerCss' style={{marginRight:"1px"}} onClick={() => { setModal(true); setID(pt._id); }}>Accept</span>  
+                                      <span className='badge bg-danger pointerCss' onClick={() => { setRejectModal(true); setID(pt._id); }}>Reject</span>
                                     </>
                                   )}
                             </td>
                             <td className="noBorder"><FontAwesomeIcon icon={faDownload} onClick={(event) => DownloadPDF(pt._id, event, pt.username ? pt.username : getUserDetails?.username)} /></td>
-                            {(getUserDetails?.role !== "admin" || getUserDetails?.role !== "employee") &&
+                            {getUserDetails?.role === "vendor" &&
                               <td className="noBorder">
                                 {pt.status === "accept" ?
                                   <button className="btn btn-sm btn-primary" disabled={ClosureBtn} onClick={() => navigate("/wcform", { state: { id: pt._id } })}>Closure </button>

@@ -308,7 +308,8 @@ function PurchaseOrder() {
                                                         </select>
                                                     </td>
                                                     <td className="noBorder">
-                                                        <input className='form-control' name="description" type='text' onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.description} />
+                                                        {/* <input className='form-control' name="description" type='text' onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.description} /> */}
+                                                        <textarea className='form-control' name="description" type='text' onChange={(e) => handleServiceChange(e, index)} defaultValue={service?.description} ></textarea>
                                                     </td>
                                                     <td className="noBorder">
                                                         <input className='form-control mx-2' name="uom" type='text' defaultValue={service?.uom} onChange={(e) => handleServiceChange(e, index)} />

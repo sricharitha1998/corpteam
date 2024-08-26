@@ -1,23 +1,30 @@
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { Capitalized } from './capitalized';
+import logo from '../../assets/img/logo/dashboard-logo.png';
 
 export const PDFfile = (data) => {
     const doc = new jsPDF();
 
+    const imgWidth = 50;
+    const imgHeight = 20; 
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const centerX = (pageWidth - imgWidth) / 2;
+
+    doc.addImage(logo, 'PNG', centerX, 10, imgWidth, imgHeight);
     // Header Information
-    doc.text('Purchase Order', 20, 20);
-    doc.text(`Work Order No: ${Capitalized(data.workOrderNumber)}`, 20, 30);
-    doc.text(`Home Pass No: ${Capitalized(data.homePass) || ''}`, 110, 30);
-    doc.text(`Route Length: ${Capitalized(data.routeLength) || ''}`, 110, 40);
-    doc.text(`Building Area: ${Capitalized(data.buildingArea) || ''}`, 20, 40);
-    doc.text(`Vendor Name: ${Capitalized(data?.vendorName) || ''}`, 20, 50);
+    doc.text('Purchase Order', 20, 40);
+    doc.text(`Work Order No: ${Capitalized(data.workOrderNumber)}`, 20, 50);
+    doc.text(`Home Pass No: ${Capitalized(data.homePass) || ''}`, 110, 50);
+    doc.text(`Route Length: ${Capitalized(data.routeLength) || ''}`, 110, 60);
+    doc.text(`Building Area: ${Capitalized(data.buildingArea) || ''}`, 20, 60);
+    doc.text(`Vendor Name: ${Capitalized(data?.vendorName) || ''}`, 20, 70);
 
     // Services Table
     const tableColumnServices = ["S.No", "Service Description", "Service Code", "UOM", "Quantity"];
     const tableRowsServices = [];
 
-    data.services.forEach((service, index) => {
+    data?.services?.forEach((service, index) => {
       const serviceData = [
         index + 1,
         Capitalized(service.description),
@@ -31,7 +38,7 @@ export const PDFfile = (data) => {
     doc.autoTable({
         head: [tableColumnServices],
         body: tableRowsServices,
-        startY: 60
+        startY: 80
     });
 
     // Get the final Y position after the services table

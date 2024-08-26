@@ -21,20 +21,28 @@ export const PDFfile = (data) => {
     doc.text(`Vendor Name: ${Capitalized(data?.vendorName) || ''}`, 20, 70);
 
     // Services Table
-    const tableColumnServices = ["S.No", "Service Description", "Service Code", "UOM", "Quantity"];
+    const tableColumnServices = ["S.No", "Service Description", "Service Code", "UOM", "Quantity", "Rate"];
     const tableRowsServices = [];
 
-    data?.services?.forEach((service, index) => {
+    data && data?.services && data?.services?.forEach((service, index) => {
       const serviceData = [
         index + 1,
         Capitalized(service.description),
         Capitalized(service.code),
         Capitalized(service.uom),
         Capitalized(service.quantity),
+        Capitalized(service.rate),
       ];
       tableRowsServices.push(serviceData);
     });
-
+    tableRowsServices.push([
+      '',
+      '',
+      '',
+      '',
+      'Total',
+      data?.serviceTotalRate,
+  ]);
     doc.autoTable({
         head: [tableColumnServices],
         body: tableRowsServices,
@@ -45,20 +53,28 @@ export const PDFfile = (data) => {
     const finalY = doc.lastAutoTable.finalY;
 
     // Supplies Table (start after the Services table)
-    const tableColumnSupplies = ["S.No", "Supply Description", "Supply Code", "UOM", "Quantity"];
+    const tableColumnSupplies = ["S.No", "Supply Description", "Supply Code", "UOM", "Quantity", "Rate"];
     const tableRowsSupplies = [];
 
-    data.supplies.forEach((supply, index) => {
+    data && data?.supplies && data.supplies.forEach((supply, index) => {
       const supplyData = [
         index + 1,
         Capitalized(supply.description),
         Capitalized(supply.code),
         Capitalized(supply.uom),
         Capitalized(supply.quantity),
+        Capitalized(supply.rate),
       ];
       tableRowsSupplies.push(supplyData);
     });
-
+    tableRowsSupplies.push([
+      '',
+      '',
+      '',
+      '',
+      'Total',
+      data?.supplyTotalRate,
+  ]);
     doc.autoTable({
         head: [tableColumnSupplies],
         body: tableRowsSupplies,

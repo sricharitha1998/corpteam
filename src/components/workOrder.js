@@ -118,7 +118,7 @@ function WorkOrder() {
     const userInfo = await fetch(`https://pms.corpteamsolution.com/api/workOrder/getOneRecord/${id}`);
     const res = await userInfo.json();
     const getAllData = { ...res, ...{ vendorName: username } }
-
+console.log("getAllData", getAllData)
     PDFfile(getAllData)
 
   }
@@ -246,7 +246,7 @@ function WorkOrder() {
                             </td>
                             <td className="noBorder"><FontAwesomeIcon icon={faDownload} onClick={(event) => DownloadPDF(pt._id, event, pt.username ? pt.username : getUserDetails?.username)} /></td>
                             {getUserDetails?.role === "vendor" &&
-                              <td className="noBorder">
+                              <td className="noBorder"> 
                                 {pt.status === "accept" ?
                                   <button className="btn btn-sm btn-primary" disabled={ClosureBtn} onClick={() => navigate("/wcform", { state: { id: pt._id } })}>Closure </button>
                                   :

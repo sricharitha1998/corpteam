@@ -13,6 +13,7 @@ function ProfileDocs() {
     const [details, setDetails] = useState()
     const [VendorDetails, setVendorDetails] = useState()
     const [ApprovalStatus, setApprovalStatus] = useState()
+    const [ApprovedAll, setApprovedAll] = useState()
 
     useEffect(() => {
         async function fetchData() {
@@ -21,9 +22,10 @@ function ProfileDocs() {
             const userInfo = await fetch(`https://pms.corpteamsolution.com/api/vendor/getDetails/${JSON.parse(getDetails)?._id}`);
             const res = await userInfo.json();
             setVendorDetails(res?.details)
-            const allApproved = res?.details?.approvals.every(approval => approval.status === "Approved");
-            console.log("res?.details?.approvals", res?.details?.approvals)
+            const allApproved = res?.details?.approvals.every(approval => approval.status !== "Approved");
             setApprovalStatus(allApproved)
+            const getApprovedAll = res?.details?.approvals.length >0 ? res?.details?.approvals.every(approval => approval.status === "Approved") : false;
+            setApprovedAll(getApprovedAll)
         }
         fetchData()
     }, [])
@@ -105,16 +107,23 @@ function ProfileDocs() {
                     <div className="row page-titles">
                         <div className="col-lg-12">
                             <div className="card-body">
-                            {VendorDetails ? (
-                                        ApprovalStatus ===true ? (
-                                            <h7>Documents are approved <a href="/login">Click Here To Login</a></h7>
-                                        ) : (
-                                            <>
-                                                <p className="text-center text-danger">**Approval Rejected**</p>
-                                                <VendorViewDetails />
-                                            </>
-                                        )
-                                    ) : (
+                            {VendorDetails ?
+                            ApprovedAll===true ?
+                            <h7>Documents are approved <a href="/login">Click Here To Login</a></h7>
+                            :
+                                !ApprovalStatus ?
+                                <>
+                                        <p className="text-center text-danger">**Approval Rejected**</p>
+
+                                        <VendorViewDetails />
+                                        </>
+                                        
+                                    :
+                                    <>
+                                        <p className="text-center text-warning">**Approval Pending**</p>
+                                        <p className="text-center"><b className="text-danger">Note:</b> Kindly wait for approval</p>
+                                    </>
+                                :
                                 <>
                                     <p className="text-center"><b className="text-danger">Note:</b> Kindly update your profile</p>
                                 <div className="form-validation">
@@ -264,7 +273,6 @@ function ProfileDocs() {
                                     </div>
                                 </div>
                                 </>
-                                    )
                             }
                             </div>
                         </div>

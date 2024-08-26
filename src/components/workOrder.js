@@ -112,13 +112,16 @@ function WorkOrder() {
     setCurrentPage(1);
   };
 
-  const DownloadPDF = async (id, event, username) => {
+  const DownloadPDF = async (id, event, username,vendor_id) => {
 
     event.preventDefault();
     const userInfo = await fetch(`https://pms.corpteamsolution.com/api/workOrder/getOneRecord/${id}`);
     const res = await userInfo.json();
-    const getAllData = { ...res, ...{ vendorName: username } }
-console.log("getAllData", getAllData)
+    const vendorDetails = await fetch(`https://pms.corpteamsolution.com/api/vendor/getDetails/${vendor_id}`);
+    const ResVendor = await vendorDetails.json();
+    console.log("ResVendor", ResVendor)
+    const getAllData = { ...res, ...{ vendorName: username }, ...ResVendor?.details }
+
     PDFfile(getAllData)
 
   }
@@ -244,7 +247,7 @@ console.log("getAllData", getAllData)
                                     </>
                                   )}
                             </td>
-                            <td className="noBorder"><FontAwesomeIcon icon={faDownload} onClick={(event) => DownloadPDF(pt._id, event, pt.username ? pt.username : getUserDetails?.username)} /></td>
+                            <td className="noBorder"><FontAwesomeIcon icon={faDownload} onClick={(event) => DownloadPDF(pt._id, event, pt.username ? pt.username : getUserDetails?.username, pt.vendor_id)} /></td>
                             {getUserDetails?.role === "vendor" &&
                               <td className="noBorder"> 
                                 {pt.status === "accept" ?

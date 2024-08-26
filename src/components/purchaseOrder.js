@@ -21,7 +21,9 @@ function PurchaseOrder() {
     const [userDetails, setUserDetails] = useState({});
     const [SupplyItems, setSupplyItems] = useState();
     const [ServiceItems, setServiceItems] = useState();
-
+    const [serviceTotalRate, setServiceTotalRate] = useState();
+    const [supplyTotalRate, setSupplyTotalRate] = useState();
+    
     useEffect(() => {
         const fetchData = async () => {
             const date = new Date();
@@ -172,7 +174,7 @@ function PurchaseOrder() {
             }
 
             // const formattedDate = new Date().toLocaleDateString();
-            const payload = { ...data, services, supplies, date: new Date() };
+            const payload = { ...data, services, supplies, date: new Date(), supplyTotalRate, serviceTotalRate };
             const response = await fetch('https://pms.corpteamsolution.com/api/workOrder/insert', {
                 method: 'POST',
                 headers: {
@@ -202,6 +204,16 @@ function PurchaseOrder() {
     };
 
     console.log("data", data)
+    useEffect(() => {
+        const calculateTotalRate = () => {
+            const serviceTotal = services.reduce((sum, service) => sum + parseFloat(service.rate || 0), 0);
+            const supplyTotal = supplies.reduce((sum, supply) => sum + parseFloat(supply.rate || 0), 0);
+            setServiceTotalRate(serviceTotal);
+            setSupplyTotalRate(supplyTotal);
+        };
+    
+        calculateTotalRate();
+    }, [services, supplies]);
 
     return (
         <div className='fontSetting'>
@@ -323,6 +335,19 @@ function PurchaseOrder() {
                                                     </td>
                                                 </tr>
                                             ))}
+                                           <tr>
+    <td colSpan="5" className="text-end"><strong>Total</strong></td>
+    <td className="noBorder">
+        <input
+            className='form-control mx-2'
+            name="total"
+            type='number'
+            value={serviceTotalRate}
+            readOnly
+        />
+    </td>
+</tr>
+
                                         </tbody>
                                     </table>
 
@@ -369,10 +394,23 @@ function PurchaseOrder() {
                                                         <input className='form-control mx-2' name="quantity" type='text' defaultValue={supply?.quantity} onChange={(e) => handleSupplyChange(e, index)} />
                                                     </td>
                                                     <td className="noBorder">
-                                                        <input className='form-control mx-2' name="rate" type='text' defaultValue={supply?.rate} onChange={(e) => handleSupplyChange(e, index)} />
+                                                        {/* <input className='form-control mx-2' name="rate" type='text' defaultValue={supply?.rate} onChange={(e) => handleSupplyChange(e, index)} /> */}
+                                                        <textarea className='form-control mx-2' name="rate" type='text' defaultValue={supply?.rate} onChange={(e) => handleSupplyChange(e, index)}></textarea>
                                                     </td>
                                                 </tr>
                                             ))}
+                                            <tr>
+    <td colSpan="5" className="text-end"><strong>Total</strong></td>
+    <td className="noBorder">
+        <input
+            className='form-control mx-2'
+            name="total"
+            type='number'
+            value={supplyTotalRate}
+            readOnly
+        />
+    </td>
+</tr>
                                         </tbody>
                                     </table>
                                 </div>

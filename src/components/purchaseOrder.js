@@ -198,8 +198,8 @@ function PurchaseOrder() {
         } catch (error) {
             console.error('Error uploading files:', error);
         }
-        const getAllData = { ...data, ...services }
-        PDFfile(getAllData)
+        // const getAllData = { ...data, ...services }
+        // PDFfile(getAllData)
 
     };
 

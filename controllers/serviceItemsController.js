@@ -59,13 +59,16 @@ const uom = req.body.uom;
                     const description = req.body.description;
                     const code = req.body.code;
 
-                   
-                    serviceItemsModel.findOne({ code }).then(function (existingUser, err) {
+                    await serviceItemsModel.findOne({ code }).then(function (existingUser, err) {
                         if (existingUser) {
                             return res.json({ message: 'That code is already in use.', status: false });
                         }
 
+<<<<<<< HEAD
                          const itemInsert = new serviceItemsModel({
+=======
+                        const itemInsert = new serviceItemsModel({
+>>>>>>> 916b5900501a490b4c4d1248c45e850a39b91176
                             code, description, uom
                         });
                         itemInsert.save().then(async (item, err) => {

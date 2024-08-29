@@ -26,11 +26,22 @@ function PurchaseOrder() {
     
     useEffect(() => {
         const fetchData = async () => {
-            const date = new Date();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const year = String(date.getFullYear()).slice(-2);
-            const RandomCode = "CTS" + month + year + Math.floor(10 + Math.random() * 90);
-            setData({ ...data, workOrderNumber: RandomCode });
+           
+            const generateUniqueCode = async () => {
+                let code = generateCode();
+                let exists = await checkCodeExists(code);
+        
+                while (exists) {
+                    code = generateCode();
+                    exists = await checkCodeExists(code);
+                }
+        
+                return code;
+            };
+
+            const uniqueCode = await generateUniqueCode();
+    setData({ ...data, workOrderNumber: uniqueCode });
+            // setData({ ...data, workOrderNumber: RandomCode });
 
             const userInfo = await fetch(`https://pms.corpteamsolution.com/api/users/getUsers/vendor`);
             const res = await userInfo.json();
@@ -38,6 +49,24 @@ function PurchaseOrder() {
         }
         fetchData();
     }, []);
+
+    const generateCode = () => {
+        const date = new Date();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = String(date.getFullYear()).slice(-2);
+        return "CTS" + month + year + Math.floor(10 + Math.random() * 90);
+    };
+
+    const checkCodeExists = async (code) => {
+        const response = await fetch(`https://pms.corpteamsolution.com/api/workOrder/checkCode/${code}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const result = await response.json();
+        return result.exists;
+    };
 
     useEffect(() => {
         const fetchData = async () => {

@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './../navbar';
 import { useNavigate } from "react-router-dom";
 import Footer from '../footer';
+import LoadingIcons from 'react-loading-icons';
+import Modal from 'react-modal';
 
 function AddVendor() {
     const navigate = useNavigate();
@@ -12,6 +14,7 @@ function AddVendor() {
     const [InputDetails, setInputDetails] = useState({status: 1, role: "vendor"})
     const [ErrMob, setErrMob] = useState("");
     const [userDetails, setUserDetails] = useState({});
+    const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const details = localStorage.getItem('Details');
@@ -49,6 +52,7 @@ function AddVendor() {
 
     const ClickSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             if(InputDetails?.username && InputDetails?.password){
             if (validateEmail(InputDetails.email)){
@@ -62,6 +66,8 @@ function AddVendor() {
                 },
                 body: JSON.stringify(InputDetails),
             });
+
+            setLoading(false)
 
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -97,6 +103,23 @@ function AddVendor() {
         <div className='fontSetting'>
 
             <Navbar />
+
+            <Modal
+                isOpen={loading}
+                onRequestClose={() => setLoading(false)}
+                style={{
+                    content: {
+                        width: '250px',
+                        margin: 'auto',
+                        height: 'fit-content',
+                        padding: '20px',
+                        boxShadow: "2px 2px 2px #dbd9d9",
+                        textAlign: "center"
+                    }
+                }}
+            >
+                <LoadingIcons.Oval stroke="#0f0f0f" speed={2} className='mx-1'/> Loading
+            </Modal>
 
             <div className="content-body">
                 <div className="container-fluid">

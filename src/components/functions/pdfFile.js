@@ -6,7 +6,6 @@ import logo from '../../assets/img/logo/dashboard-logo.png';
 export const PDFfile = (data) => {
   console.log("data", data)
     const doc = new jsPDF();
-
     const imgWidth = 50;
     const imgHeight = 20; 
     const pageWidth = doc.internal.pageSize.getWidth();
@@ -16,16 +15,23 @@ export const PDFfile = (data) => {
     // Header Information
     doc.setFont('helvetica', 'bold');
     doc.text('Purchase Order', 20, 40);
-    doc.setFont('helvetica', 'normal');
+    doc.setFont('helvetica', 'normal'); 
     doc.text(`Work Order No: ${Capitalized(data.workOrderNumber)}`, 20, 45);
-    doc.text(`Home Pass No: ${Capitalized(data.homePass) || ''}`, 110, 45);
-    doc.text(`Route Length: ${Capitalized(data.routeLength) || ''}`, 110, 50);
-    doc.text(`Building Area: ${Capitalized(data.buildingArea) || ''}`, 20, 50);
+    doc.text(`Home Pass No: ${Capitalized(data.homePass) || ''}`, 20, 50);
+    doc.text(`Route Length: ${Capitalized(data.routeLength) || ''}`, 20, 55);
+    doc.text(`Building Area: ${Capitalized(data.buildingArea) || ''}`, 20, 60);
     doc.setFont('helvetica', 'bold');
-    doc.text('Service Partner Details: ', 20, 60);
+    doc.text('Company Address:', 110, 40);
     doc.setFont('helvetica', 'normal');
-    doc.text(`Service Partner Name: ${Capitalized(data?.vendorName) || ''}`, 20, 65);
-    doc.text(`Address: ${Capitalized(data?.address) || ''}`, 20, 70);
+    doc.text(`13th Floor Manjeera Trinity,`, 110, 45);
+    doc.text(`JNTU Road,`, 110, 50);
+    doc.text(`KPHB,`, 110, 55);
+    doc.text(`Hyderabad.`, 110, 60);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Service Partner Details: ', 20, 70);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Service Partner Name: ${Capitalized(data?.vendorName) || ''}`, 20, 75);
+    doc.text(`Address: ${Capitalized(data?.address) || ''}`, 20, 80);
 
     // Services Table
     const tableColumnServices = ["S.No", "Service Description", "Service Code", "UOM", "Quantity", "Rate"];
@@ -53,7 +59,7 @@ export const PDFfile = (data) => {
     doc.autoTable({
         head: [tableColumnServices],
         body: tableRowsServices,
-        startY: 90,
+        startY: 100,
         theme: 'grid',
         headStyles: {
           fillColor: [0, 68, 117],

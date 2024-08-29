@@ -1,16 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../assets/css/style.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../assets/img/logo/dashboard-logo.png';
-import ReactToPrint from 'react-to-print';
-
 
 function PrintPurchase() {
     const location = useLocation();
     const navigate = useNavigate();
-    const componentRef = useRef();
+   
     const [services, setServices] = useState()
     const [supplies, setSupplies] = useState()
     const [Details, setDetails] = useState()
@@ -24,27 +22,25 @@ function PrintPurchase() {
     }, [location?.state])
 
     const handlePrint = () => {
-        // document.querySelectorAll('.print-hide').forEach(button => {
-        //     button.classList.add('no-print');
-        // });
+        document.querySelectorAll('.print-hide').forEach(button => {
+            button.classList.add('no-print');
+        });
     
-        // // Print the page
-        // window.print();
+        // Print the page
+        window.print();
     
-        // // Remove the no-print class after printing
-        // document.querySelectorAll('.print-hide').forEach(button => {
-        //     button.classList.remove('no-print');
-        // });
-
-        
+        // Remove the no-print class after printing
+        document.querySelectorAll('.print-hide').forEach(button => {
+            button.classList.remove('no-print');
+        });
     };
 
     return (
         <div className='fontSetting'>
 
-            <div className="m-5" ref={componentRef}>
+            <div className="m-5">
                 <div className="container-fluid">
-                    <div className="">
+                    <div className="row page-titles">
                         <div className="col-lg-12">
 
                             <div className="card-body">
@@ -54,16 +50,16 @@ function PrintPurchase() {
                                 <img src={logo} alt="Company Logo" style={{ maxWidth: '200px' }} />
                             </div>
               <h4 className='text-center'>Purchase Order</h4>
-              <div className='col-md-12'><h6><b>Work Order Number: </b>{Details?.workOrderNumber}</h6></div>
-              <div className='col-md-12'><h6><b>Home Pass Number:</b> {Details?.homePass}</h6></div>
-              <div className='col-md-12'><h6><b>Route Length:</b> {Details?.routeLength}</h6></div>
-              <div className='col-md-12'><h6><b>Service Partner Name: </b>{location?.state?.VendorName}</h6></div>
-              <div className='col-md-12'><h6><b>Building Area:</b> {Details?.buildingArea}</h6></div>
+              <div className='col-md-4 mt-5'><h6>Work Order Number: {Details?.workOrderNumber}</h6></div>
+              <div className='col-md-4 mt-5'><h6>Home Pass Number: {Details?.homePass}</h6></div>
+              <div className='col-md-4 mt-5'><h6>Route Length: {Details?.routeLength}</h6></div>
+              <div className='col-md-4'><h6>Service Partner Name: {location?.state?.VendorName}</h6></div>
+              <div className='col-md-4'><h6>Building Area: {Details?.buildingArea}</h6></div>
             
               </div>
                                       
                                 </div>
-                                <h3 className='text-center' style={{color:"#e58f00", wordSpacing: "20px"}}>Services</h3>
+                                <h4 className='text-center'>Services</h4>
                                 <div className="table-responsive">
                                     <table className="table">
                                         <thead>
@@ -73,7 +69,6 @@ function PrintPurchase() {
                                                 <th scope="col">Code</th>
                                                 <th scope="col">UOM</th>
                                                 <th scope="col">Quantity</th>
-                                                <th scope="col">Rate</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -92,22 +87,13 @@ function PrintPurchase() {
                                                     <td className="noBorder" >
                                                         {service.quantity}
                                                     </td>
-                                                    <td className="noBorder" >
-                                                        {service.rate}
-                                                    </td>
                                                 </tr>
                                             ))}
-                                             <tr>
-    <td colSpan="5" className="text-end"><strong>Total</strong></td>
-    <td className="noBorder">
-    {location?.state?.serviceTotalRate}
-    </td>
-</tr>
                                         </tbody>
                                     </table>
                                 </div>
 
-                                <h3 className='text-center' style={{color:"#e58f00", wordSpacing: "20px"}}>Supplies</h3>
+                                <h4 className='text-center'>Supplies</h4>
                                 <div className="table-responsive">
                                     <table className="table">
                                         <thead>
@@ -117,7 +103,6 @@ function PrintPurchase() {
                                                 <th scope="col">Code</th>
                                                 <th scope="col">UOM</th>
                                                 <th scope="col">Quantity</th>
-                                                <th scope="col">Rate</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -136,44 +121,28 @@ function PrintPurchase() {
                                                     <td className="noBorder" >
                                                         {supply.quantity}
                                                     </td>
-                                                    <td className="noBorder" >
-                                                        {supply.rate}
-                                                    </td>
                                                 </tr>
                                             ))}
-                                            <tr>
-    <td colSpan="5" className="text-end"><strong>Total</strong></td>
-    <td className="noBorder">
-    {location?.state?.supplyTotalRate}
-    </td>
-</tr>
                                         </tbody>
                                     </table>
                                 </div>
                             
-                                
+                                <div className="row mt-4 align-items-center">
+
+                                    <div className="col-sm-6 text-sm-right text-start">
+                                        <a href="javascript:void(0);" className="btn btnColor text-white mb-2" onClick={() => navigate("/purchaseOrder", {state: {data: Details, services, VendorName: location?.state?.VendorName, supplies }})}>
+                                        Back
+                                        </a>
+                                        <a href="javascript:void(0);" className="btn text-white btnColor2 ms-4 mb-2" onClick={handlePrint}>Print
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
             </div>
-
-            <div className="row mt-4 align-items-center">
-
-<div className="col-sm-5"></div>
-<div className="col-sm-2 mx-5 text-sm-right text-start">
-    <a href="javascript:void(0);" className="btn btnColor text-white mb-2 print-hide" onClick={() => navigate("/purchaseOrder", {state: {data: Details, services, VendorName: location?.state?.VendorName, supplies }})}>
-    Back
-    </a>
-    <ReactToPrint 
-trigger={() => <button className="btn text-white btnColor2 ms-4 mb-2 print-hide">Print</button>}
-content={() => componentRef.current} 
-/>
-    {/* <a href="javascript:void(0);" className="btn text-white btnColor2 ms-4 mb-2 print-hide" onClick={handlePrint}>Print
-    </a> */}
-</div>
-</div>
             
         </div>
     );

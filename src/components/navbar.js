@@ -1,8 +1,9 @@
 import React, {useEffect, useState, useRef} from 'react';
 import '../assets/css/style.css'; 
 import Logo from '../assets/img/logo/dashboard-logo.png';
+import CorpteamLogo from '../assets/img/corpteamLogo.jpeg'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog, faFileAlt, faTools, faBoxes, faUser, faFileInvoice, faPuzzlePiece, faListCheck, faUserTie, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faFileAlt, faTools, faBoxes, faUser, faUsers, faFileInvoice, faPuzzlePiece, faListCheck, faUserTie, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 // import '../assets/css/dropDown.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -68,7 +69,7 @@ console.log("location.pathname", location.pathname)
       {/* <div id="main-wrapper" className="show menu-toggle"> */}
       <div className="nav-header">
         <a href="https://corpteamsolution.com/" className="brand-logo">
-          <img src={Logo} width="100px" alt="Dashboard Logo" />
+          <img src={Logo} width="150px" alt="Dashboard Logo" />
         </a>
         {/* <div className="nav-control" onClick={() => setMenuShow(!MenuShow)}>
         {
@@ -146,6 +147,9 @@ console.log("location.pathname", location.pathname)
       <div className="deznav">
         <>
           <div className="main-profile">
+            {/* <a href="https://corpteamsolution.com/" className="brand-logo">
+          <img src={CorpteamLogo} width="50px" alt="Dashboard Logo" />
+        </a> */}
             <h5 className="name"><span className="font-w400">Hello,</span> {userDetails?.username}</h5>
             <p className="email">{userDetails?.email}</p>
           </div>
@@ -170,7 +174,7 @@ console.log("location.pathname", location.pathname)
             <li>
               <a className="has-arrow ai-icon" href="javascript:void(0);" aria-expanded="false">
             
-                <FontAwesomeIcon icon={faUser} className="fontAwesomeIcons mt-1"/>
+                <FontAwesomeIcon icon={faUsers} className="fontAwesomeIcons mt-1"/>
                 <span className="nav-text" onClick={() => setEmpShow(!EmpShow)}>Employee</span>
               </a>
               {(EmpShow || (location?.pathname === '/addEmployee' || location?.pathname === '/listEmployees')) &&

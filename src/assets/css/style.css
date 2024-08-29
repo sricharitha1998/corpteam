@@ -1268,7 +1268,10 @@
 
 @media print {
   .no-print {
-      display: none;
+      display: none !important;
+  }
+  .tableCss{
+    background-color: #f2f2f2 !important
   }
   table {
       width: 100%;

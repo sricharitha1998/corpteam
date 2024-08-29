@@ -15,7 +15,7 @@ function ProfileDocs() {
     const [ApprovalStatus, setApprovalStatus] = useState()
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchData1() {
             const getDetails = localStorage.getItem('Details');
             setDetails(JSON.parse(getDetails))
             const userInfo = await fetch(` http://93.127.185.34:4000/vendor/getDetails/${JSON.parse(getDetails)?._id}`);
@@ -24,7 +24,7 @@ function ProfileDocs() {
             const allApproved = res?.details?.approvals.every(approval => approval.status !== "Approved");
             setApprovalStatus(allApproved)
         }
-        fetchData()
+        fetchData1()
     }, [])
 
     useEffect(() => {

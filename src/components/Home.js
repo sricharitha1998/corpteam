@@ -18,7 +18,7 @@ const Home = () => {
                 <a href="/adminLogin" className='btn btnColor text-white'>Admin Login</a>
                 </div>
     </div>
-      <div className="container h-100" style={{marginTop: "8%"}}>
+      <div className="container h-100" style={{marginTop: "4%"}}>
         <div className="row justify-content-center h-100 align-items-center">
           <div className="col-md-6">
             <div className="authincation-content">

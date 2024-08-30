@@ -5,7 +5,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './navbar';
 import Footer from './footer';
-import { PDFfile } from './functions/pdfFile';
 
 function PurchaseOrder() {
     const location = useLocation();
@@ -15,6 +14,7 @@ function PurchaseOrder() {
     const [supplies, setSupplies] = useState([{ code: '', uom: '', description: '', quantity: '', rate:'' }]);
     const [currentPage, setCurrentPage] = useState(1);
     const [Address, setAddress] = useState("");
+    const [getGst, setGst] = useState("");
     const itemsPerPage = 25; // Adjust this value to set items per page
     const [vendors, setVendors] = useState()
     const [VendorName, setVendorName] = useState()
@@ -26,22 +26,11 @@ function PurchaseOrder() {
     
     useEffect(() => {
         const fetchData = async () => {
-           
-            const generateUniqueCode = async () => {
-                let code = generateCode();
-                let exists = await checkCodeExists(code);
-        
-                while (exists) {
-                    code = generateCode();
-                    exists = await checkCodeExists(code);
-                }
-        
-                return code;
-            };
-
-            const uniqueCode = await generateUniqueCode();
-    setData({ ...data, workOrderNumber: uniqueCode });
-            // setData({ ...data, workOrderNumber: RandomCode });
+            const date = new Date();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = String(date.getFullYear()).slice(-2);
+            const RandomCode = "CTS" + month + year + Math.floor(10 + Math.random() * 90);
+            setData({ ...data, workOrderNumber: RandomCode });
 
             const userInfo = await fetch(`https://pms.corpteamsolution.com/api/users/getUsers/vendor`);
             const res = await userInfo.json();
@@ -49,24 +38,6 @@ function PurchaseOrder() {
         }
         fetchData();
     }, []);
-
-    const generateCode = () => {
-        const date = new Date();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const year = String(date.getFullYear()).slice(-2);
-        return "CTS" + month + year + Math.floor(10 + Math.random() * 90);
-    };
-
-    const checkCodeExists = async (code) => {
-        const response = await fetch(`https://pms.corpteamsolution.com/api/workOrder/checkCode/${code}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        const result = await response.json();
-        return result.exists;
-    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -77,6 +48,7 @@ function PurchaseOrder() {
                 const userInfo = await fetch(`https://pms.corpteamsolution.com/api/vendor/getDetails/${location?.state?.data?.vendorID}`);
                 const res = await userInfo.json();
                 setAddress(res?.details?.address)
+                setGst(res?.details?.gst)
                 setVendorName(location?.state?.VendorName)
             }
         };
@@ -169,6 +141,7 @@ function PurchaseOrder() {
             const userInfo = await fetch(`https://pms.corpteamsolution.com/api/vendor/getDetails/${SplitValue[0]}`);
             const res = await userInfo.json();
             setAddress(res?.details?.address)
+            setGst(res?.details?.gst)
             setVendorName(SplitValue[1])
         } else {
             setData({
@@ -232,7 +205,6 @@ function PurchaseOrder() {
 
     };
 
-    console.log("data", data)
     useEffect(() => {
         const calculateTotalRate = () => {
             const serviceTotal = services.reduce((sum, service) => sum + parseFloat(service.rate || 0), 0);
@@ -459,7 +431,7 @@ function PurchaseOrder() {
                                         <a href="javascript:void(0);" className="btn btnColor text-white mb-2" onClick={handleSubmit}>
                                             Submit
                                         </a>
-                                        <a href="javascript:void(0);" className="btn text-white btnColor2 ms-4 mb-2" onClick={() => navigate("/printPurchase", { state: { data, services, VendorName, supplies, supplyTotalRate, serviceTotalRate } })}>
+                                        <a href="javascript:void(0);" className="btn text-white btnColor2 ms-4 mb-2" onClick={() => navigate("/printPurchase", { state: { data, services, VendorName, supplies, supplyTotalRate, serviceTotalRate, Address, getGst } })}>
                                             Preview Print
                                         </a>
                                     </div>

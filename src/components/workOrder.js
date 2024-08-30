@@ -119,7 +119,7 @@ function WorkOrder() {
     const res = await userInfo.json();
     const vendorDetails = await fetch(`https://pms.corpteamsolution.com/api/vendor/getDetails/${vendor_id}`);
     const ResVendor = await vendorDetails.json();
-    console.log("ResVendor", ResVendor)
+    // console.log("ResVendor", ResVendor)
     const getAllData = { ...res, ...{ vendorName: username }, ...ResVendor?.details }
 
     PDFfile(getAllData)

@@ -35,13 +35,13 @@ const Home = () => {
                       Welcome to CorpTeam Solutions Partner Management System
                     </h4>
                     <div className="row pt-sm-4 pt-3 align-items-center">
-                      <div className="col-sm-6 mb-sm-0 mb-3">
+                      <div className="col-sm-6 mb-sm-0 mb-3 homeBtn">
                         <a href="/EmpLogin" className="btn d-block btn-lg" style={{backgroundColor:"#004377", color: "white", }}>
                           <img src={employeeIcon} width="30px" alt="Employee Icon"/>
                           &nbsp;&nbsp;Employee
                         </a>
                       </div>
-                      <div className="col-sm-6">
+                      <div className="col-sm-6 homeBtn">
                         <a href="/login" className="btn d-block btn-lg" style={{backgroundColor:"#004377", color: "white"}}>
                           <img src={serviceProviderIcon} width="35px" alt="Service Provider Icon" />
                           &nbsp;Service Partner

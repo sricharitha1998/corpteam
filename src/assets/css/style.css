@@ -1,3 +1,5 @@
+
+
 .page-titles{
   box-shadow: 0 2px 10px -3px #7e8286 !important;
 }
@@ -6,6 +8,14 @@
       page-break-before: always;
   }
 }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .homeBtn{
+    width: 100% !important;
+    padding: 5px 0px 5px 0px;
+  }
+}
+
 :root {
   --primary: #eb8153;
   --secondary: #6418c3;

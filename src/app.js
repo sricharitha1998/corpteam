@@ -32,6 +32,7 @@ import VendorProfile from './components/vendor/vendorProfile';
 import EmployeeList from './components/employee/list';
 import AddEmployee from './components/employee/add';
 import EmployeeLogin from './components/empLogin';
+import AddInventory from './components/inventory/add';
 
 function App() {
     return ( 
@@ -68,6 +69,7 @@ function App() {
                 <Route path="/addEmployee" element={<AddEmployee />} />
                 <Route path="/listEmployees" element={<EmployeeList />} />
                 <Route path="/EmpLogin" element={<EmployeeLogin />} />
+                <Route path="/addInventory" element={<AddInventory />} />
 		        <Route path="*" element={Error} />
             </Routes>
         </Router>

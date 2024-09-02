@@ -9,7 +9,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-
 function Navbar() {
   useEffect(() => {
     // Assuming your custom.js defines a function called initializeCustom
@@ -68,7 +67,7 @@ console.log("location.pathname", location.pathname)
 
       {/* <div id="main-wrapper" className="show menu-toggle"> */}
       <div className="nav-header">
-        <a href="https://corpteamsolution.com/" className="brand-logo">
+        <a href="https://corpteamsolution.com/" target='_blank' className="brand-logo">
           <img src={Logo} width="150px" alt="Dashboard Logo" />
         </a>
         {/* <div className="nav-control" onClick={() => setMenuShow(!MenuShow)}>

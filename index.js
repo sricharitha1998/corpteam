@@ -64,6 +64,9 @@ app.use('/workOrder/', workOrder);
 const EmpRoute = require('./routes/empRoute');
 app.use('/emp/', EmpRoute);
 
+const OrderRoute = require('./routes/orderRoute');
+app.use('/order/', OrderRoute);
+
 app.get('/public/documents/:filename', (req, res) => {
     const filename = req.params.filename;
     const filePath = path.join(__dirname, 'public', 'documents', filename);

@@ -4,6 +4,7 @@ const WorkOrder = require('../controllers/workOrderController');
 
 router.post('/insert', WorkOrder.InsertRecords);
 router.get('/getRecords/:id', WorkOrder.getRecords);
+router.get('/checkCode/:code', WorkOrder.CheckCode);
 router.get('/getAll', WorkOrder.getAllRecords);
 router.get('/getOneRecord/:id', WorkOrder.getOneRecord);
 router.post('/updateStatus', WorkOrder.UpdateStatus);

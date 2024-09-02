@@ -37,6 +37,24 @@ supplyTotalRate: req.body.supplyTotalRate,
                 }
         }
     },
+CheckCode: async (req, res) => {
+        const methods = req.method;
+        switch (methods) {
+            case "GET":
+                try {
+                    await workOrderModel.find({workOrderNumber: req.params.code}).then(function (docs, err) {
+                        if (err) {
+                            console.log("err", err);
+                            return next(err);
+                        }
+                        return res.status(200).json(docs);
+                         
+                    });
+                } catch (err) {
+                    return res.status(500).json({ msg: err.message });
+                }
+        }
+    },
     getRecords: async (req, res) => {
         const methods = req.method;
         switch (methods) {

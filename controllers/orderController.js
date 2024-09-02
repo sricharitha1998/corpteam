@@ -6,11 +6,10 @@ const OrderItems = {
         switch (methods) {
             case "POST":
                 try {
-                    const data = req.body;
-
-                    const formattedData = data.map(item => ({
-                        
-                        mwoNumber: item?.mwoNumber,
+                    const data = req.body.data;
+//			console.log("req.body",req.body)
+                    const formattedData = await data.map(item => ({
+ mwoNumber: item?.mwoNumber,
     cwoNumber: item?.cwoNumber,
     homePassCount: item?.homePassCount,
     totalCwo: item?.totalCwo,
@@ -26,7 +25,7 @@ const OrderItems = {
     partnerName:item?.partnerName,
     status:item?.status
                     }));
-
+//console.log("dataaaaaaaaa",formattedData)
 			for (const item of formattedData) {
                       
                                 const itemInsert = await new OrderItemsModel(item);

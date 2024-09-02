@@ -8,7 +8,7 @@ import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Pagination from '../pagination';
 import Footer from '../footer';
-import { Capitalized } from '../functions/capitalized';
+import { Capitalized, AllCapitalized } from '../functions/capitalized';
 
 function EmployeeList() {
 
@@ -108,7 +108,7 @@ function EmployeeList() {
                       {currentItems.map((pt, index) => (
                         <tr key={pt._id}>
                           <td className="noBorder">{indexOfFirstItem + index + 1}</td>
-                          <td className="noBorder">{Capitalized(pt.empID)}</td>
+                          <td className="noBorder">{AllCapitalized(pt.empID)}</td>
                           <td className="noBorder">{Capitalized(pt.email)}</td>
                           <td className="noBorder">{pt.MobNumber}</td>
                           <td className="noBorder">

@@ -1,17 +1,14 @@
 import React, {useEffect, useState, useRef} from 'react';
 import '../assets/css/style.css'; 
 import Logo from '../assets/img/logo/dashboard-logo.png';
-import CorpteamLogo from '../assets/img/corpteamLogo.jpeg'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog, faFileAlt, faTools, faBoxes, faUser, faUsers, faFileInvoice, faPuzzlePiece, faListCheck, faUserTie, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-// import '../assets/css/dropDown.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function Navbar() {
   useEffect(() => {
-    // Assuming your custom.js defines a function called initializeCustom
     if (window.initializeCustom) {
       window.initializeCustom();
     }
@@ -23,6 +20,7 @@ function Navbar() {
   const [ vendorShow, setVenodrShow ] = useState(false);
   const [ EmpShow, setEmpShow ] = useState(false);
   const [userDetails, setUserDetails] = useState({});
+  
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
@@ -34,7 +32,6 @@ function Navbar() {
     }
 }, []);
 
-  
   const handleSignOut = () => {
     localStorage.removeItem('Details');
     navigate('/');
@@ -42,7 +39,6 @@ function Navbar() {
 
   const buttonRef = useRef(null);
   const menuRef = useRef(null);
-console.log("location.pathname", location.pathname)
   useEffect(() => {
     const closeMenuOnClickOutside = (e) => {
       if (
@@ -64,31 +60,21 @@ console.log("location.pathname", location.pathname)
 
   return (
     <div fontSetting style={{position: "sticky", top: "0", zIndex: "1000", flexShrink: "0"}}>
-
-      {/* <div id="main-wrapper" className="show menu-toggle"> */}
       <div className="nav-header">
         <a href="https://corpteamsolution.com/" target='_blank' className="brand-logo">
           <img src={Logo} width="150px" alt="Dashboard Logo" />
         </a>
-        {/* <div className="nav-control" onClick={() => setMenuShow(!MenuShow)}>
-        {
-          MenuShow ? 
+
+        {/* <div className="navbar-toggler" onClick={() => setMenuShow(!MenuShow)}>
           <div className="hamburger">
             <span className="line"></span>
             <span className="line"></span>
             <span className="line"></span>
           </div>
-          :
-          <div class="hamburger is-active">
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-          </div>
-        }
          
         </div> */}
       </div>
-      
+      <div className={`collapse navbar-collapse ${MenuShow ? 'show' : ''}`}></div>
       <div className="header">
         <div className="header-content">
           <nav className="navbar navbar-expand">
@@ -96,24 +82,7 @@ console.log("location.pathname", location.pathname)
               <div className="header-left">
                 
               </div>
-              {/* <main>
-      <details id="menu" ref={menuRef}>
-        <summary id="menuButton" ref={buttonRef}>open</summary>
-        <div className="menu">
-          <ul className="menu-list">
-            <li className="menu-list--item">
-              <a href="#" className="menu-list--action">Action</a>
-            </li>
-            <li className="menu-list--item">
-              <a href="#" className="menu-list--action">Another action</a>
-            </li>
-            <li className="menu-list--item">
-              <a href="#" className="menu-list--action">Something else here</a>
-            </li>
-          </ul>
-        </div>
-      </details>
-    </main> */}
+             
               <ul className="navbar-nav header-right main-notification">
                 <li className="nav-item dropdown header-profile">
                   <a className="nav-link" href="#" role="button">
@@ -122,20 +91,6 @@ console.log("location.pathname", location.pathname)
                       <small>{userDetails?.role}</small>
                     </div>
                   </a>
-                  {/* <div className="dropdown-menu dropdown-menu-end">
-                    <a href="ranjith-profile.html" className="dropdown-item ai-icon">
-                      <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" className="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                      <span className="ms-2">Profile </span>
-                    </a>
-                    <a href="email-inbox.html" className="dropdown-item ai-icon">
-                      <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" className="text-success" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                      <span className="ms-2">Inbox </span>
-                    </a>
-                    <a href="page-login.html" className="dropdown-item ai-icon">
-                      <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" className="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                      <span className="ms-2">Logout </span>
-                    </a>
-                  </div> */}
                 </li>
               </ul>
             </div>
@@ -143,16 +98,16 @@ console.log("location.pathname", location.pathname)
         </div>
       </div>
      
-      <div className="deznav">
-        <>
-          <div className="main-profile">
+      <div className={`deznav ${MenuShow ? "" : "hideNav"}`}>
+      <>
+          <div className="main-profile " style={{backgroundColor: "white"}}>
             {/* <a href="https://corpteamsolution.com/" className="brand-logo">
           <img src={CorpteamLogo} width="50px" alt="Dashboard Logo" />
         </a> */}
             <h5 className="name"><span className="font-w400">Hello,</span> {userDetails?.username}</h5>
             <p className="email">{userDetails?.email}</p>
           </div>
-          <ul className="metismenu" id="menu">
+          <ul className="metismenu" id="menu" style={{backgroundColor: "white"}}>
             <li>
             {userDetails?.role === "admin" || userDetails?.role === "employee" ?
               
@@ -282,11 +237,132 @@ console.log("location.pathname", location.pathname)
           </div>
         </>
       </div>
-      
-      
-    {/* </div> */}
+
     </div>
   );
 }
 
 export default Navbar;
+
+// import React, { useEffect, useState, useRef } from 'react';
+// import '../assets/css/style.css'; 
+// import Logo from '../assets/img/logo/dashboard-logo.png';
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faCog, faFileAlt, faTools, faBoxes, faUser, faUsers, faFileInvoice, faPuzzlePiece, faListCheck, faUserTie, faSignOutAlt, faBars } from "@fortawesome/free-solid-svg-icons";
+// import 'bootstrap/dist/js/bootstrap.bundle.min';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import { useNavigate, useLocation } from 'react-router-dom';
+
+// function Navbar() {
+//   const [menuShow, setMenuShow] = useState(false);
+//   const [wcfShow, setWCFShow] = useState(false);
+//   const [invoiceShow, setInvoiceShow] = useState(false);
+//   const [vendorShow, setVendorShow] = useState(false);
+//   const [empShow, setEmpShow] = useState(false);
+//   const [userDetails, setUserDetails] = useState({});
+//   const navigate = useNavigate();
+//   const location = useLocation();
+
+//   useEffect(() => {
+//     const details = localStorage.getItem('Details');
+//     if (!details) {
+//       navigate('/');
+//     } else {
+//       setUserDetails(JSON.parse(details));
+//     }
+//   }, [navigate]);
+
+//   const handleSignOut = () => {
+//     localStorage.removeItem('Details');
+//     navigate('/');
+//   };
+
+//   const toggleMenu = () => {
+//     setMenuShow(!menuShow);
+//   };
+
+//   return (
+//     <div style={{ position: "sticky", top: "0", zIndex: "1000", flexShrink: "0" }}>
+//       <div className="nav-header">
+//         <a href="https://corpteamsolution.com/" target='_blank' className="brand-logo">
+//           <img src={Logo} width="150px" alt="Dashboard Logo" />
+//         </a>
+//         <button className="navbar-toggler" type="button" onClick={toggleMenu}>
+//           <FontAwesomeIcon icon={faBars} />
+//         </button>
+//       </div>
+
+//       <div className={`collapse navbar-collapse ${menuShow ? 'show' : ''}`}>
+//         <div className="header">
+//           <div className="header-content">
+//             <nav className="navbar navbar-expand">
+//               <ul className="navbar-nav header-right">
+//                 <li className="nav-item dropdown header-profile">
+//                   <a className="nav-link" href="#" role="button">
+//                     <div className="header-info">
+//                       <span>{userDetails?.username}</span>
+//                       <small>{userDetails?.role}</small>
+//                     </div>
+//                   </a>
+//                 </li>
+//               </ul>
+//             </nav>
+//           </div>
+//         </div>
+
+//         <div className="deznav">
+//           <div className="main-profile">
+//             <h5 className="name"><span className="font-w400">Hello,</span> {userDetails?.username}</h5>
+//             <p className="email">{userDetails?.email}</p>
+//           </div>
+//           <ul className="metismenu" id="menu">
+//             <li>
+//               {userDetails?.role === "admin" || userDetails?.role === "employee" ? (
+//                 <a href="/adminDashboard" className={`ai-icon ${location.pathname === '/adminDashboard' ? 'activeNav text-white' : ''}`} aria-expanded="false">
+//                   <FontAwesomeIcon icon={faCog} className={`fontAwesomeIcons mt-1 ${location.pathname === '/adminDashboard' ? 'text-white' : ''}`} />
+//                   <span className="nav-text">Dashboard</span>
+//                 </a>
+//               ) : (
+//                 <a href="/dashboard" className={`ai-icon ${location.pathname === '/dashboard' ? 'activeNav text-white' : ''}`} aria-expanded="false">
+//                   <FontAwesomeIcon icon={faCog} className={`fontAwesomeIcons mt-1 ${location.pathname === '/dashboard' ? 'text-white' : ''}`} />
+//                   <span className="nav-text">Service Partner</span>
+//                 </a>
+//               )}
+//             </li>
+
+//             {userDetails?.role === "admin" && (
+//               <li>
+//                 <a className="has-arrow ai-icon" href="javascript:void(0);" aria-expanded="false">
+//                   <FontAwesomeIcon icon={faUsers} className="fontAwesomeIcons mt-1" />
+//                   <span className="nav-text" onClick={() => setEmpShow(!empShow)}>Employee</span>
+//                 </a>
+//                 {(empShow || location.pathname === '/addEmployee' || location.pathname === '/listEmployees') && (
+//                   <ul aria-expanded="false">
+//                     <li><a href="/addEmployee" className={`${location.pathname === '/addEmployee' ? 'activeNav text-white' : ''}`}>Add</a></li>
+//                     <li><a href="/listEmployees" className={`${location.pathname === '/listEmployees' ? 'activeNav text-white' : ''}`}>List</a></li>
+//                   </ul>
+//                 )}
+//               </li>
+//             )}
+
+//             {/* More menu items here... */}
+//             <li>
+//               <a href="/profile" className={`ai-icon ${location.pathname === '/profile' ? 'activeNav text-white' : ''}`} aria-expanded="false">
+//                 <FontAwesomeIcon icon={faUserTie} className={`fontAwesomeIcons mt-1 ${location.pathname === '/profile' ? 'text-white' : ''}`} />
+//                 <span className="nav-text">Profile</span>
+//               </a>
+//             </li>
+//             <li>
+//               <a href="/" className="ai-icon" aria-expanded="false" onClick={handleSignOut}>
+//                 <FontAwesomeIcon icon={faSignOutAlt} className="fontAwesomeIcons mt-1" />
+//                 <span className="nav-text">Logout</span>
+//               </a>
+//             </li>
+//           </ul>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Navbar;
